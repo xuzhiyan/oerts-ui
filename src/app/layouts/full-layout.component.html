@@ -13,7 +13,9 @@
     <nav class="sidebar-nav">
       <ul class="nav">
         <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" [routerLink]="['/dashboard']"><i class="icon-speedometer"></i> Dashboard <span class="badge badge-info">NEW</span></a>
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['./edit-password']"><i
+            class="icon-speedometer"></i>
+            Dashboard <span class="badge badge-info">NEW</span></a>
         </li>
       </ul>
     </nav>
@@ -24,6 +26,11 @@
 
     <!-- Breadcrumb -->
     <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a>dashboard</a>
+        <span>/</span>
+        <span>dashboard</span>
+      </li>
       <app-breadcrumbs></app-breadcrumbs>
     </ol>
 
@@ -32,8 +39,3 @@
     </div><!-- /.conainer-fluid -->
   </main>
 </div>
-
-<footer class="app-footer">
-  <a href="http://coreui.io">CoreUI</a> &copy; 2017 creativeLabs.
-  <span class="float-right">Powered by <a href="http://coreui.io">CoreUI</a></span>
-</footer>
