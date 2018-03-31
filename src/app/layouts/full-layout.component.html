@@ -1,6 +1,6 @@
 <header class="app-header navbar">
   <button class="navbar-toggler d-lg-none" type="button" appMobileSidebarToggler>&#9776;</button>
-  <a class="navbar-brand" href="#"></a>
+  <span class="logo-font pl-3">考生报名系统</span>
   <ul class="nav navbar-nav mr-auto d-md-down-none">
     <li class="nav-item">
       <a class="nav-link navbar-toggler" href="#" appSidebarToggler>&#9776;</a>
@@ -13,9 +13,78 @@
     <nav class="sidebar-nav">
       <ul class="nav">
         <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" [routerLink]="['./edit-password']"><i
-            class="icon-speedometer"></i>
-            Dashboard <span class="badge badge-info">NEW</span></a>
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['./home']">
+            <i class="icon-puzzle"></i>
+            首页
+          </a>
+        </li>
+        <li class="nav-title">
+          考试信息
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['./test-registration']">
+            <i class="icon-note"></i>
+            考试报名
+            <span class="badge badge-info">1</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['./test-pay']">
+            <i class="icon-wallet"></i>
+            网上缴费
+            <span class="badge badge-info">4</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['./test-complete']">
+            <i class="icon-check"></i>
+            已报名考试
+            <span class="badge badge-info">5</span>
+          </a>
+        </li>
+        <li class="nav-title">
+          个人信息
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['./edit-persioninf']">
+            <i class="icon-user"></i>
+            完善/修改个人信息
+            <!--<span class="badge badge-info">1</span>-->
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['./edit-password']">
+            <i class="icon-wrench"></i>
+            修改密码
+            <!--<span class="badge badge-info">1</span>-->
+          </a>
+        </li>
+        <li class="nav-title">
+          成绩相关
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['./score-inquiry']">
+            <i class="icon-badge"></i>
+            成绩查询
+            <!--<span class="badge badge-info">1</span>-->
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['./score-details']">
+            <i class="icon-pie-chart"></i>
+            成绩报表
+            <!--<span class="badge badge-info">1</span>-->
+          </a>
+        </li>
+        <li class="nav-title">
+          帮助
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['./online-qa']">
+            <i class="icon-bubbles"></i>
+            在线问答
+            <!--<span class="badge badge-info">1</span>-->
+          </a>
         </li>
       </ul>
     </nav>
@@ -23,19 +92,6 @@
 
   <!-- Main content -->
   <main class="main">
-
-    <!-- Breadcrumb -->
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item">
-        <a>dashboard</a>
-        <span>/</span>
-        <span>dashboard</span>
-      </li>
-      <app-breadcrumbs></app-breadcrumbs>
-    </ol>
-
-    <div class="container-fluid">
-      <router-outlet></router-outlet>
-    </div><!-- /.conainer-fluid -->
+    <router-outlet></router-outlet>
   </main>
 </div>
