@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {CanActivate, Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -8,13 +8,31 @@ import {Router} from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private loginRouter: Router) {
+  constructor(private router: Router) {
   }
 
   ngOnInit() {
   }
 
   userLogin() {
-    this.loginRouter.navigate(['/layout']);
+    this.router.navigate(['/layout']);
+  }
+
+  userRegister() {
+    this.router.navigate(['/register']);
+  }
+}
+
+export class LoginGuard implements CanActivate {
+  canActivate() {
+    const isLogin: boolean = Math.random() < 0.5;
+
+    if (!isLogin) {
+      console.log('登录');
+      return true;
+    } else {
+      console.log('未登录');
+      return false;
+    }
   }
 }
