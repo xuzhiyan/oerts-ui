@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 
 import {FullLayoutComponent} from './layouts/full-layout.component';
-import {LoginComponent, LoginGuard} from './login/login.component';
+import {LoginComponent} from './login/login.component';
 import {HomeComponent} from './pages/home/home.component';
 import {EditPasswordComponent} from './pages/edit-password/edit-password.component';
 import {TestRegistrationComponent} from './pages/test-registration/test-registration.component';
@@ -19,7 +19,7 @@ export const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {
-    path: 'layout', canActivate: [LoginGuard], component: FullLayoutComponent,
+    path: 'layout', component: FullLayoutComponent,
     children: [
       {path: '', redirectTo: 'home', pathMatch: 'full'},
       {path: 'home', component: HomeComponent},
@@ -38,7 +38,7 @@ export const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  providers: [LoginGuard]
+  providers: []
 })
 export class AppRoutingModule {
 }

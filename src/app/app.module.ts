@@ -24,6 +24,7 @@ import {TestPayComponent} from './pages/test-pay/test-pay.component';
 import {TestRegistrationComponent} from './pages/test-registration/test-registration.component';
 import {OnlineQaComponent} from './pages/online-qa/online-qa.component';
 import {RegisterComponent} from './register/register.component';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -31,7 +32,8 @@ import {RegisterComponent} from './register/register.component';
     AppRoutingModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
-    ChartsModule
+    ChartsModule,
+    FormsModule
   ],
   declarations: [
     NAV_DROPDOWN_DIRECTIVES,
