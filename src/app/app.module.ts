@@ -23,8 +23,8 @@ import {TestCompleteComponent} from './pages/test-complete/test-complete.compone
 import {TestPayComponent} from './pages/test-pay/test-pay.component';
 import {TestRegistrationComponent} from './pages/test-registration/test-registration.component';
 import {OnlineQaComponent} from './pages/online-qa/online-qa.component';
-import {RegisterComponent} from './register/register.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { RegistComponent } from './regist/regist.component';
 
 @NgModule({
   imports: [
@@ -33,7 +33,8 @@ import {FormsModule} from '@angular/forms';
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
     ChartsModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   declarations: [
     NAV_DROPDOWN_DIRECTIVES,
@@ -52,7 +53,7 @@ import {FormsModule} from '@angular/forms';
     TestPayComponent,
     TestRegistrationComponent,
     OnlineQaComponent,
-    RegisterComponent
+    RegistComponent
   ],
   providers: [{
     provide: LocationStrategy,

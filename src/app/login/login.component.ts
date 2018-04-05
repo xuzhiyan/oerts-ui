@@ -8,25 +8,33 @@ import {CanActivate, Router} from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  public username: String = '';
-  public password: String = '';
+  username: String = '';
+  password: String = '';
+  loginStatus: boolean;
+
 
   constructor(private router: Router) {
   }
 
   ngOnInit() {
+    this.loginStatus = true;
+  }
+
+  userInput() {
+    this.loginStatus = true;
   }
 
   userLogin() {
     if (this.username === 'xzy' && this.password === '123456') {
       this.router.navigate(['/layout']);
     } else {
-      window.alert('账号/密码错误');
+      this.loginStatus = false;
     }
 
   }
 
   userRegister() {
-    this.router.navigate(['/register']);
+    this.router.navigate(['/regist']);
   }
+
 }

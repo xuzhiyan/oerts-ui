@@ -1,0 +1,79 @@
+<div class="app flex-row align-items-center">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card mx-4" [formGroup]="registModel">
+          <div class="card-body pl-4 pr-4 pb-0">
+
+            <span class="regist-font">注册</span>
+            <p class="text-muted">创建你的账号</p>
+            <div class="input-group mb-1">
+              <span class="input-group-addon"><i class="icon-user"></i></span>
+              <input type="text" class="form-control" placeholder="姓名" formControlName="username"
+                     [class.hasError]="registModel.hasError('usernameValid', 'username') && registModel.get('username').touched">
+            </div>
+            <div class="input-group mb-1 error-message"
+                 [hidden]="!registModel.hasError('usernameValid', 'username') || registModel.get('username').untouched">
+              {{registModel.getError('usernameValid', 'username')?.errorDesc}}
+            </div>
+            <div class="input-group mb-1 error-space"
+                 [hidden]="registModel.hasError('usernameValid', 'username') && registModel.get('username').touched">
+              &nbsp;
+            </div>
+
+            <div class="input-group mb-1">
+              <span class="input-group-addon"><i class="icon-phone"></i></span>
+              <input type="text" class="form-control" placeholder="手机号" formControlName="userphone"
+                     [class.hasError]="registModel.hasError('userphoneValid', 'userphone') && registModel.get('userphone').touched">
+            </div>
+            <div class="input-group mb-1 error-message"
+                 [hidden]="!registModel.hasError('userphoneValid', 'userphone') || registModel.get('userphone').untouched">
+              {{registModel.getError('userphoneValid', 'userphone')?.errorDesc}}
+            </div>
+            <div class="input-group mb-1 error-space"
+                 [hidden]="registModel.hasError('userphoneValid', 'userphone') && registModel.get('userphone').touched">
+              &nbsp;
+            </div>
+
+            <div formGroupName="loginPasswordsGroup">
+              <div class="input-group mb-1">
+                <span class="input-group-addon"><i class="icon-lock"></i></span>
+                <input type="password" class="form-control" placeholder="密码" formControlName="loginpassword"
+                       [class.hasError]="registModel.hasError('passwordValid', 'loginPasswordsGroup') && registModel.get('loginPasswordsGroup').touched">
+              </div>
+              <div class="input-group mb-1 error-space">
+                &nbsp;
+              </div>
+
+              <div class="input-group mb-1">
+                <span class="input-group-addon"><i class="icon-lock"></i></span>
+                <input type="password" class="form-control" placeholder="确认密码" formControlName="pconfirm"
+                       [class.hasError]="registModel.hasError('passwordValid', 'loginPasswordsGroup') && registModel.get('loginPasswordsGroup').touched">
+              </div>
+              <div class="input-group mb-1 error-message"
+                   [hidden]="!registModel.hasError('passwordValid', 'loginPasswordsGroup') || registModel.get('loginPasswordsGroup').untouched">
+                {{registModel.getError('passwordValid', 'loginPasswordsGroup')?.errorDesc}}
+              </div>
+              <div class="input-group mb-1 error-space"
+                   [hidden]="registModel.hasError('passwordValid', 'loginPasswordsGroup') && registModel.get('loginPasswordsGroup').touched">
+                &nbsp;
+              </div>
+            </div>
+
+          </div>
+          <div class="card-footer p-4">
+            <div class="row">
+              <div class="col-6">
+                <button class="btn btn-block btn-success" type="botton" (click)="onRegist()"><span>注册</span></button>
+              </div>
+              <div class="col-6">
+                <button class="btn btn-block btn-danger" type="button" (click)="onReset()"><span>重置</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

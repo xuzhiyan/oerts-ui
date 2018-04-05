@@ -12,12 +12,12 @@ import {ScoreInquiryComponent} from './pages/score-inquiry/score-inquiry.compone
 import {ScoreDetailsComponent} from './pages/score-details/score-details.component';
 import {EditPersoninfComponent} from './pages/edit-personinf/edit-personinf.component';
 import {OnlineQaComponent} from './pages/online-qa/online-qa.component';
-import {RegisterComponent} from './register/register.component';
+import {RegistComponent} from './regist/regist.component';
 
 export const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
-  {path: 'register', component: RegisterComponent},
+  {path: 'regist', component: RegistComponent},
   {
     path: 'layout', component: FullLayoutComponent,
     children: [
