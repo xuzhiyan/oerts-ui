@@ -1,0 +1,5 @@
+{
+  "/oerts": {
+    "target": "http://localhost:9090"
+  }
+}
