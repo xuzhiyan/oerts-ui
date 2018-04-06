@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {Http} from '@angular/http';
-import 'rxjs/Rx';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -10,24 +9,22 @@ import 'rxjs/Rx';
 })
 export class LoginComponent implements OnInit {
 
-  username: String = '';
+  userphone: String = '';
   password: String = '';
   loginStatus: boolean;
-  userInfo: UserInfo;
+  header = new HttpHeaders({'Content-Type': 'application/json'});
 
   constructor(private router: Router,
-              private http: Http) {
+              private http: HttpClient) {
   }
 
   ngOnInit() {
     this.loginStatus = true;
-    this.http.get('/oerts/all')
-      .map((res) => res.json())
-      .subscribe(
-        (data) => {
-          this.userInfo = data
-        });
-    // console.log(this.userInfo.);
+    // this.http.get('/oerts/all').subscribe(data => {
+    //   console.log(data);
+    //   this.userInfo = data;
+    //   console.log(this.userInfo[0].id);
+    // })
   }
 
   userInput() {
@@ -35,12 +32,15 @@ export class LoginComponent implements OnInit {
   }
 
   userLogin() {
-    if (this.username === 'xzy' && this.password === '123456') {
-      this.router.navigate(['/layout']);
-    } else {
-      this.loginStatus = false;
-    }
-
+    const body = JSON.stringify({'userPhone': this.userphone, 'loginPassword': this.password});
+    this.http.post('/oerts/loginByPassw', body, {headers: this.header}).subscribe(data => {
+      if (data) {
+        // 还要传用户的id
+        this.router.navigate(['/layout']);
+      } else {
+        this.loginStatus = false;
+      }
+    });
   }
 
   userRegister() {
@@ -49,18 +49,18 @@ export class LoginComponent implements OnInit {
 
 }
 
-export class UserInfo {
-  public id: string;
-  public idCard: string;
-  public userPhone: string;
-  public userName: string;
-  public userSex: string;
-  public userProfession: string;
-  public loginPassword: string;
-  public payPassword: string;
-  public userPhoto: string;
-  public residentialAddress: string;
-  public emailAddress: string;
-  public userBalance: string;
-  public lastLogintime: string;
-}
+// export class UserInfo {
+//   public id: string;
+//   public idCard: string;
+//   public userPhone: string;
+//   public userName: string;
+//   public userSex: string;
+//   public userProfession: string;
+//   public loginPassword: string;
+//   public payPassword: string;
+//   public userPhoto: string;
+//   public residentialAddress: string;
+//   public emailAddress: string;
+//   public userBalance: string;
+//   public lastLogintime: string;
+// }

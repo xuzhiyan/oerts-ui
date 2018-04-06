@@ -37,7 +37,6 @@ import {RegistComponent} from './regist/regist.component';
     ChartsModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule,
     HttpClientModule
   ],
   declarations: [
