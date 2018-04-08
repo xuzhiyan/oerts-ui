@@ -36,9 +36,11 @@ export class RegistComponent implements OnInit {
       const body = {
         'userName': this.registModel.value.username,
         'userPhone': this.registModel.value.userphone,
-        'loginPassword': this.registModel.value.loginpassword
+        'loginPassword': this.registModel.value.loginPasswordsGroup.loginpassword
       };
-      // this.http.post(
+      this.http.post('/oerts/registbypassw', body, {headers: this.header}).subscribe(data => {
+        console.log(data);
+      });
     }
   }
 
