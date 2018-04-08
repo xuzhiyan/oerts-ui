@@ -32,8 +32,8 @@ export class LoginComponent implements OnInit {
   }
 
   userLogin() {
-    const body = JSON.stringify({'userPhone': this.userphone, 'loginPassword': this.password});
-    this.http.post('/oerts/loginByPassw', body, {headers: this.header}).subscribe(data => {
+    const body = {'userPhone': this.userphone, 'loginPassword': this.password};
+    this.http.post('/oerts/loginbypassw', body, {headers: this.header}).subscribe(data => {
       if (data) {
         // 还要传用户的id
         this.router.navigate(['/layout']);

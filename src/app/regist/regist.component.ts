@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormGroup, FormBuilder} from '@angular/forms';
 import {passwordValidator, usernameValidator, userphoneValidator} from '../shared/validators';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Component({
   selector: 'app-regist',
@@ -10,11 +11,14 @@ import {passwordValidator, usernameValidator, userphoneValidator} from '../share
 export class RegistComponent implements OnInit {
 
   registModel: FormGroup;
+  header = new HttpHeaders({'Content-Type': 'application/json'});
 
-  constructor(fb: FormBuilder) {
+  constructor(private fb: FormBuilder,
+              private http: HttpClient) {
     this.registModel = fb.group({
       username: ['', usernameValidator],
-      userphone: ['', userphoneValidator],
+      // userphone: ['', userphoneValidator],
+      userphone: ['',],
       loginPasswordsGroup: fb.group({
         loginpassword: [''],
         pconfirm: ['']
@@ -28,6 +32,13 @@ export class RegistComponent implements OnInit {
   onRegist() {
     if (this.registModel.valid) {
       console.log('开始注册');
+      console.log(this.registModel.value.username);
+      const body = {
+        'userName': this.registModel.value.username,
+        'userPhone': this.registModel.value.userphone,
+        'loginPassword': this.registModel.value.loginpassword
+      };
+      // this.http.post(
     }
   }
 
