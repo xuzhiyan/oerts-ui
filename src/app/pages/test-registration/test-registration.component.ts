@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {ExamManagementService} from '../../service/exam-management.service';
 
 @Component({
   selector: 'app-test-registration',
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TestRegistrationComponent implements OnInit {
 
-  constructor() { }
+  examInfo: any;
+
+  constructor(private http: HttpClient,
+              private examService: ExamManagementService) {
+  }
 
   ngOnInit() {
+    this.http.get('/oerts/exams').subscribe(data => {
+      this.examInfo = data;
+      // console.log(this.examInfo.length);
+    })
+
+    // console.log(this.examService.getAllExams());
+    // this.examInfo = this.examService.getAllExams();
+    // console.log(this.examInfo);
   }
 
 }

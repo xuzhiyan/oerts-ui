@@ -17,8 +17,8 @@ export class RegistComponent implements OnInit {
               private http: HttpClient) {
     this.registModel = fb.group({
       username: ['', usernameValidator],
-      // userphone: ['', userphoneValidator],
-      userphone: ['',],
+      userphone: ['', userphoneValidator],
+      // userphone: ['',],
       loginPasswordsGroup: fb.group({
         loginpassword: [''],
         pconfirm: ['']
@@ -39,7 +39,8 @@ export class RegistComponent implements OnInit {
         'loginPassword': this.registModel.value.loginPasswordsGroup.loginpassword
       };
       this.http.post('/oerts/registbypassw', body, {headers: this.header}).subscribe(data => {
-        console.log(data);
+        // console.log(data);
+        alert('注册成功');
       });
     }
   }

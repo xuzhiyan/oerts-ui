@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-dashboard',
@@ -6,6 +7,9 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./full-layout.component.css']
 })
 export class FullLayoutComponent implements OnInit {
+
+  examInfo: any;
+  examInfoLength: number;
 
   public disabled = false;
   public status: { isopen: boolean } = {isopen: false};
@@ -20,6 +24,14 @@ export class FullLayoutComponent implements OnInit {
     this.status.isopen = !this.status.isopen;
   }
 
+  constructor(private http: HttpClient) {
+  }
+
   ngOnInit(): void {
+    this.http.get('/oerts/exams').subscribe(data => {
+      this.examInfo = data;
+      // console.log(this.examInfo.length);
+      this.examInfoLength = this.examInfo.length;
+    })
   }
 }

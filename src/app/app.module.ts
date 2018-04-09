@@ -4,7 +4,6 @@ import {LocationStrategy, HashLocationStrategy} from '@angular/common';
 import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
 import {TabsModule} from 'ngx-bootstrap/tabs';
 import {AppRoutingModule} from './app.routing';
-import {HttpModule} from '@angular/http';
 import {HttpClientModule} from '@angular/common/http';
 
 import {NAV_DROPDOWN_DIRECTIVES} from './shared/nav-dropdown.directive';
@@ -27,6 +26,7 @@ import {TestRegistrationComponent} from './pages/test-registration/test-registra
 import {OnlineQaComponent} from './pages/online-qa/online-qa.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RegistComponent} from './regist/regist.component';
+import {ExamManagementService} from './service/exam-management.service';
 
 @NgModule({
   imports: [
@@ -58,10 +58,10 @@ import {RegistComponent} from './regist/regist.component';
     OnlineQaComponent,
     RegistComponent
   ],
-  providers: [{
-    provide: LocationStrategy,
-    useClass: HashLocationStrategy
-  }],
+  providers: [
+    {provide: LocationStrategy, useClass: HashLocationStrategy},
+    ExamManagementService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

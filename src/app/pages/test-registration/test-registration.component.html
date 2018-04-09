@@ -7,6 +7,56 @@
 
 <div class="container-fluid">
   <div class="animated fadeIn">
-    test-registration works!
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-header">
+            <i class="fa fa-align-justify"></i> 考试信息
+          </div>
+          <div class="card-body">
+            <table class="table table-striped">
+              <thead>
+              <tr>
+                <th>考试编号</th>
+                <th>考试名称</th>
+                <th>考试开始时间</th>
+                <th>考试结束时间</th>
+                <th>报名开始时间</th>
+                <th>报名结束时间</th>
+                <th>报名费用</th>
+                <th>考试地点</th>
+                <th>上限人数</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let exams of examInfo">
+                <td>{{exams.examId}}</td>
+                <td>{{exams.examName}}</td>
+                <td>{{exams.examTimeFrom}}</td>
+                <td>{{exams.examTimeTo}}</td>
+                <td>{{exams.regTimeFrom}}</td>
+                <td>{{exams.regTimeTo}}</td>
+                <td>{{exams.cost}}</td>
+                <td>{{exams.examPlace}}</td>
+                <td>{{exams.maxNum}}</td>
+              </tr>
+              </tbody>
+            </table>
+            <ul class="pagination">
+              <li class="page-item"><a class="page-link" href="#">Prev</a></li>
+              <li class="page-item active">
+                <a class="page-link" href="#">1</a>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">4</a></li>
+              <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!--/.col-->
+    </div>
+    <!--/.row-->
   </div>
 </div>
