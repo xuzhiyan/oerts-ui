@@ -17,7 +17,6 @@
             <table class="table table-striped">
               <thead>
               <tr>
-                <th>考试编号</th>
                 <th>考试名称</th>
                 <th>考试开始时间</th>
                 <th>考试结束时间</th>
@@ -30,7 +29,6 @@
               </thead>
               <tbody>
               <tr *ngFor="let exams of examInfo">
-                <td>{{exams.examId}}</td>
                 <td>{{exams.examName}}</td>
                 <td>{{exams.examTimeFrom}}</td>
                 <td>{{exams.examTimeTo}}</td>

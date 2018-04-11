@@ -4,17 +4,26 @@ import {HttpClient} from '@angular/common/http';
 @Injectable()
 export class ExamManagementService {
 
-  examInfo: any;
-
   constructor(private http: HttpClient) {
   }
 
   getAllExams() {
-    this.http.get('/oerts/exams').subscribe(data => {
-      console.log(data);
-      this.examInfo = data;
-      return this.examInfo;
-    })
+    return this.http.get('/oerts/exams');
   }
 
 }
+
+// export class ExamInfo {
+//   constructor(public examId: string,
+//               public examName: string,
+//               public cost: number,
+//               public maxNum: number,
+//               public examPlace: string,
+//               public examTimeFrom: Date,
+//               public examTimeTo: Date,
+//               public regTimeFrom: Date,
+//               public regTimeTo: Date,
+//               ) {
+//
+//   }
+// }

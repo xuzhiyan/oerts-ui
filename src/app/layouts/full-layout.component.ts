@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {ExamManagementService} from '../service/exam-management.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,7 +9,6 @@ import {HttpClient} from '@angular/common/http';
 })
 export class FullLayoutComponent implements OnInit {
 
-  examInfo: any;
   examInfoLength: number;
 
   public disabled = false;
@@ -24,14 +24,14 @@ export class FullLayoutComponent implements OnInit {
     this.status.isopen = !this.status.isopen;
   }
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private examService: ExamManagementService) {
   }
 
   ngOnInit(): void {
-    this.http.get('/oerts/exams').subscribe(data => {
-      this.examInfo = data;
-      // console.log(this.examInfo.length);
-      this.examInfoLength = this.examInfo.length;
+    this.examService.getAllExams().subscribe(data => {
+      const examInfo: any = data;
+      this.examInfoLength = examInfo.length;
     })
   }
 }
