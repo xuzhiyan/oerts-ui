@@ -32,6 +32,26 @@ export function passwordValidator(group: FormGroup): any {
   }
 }
 
+export function idcardValidator(control: FormControl): any {
+  const idcardReq = /^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/;
+  const valid = idcardReq.test(control.value);
+  if (isEmpty(control.value)) {
+    return {idcardValid: {errorDesc: '身份证号不能为空'}};
+  } else {
+    return valid ? null : {idcardValid: {errorDesc: '身份证号格式不正确'}};
+  }
+}
+
+export function emailaddressValidator(control: FormControl): any {
+  const emailaddressReq = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+  const valid = emailaddressReq.test(control.value);
+  if (isEmpty(control.value)) {
+    return {emailaddressValid: {errorDesc: '邮箱地址不能为空'}};
+  } else {
+    return valid ? null : {emailaddressValid: {errorDesc: '邮箱地址格式不正确'}};
+  }
+}
+
 function isEmpty(index: any) {
   return index === '' || index === null;
 }

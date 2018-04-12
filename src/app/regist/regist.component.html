@@ -10,28 +10,28 @@
             <div class="input-group mb-1">
               <span class="input-group-addon"><i class="icon-user"></i></span>
               <input type="text" class="form-control" placeholder="姓名" formControlName="username"
-                     [class.hasError]="registModel.hasError('usernameValid', 'username') && registModel.get('username').touched">
+                     [class.hasError]="!(!registModel.hasError('usernameValid', 'username') || registModel.get('username').untouched && validStatus)">
             </div>
             <div class="input-group mb-1 error-message"
-                 [hidden]="!registModel.hasError('usernameValid', 'username') || registModel.get('username').untouched">
+                 [hidden]="!registModel.hasError('usernameValid', 'username') || registModel.get('username').untouched && validStatus">
               {{registModel.getError('usernameValid', 'username')?.errorDesc}}
             </div>
             <div class="input-group mb-1 error-space"
-                 [hidden]="registModel.hasError('usernameValid', 'username') && registModel.get('username').touched">
+                 [hidden]="!(!registModel.hasError('usernameValid', 'username') || registModel.get('username').untouched && validStatus)">
               &nbsp;
             </div>
 
             <div class="input-group mb-1">
               <span class="input-group-addon"><i class="icon-phone"></i></span>
               <input type="text" class="form-control" placeholder="手机号" formControlName="userphone"
-                     [class.hasError]="registModel.hasError('userphoneValid', 'userphone') && registModel.get('userphone').touched">
+                     [class.hasError]="!(!registModel.hasError('userphoneValid', 'userphone') || registModel.get('userphone').untouched && validStatus)">
             </div>
             <div class="input-group mb-1 error-message"
-                 [hidden]="!registModel.hasError('userphoneValid', 'userphone') || registModel.get('userphone').untouched">
+                 [hidden]="!registModel.hasError('userphoneValid', 'userphone') || registModel.get('userphone').untouched && validStatus">
               {{registModel.getError('userphoneValid', 'userphone')?.errorDesc}}
             </div>
             <div class="input-group mb-1 error-space"
-                 [hidden]="registModel.hasError('userphoneValid', 'userphone') && registModel.get('userphone').touched">
+                 [hidden]="!(!registModel.hasError('userphoneValid', 'userphone') || registModel.get('userphone').untouched && validStatus)">
               &nbsp;
             </div>
 
@@ -39,7 +39,7 @@
               <div class="input-group mb-1">
                 <span class="input-group-addon"><i class="icon-lock"></i></span>
                 <input type="password" class="form-control" placeholder="密码" formControlName="loginpassword"
-                       [class.hasError]="registModel.hasError('passwordValid', 'loginPasswordsGroup') && registModel.get('loginPasswordsGroup').touched">
+                       [class.hasError]="!(!registModel.hasError('passwordValid', 'loginPasswordsGroup') || registModel.get('loginPasswordsGroup').untouched && validStatus)">
               </div>
               <div class="input-group mb-1 error-space">
                 &nbsp;
@@ -48,14 +48,14 @@
               <div class="input-group mb-1">
                 <span class="input-group-addon"><i class="icon-lock"></i></span>
                 <input type="password" class="form-control" placeholder="确认密码" formControlName="pconfirm"
-                       [class.hasError]="registModel.hasError('passwordValid', 'loginPasswordsGroup') && registModel.get('loginPasswordsGroup').touched">
+                       [class.hasError]="!(!registModel.hasError('passwordValid', 'loginPasswordsGroup') || registModel.get('loginPasswordsGroup').untouched && validStatus)">
               </div>
               <div class="input-group mb-1 error-message"
-                   [hidden]="!registModel.hasError('passwordValid', 'loginPasswordsGroup') || registModel.get('loginPasswordsGroup').untouched">
+                   [hidden]="!registModel.hasError('passwordValid', 'loginPasswordsGroup') || registModel.get('loginPasswordsGroup').untouched && validStatus">
                 {{registModel.getError('passwordValid', 'loginPasswordsGroup')?.errorDesc}}
               </div>
               <div class="input-group mb-1 error-space"
-                   [hidden]="registModel.hasError('passwordValid', 'loginPasswordsGroup') && registModel.get('loginPasswordsGroup').touched">
+                   [hidden]="!(!registModel.hasError('passwordValid', 'loginPasswordsGroup') || registModel.get('loginPasswordsGroup').untouched && validStatus)">
                 &nbsp;
               </div>
             </div>

@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {Http} from '@angular/http'
 import {ExamManagementService} from '../../service/exam-management.service';
 
 @Component({
@@ -11,8 +12,11 @@ export class TestRegistrationComponent implements OnInit {
 
   examInfo: any;
 
+  test: Array<ExamInfo> = new Array();
+
   constructor(private http: HttpClient,
-              private examService: ExamManagementService) {
+              private examService: ExamManagementService,
+              private httpt: Http) {
   }
 
   ngOnInit() {
@@ -40,26 +44,36 @@ export class TestRegistrationComponent implements OnInit {
     //   regTimeTo: data[`regTimeTo`]
     // });
     // console.log(this.examInfo.cost);
+
+    this.httpt.get('/oerts/exams').subscribe(data => {
+       this.test = data.json();
+      console.log('########### this.test', this.test[0].examId);
+    });
   }
+
 }
 
-// export interface ExamInfo {
-//
-//   examId: string,
-//
-//   examName: string,
-//
-//   cost: number,
-//
-//   maxNum: number,
-//
-//   examPlace: string,
-//
-//   examTimeFrom: Date,
-//
-//   examTimeTo: Date,
-//
-//   regTimeFrom: Date,
-//
-//   regTimeTo: Date,
-// }
+class ExamInfo {
+
+  // constructor(examId: string,
+  //             examName: string,
+  //             cost: number,
+  //             maxNum: number,
+  //             examPlace: string,
+  //             examTimeFrom: Date,
+  //             examTimeTo: Date,
+  //             regTimeFrom: Date,
+  //             regTimeTo: Date) {
+  // }
+
+examId: string;
+examName: string;
+cost: number;
+maxNum: number;
+  examPlace: string;
+  examTimeFrom: Date;
+  examTimeTo: Date;
+  regTimeFrom: Date;
+  regTimeTo: Date;
+
+}

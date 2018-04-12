@@ -5,6 +5,7 @@ import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
 import {TabsModule} from 'ngx-bootstrap/tabs';
 import {AppRoutingModule} from './app.routing';
 import {HttpClientModule} from '@angular/common/http';
+import {HttpModule} from '@angular/http';
 
 import {NAV_DROPDOWN_DIRECTIVES} from './shared/nav-dropdown.directive';
 import {ChartsModule} from 'ng2-charts/ng2-charts';
@@ -37,7 +38,8 @@ import {ExamManagementService} from './service/exam-management.service';
     ChartsModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    HttpModule
   ],
   declarations: [
     NAV_DROPDOWN_DIRECTIVES,

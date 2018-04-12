@@ -10,6 +10,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 })
 export class RegistComponent implements OnInit {
 
+  validStatus: boolean;
   registModel: FormGroup;
   header = new HttpHeaders({'Content-Type': 'application/json'});
 
@@ -27,6 +28,7 @@ export class RegistComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.validStatus = true;
   }
 
   onRegist() {
@@ -42,10 +44,13 @@ export class RegistComponent implements OnInit {
         // console.log(data);
         alert('注册成功');
       });
+    } else {
+      this.validStatus = false;
     }
   }
 
   onReset() {
+    this.validStatus = true;
     this.registModel.reset();
   }
 
