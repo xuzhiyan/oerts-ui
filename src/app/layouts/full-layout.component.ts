@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
 import {ExamManagementService} from '../service/exam-management.service';
+import {ExamInfo} from '../model/ExamInfo';
 
 @Component({
   selector: 'app-dashboard',
@@ -24,14 +24,12 @@ export class FullLayoutComponent implements OnInit {
     this.status.isopen = !this.status.isopen;
   }
 
-  constructor(private http: HttpClient,
-              private examService: ExamManagementService) {
+  constructor(private examService: ExamManagementService) {
   }
 
   ngOnInit(): void {
     this.examService.getAllExams().subscribe(data => {
-      const examInfo: any = data;
-      this.examInfoLength = examInfo.length;
+      this.examInfoLength = data.json().length;
     })
   }
 }

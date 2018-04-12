@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {Http} from '@angular/http';
 
 @Injectable()
 export class ExamManagementService {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: Http) {
   }
 
   getAllExams() {
@@ -12,18 +12,3 @@ export class ExamManagementService {
   }
 
 }
-
-// export class ExamInfo {
-//   constructor(public examId: string,
-//               public examName: string,
-//               public cost: number,
-//               public maxNum: number,
-//               public examPlace: string,
-//               public examTimeFrom: Date,
-//               public examTimeTo: Date,
-//               public regTimeFrom: Date,
-//               public regTimeTo: Date,
-//               ) {
-//
-//   }
-// }

@@ -13,6 +13,7 @@ import {ScoreDetailsComponent} from './pages/score-details/score-details.compone
 import {EditPersoninfComponent} from './pages/edit-personinf/edit-personinf.component';
 import {OnlineQaComponent} from './pages/online-qa/online-qa.component';
 import {RegistComponent} from './regist/regist.component';
+import {TestDetailsComponent} from './pages/test-details/test-details.component';
 
 export const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -30,7 +31,8 @@ export const routes: Routes = [
       {path: 'score-details', component: ScoreDetailsComponent},
       {path: 'edit-persioninf', component: EditPersoninfComponent},
       {path: 'edit-password', component: EditPasswordComponent},
-      {path: 'online-qa', component: OnlineQaComponent}
+      {path: 'online-qa', component: OnlineQaComponent},
+      {path: 'test-details/:id', component: TestDetailsComponent}
     ]
   },
 ];

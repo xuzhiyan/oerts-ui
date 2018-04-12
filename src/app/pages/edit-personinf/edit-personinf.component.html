@@ -92,7 +92,14 @@
             <div class="form-group row">
               <label class="col-md-3 form-control-label">居住地址:</label>
               <div class="col-md-6">
-                <input type="text" name="residentialaddress" class="form-control" formControlName="residentialaddress">
+                <input type="text" name="residentialaddress" class="form-control" formControlName="residentialaddress"
+                       [class.hasError]="!(!editModel.hasError('residentialaddressValid', 'residentialaddress') || editModel.get('residentialaddress').untouched && validStatus)">
+              </div>
+              <div class="col-md-3 error-message"
+                   [hidden]="!editModel.hasError('residentialaddressValid', 'residentialaddress') || editModel.get('residentialaddress').untouched && validStatus">
+                <label class="error-message-vertical">
+                  {{editModel.getError('residentialaddressValid', 'residentialaddress')?.errorDesc}}
+                </label>
               </div>
             </div>
             <div class="form-group row">

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Http} from '@angular/http'
 import {ExamManagementService} from '../../service/exam-management.service';
+import {ExamInfo} from '../../model/ExamInfo';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-test-registration',
@@ -10,13 +10,10 @@ import {ExamManagementService} from '../../service/exam-management.service';
 })
 export class TestRegistrationComponent implements OnInit {
 
-  examInfo: any;
+  examInfo: Array<ExamInfo> = new Array();
 
-  test: Array<ExamInfo> = new Array();
-
-  constructor(private http: HttpClient,
-              private examService: ExamManagementService,
-              private httpt: Http) {
+  constructor(private examService: ExamManagementService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -27,7 +24,7 @@ export class TestRegistrationComponent implements OnInit {
     // })
 
     this.examService.getAllExams().subscribe(data => {
-      this.examInfo = data;
+      this.examInfo = data.json();
     });
 
     // this.http.get<ExamInfo>('/oerts/exams').subscribe((data: ExamInfo) => this.examInfo = { ...data});
@@ -45,35 +42,14 @@ export class TestRegistrationComponent implements OnInit {
     // });
     // console.log(this.examInfo.cost);
 
-    this.httpt.get('/oerts/exams').subscribe(data => {
-       this.test = data.json();
-      console.log('########### this.test', this.test[0].examId);
-    });
+    // this.httpt.get('/oerts/exams').subscribe(data => {
+    //   this.test = data.json();
+    //   console.log('########### this.test', this.test[0].examId);
+    // });
   }
 
-}
-
-class ExamInfo {
-
-  // constructor(examId: string,
-  //             examName: string,
-  //             cost: number,
-  //             maxNum: number,
-  //             examPlace: string,
-  //             examTimeFrom: Date,
-  //             examTimeTo: Date,
-  //             regTimeFrom: Date,
-  //             regTimeTo: Date) {
-  // }
-
-examId: string;
-examName: string;
-cost: number;
-maxNum: number;
-  examPlace: string;
-  examTimeFrom: Date;
-  examTimeTo: Date;
-  regTimeFrom: Date;
-  regTimeTo: Date;
-
+  onDetails(item: any) {
+    // console.log(item);
+    this.router.navigate(['/layout/test-details', item.examId]);
+  }
 }

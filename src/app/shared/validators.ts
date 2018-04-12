@@ -52,6 +52,14 @@ export function emailaddressValidator(control: FormControl): any {
   }
 }
 
+export function residentialaddressValidator(control: FormControl): any {
+  if (isEmpty(control.value)) {
+    return {residentialaddressValid: {errorDesc: '居住地址不能为空'}};
+  } else {
+    return null;
+  }
+}
+
 function isEmpty(index: any) {
   return index === '' || index === null;
 }

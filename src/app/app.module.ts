@@ -28,6 +28,7 @@ import {OnlineQaComponent} from './pages/online-qa/online-qa.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RegistComponent} from './regist/regist.component';
 import {ExamManagementService} from './service/exam-management.service';
+import { TestDetailsComponent } from './pages/test-details/test-details.component';
 
 @NgModule({
   imports: [
@@ -58,7 +59,8 @@ import {ExamManagementService} from './service/exam-management.service';
     TestPayComponent,
     TestRegistrationComponent,
     OnlineQaComponent,
-    RegistComponent
+    RegistComponent,
+    TestDetailsComponent
   ],
   providers: [
     {provide: LocationStrategy, useClass: HashLocationStrategy},

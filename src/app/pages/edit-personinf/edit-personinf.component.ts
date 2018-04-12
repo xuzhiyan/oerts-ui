@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormGroup, FormBuilder} from '@angular/forms';
-import {emailaddressValidator, idcardValidator, usernameValidator, userphoneValidator} from '../../shared/validators';
+import {
+  emailaddressValidator, idcardValidator, residentialaddressValidator, usernameValidator,
+  userphoneValidator
+} from '../../shared/validators';
 
 
 @Component({
@@ -20,7 +23,7 @@ export class EditPersoninfComponent implements OnInit {
       idcard: ['', idcardValidator],
       userprofession: [''],
       emailaddress: ['', emailaddressValidator],
-      residentialaddress: [''],
+      residentialaddress: ['', residentialaddressValidator],
       userphoto: [''],
       idcardphoto: ['']
     })
