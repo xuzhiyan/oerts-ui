@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable()
 export class ExamManagementService {
@@ -9,6 +10,11 @@ export class ExamManagementService {
 
   getAllExams() {
     return this.http.get('/oerts/exams');
+  }
+
+  getExamById(id: string) {
+    const url = '/oerts/exam/' + id;
+    return this.http.get(url);
   }
 
 }

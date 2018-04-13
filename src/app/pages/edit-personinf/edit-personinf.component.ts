@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormGroup, FormBuilder} from '@angular/forms';
 import {
   emailaddressValidator, idcardValidator, residentialaddressValidator, usernameValidator,
-  userphoneValidator
+  userphoneValidator, userprofessionValidator, usersexValidator
 } from '../../shared/validators';
 
 
@@ -20,8 +20,9 @@ export class EditPersoninfComponent implements OnInit {
     this.editModel = fb.group({
       username: ['', usernameValidator],
       userphone: ['', userphoneValidator],
+      usersex: ['', usersexValidator],
       idcard: ['', idcardValidator],
-      userprofession: [''],
+      userprofession: ['', userprofessionValidator],
       emailaddress: ['', emailaddressValidator],
       residentialaddress: ['', residentialaddressValidator],
       userphoto: [''],
@@ -34,7 +35,7 @@ export class EditPersoninfComponent implements OnInit {
   }
 
   onEdit() {
-    // console.log(this.editModel.value.userphone);
+    console.log(this.editModel.value.usersex);
     if (this.editModel.valid) {
 
     } else {

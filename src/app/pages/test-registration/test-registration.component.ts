@@ -11,45 +11,33 @@ import {Router} from '@angular/router';
 export class TestRegistrationComponent implements OnInit {
 
   examInfo: Array<ExamInfo> = new Array();
+  // test: Array<ExamInfo> = new Array();
+  // ttt: any;
 
   constructor(private examService: ExamManagementService,
               private router: Router) {
   }
 
   ngOnInit() {
-    // this.http.get('/oerts/exams').subscribe(data => {
-    //   console.log(data);
-    //   this.examInfo = data;
-    //   console.log(this.examInfo);
-    // })
 
     this.examService.getAllExams().subscribe(data => {
       this.examInfo = data.json();
     });
 
-    // this.http.get<ExamInfo>('/oerts/exams').subscribe((data: ExamInfo) => this.examInfo = { ...data});
-
-    // this.http.get<ExamInfo>('/oerts/exams').subscribe((data: ExamInfo) => this.examInfo = {
-    //   examId: data[`examId`],
-    //   examName: data[`examName`],
-    //   cost: data[`cost`],
-    //   maxNum: data[`maxNum`],
-    //   examPlace: data[`examPlace`],
-    //   examTimeFrom: data[`examTimeFrom`],
-    //   examTimeTo: data[`examTimeTo`],
-    //   regTimeFrom: data[`regTimeFrom`],
-    //   regTimeTo: data[`regTimeTo`]
-    // });
-    // console.log(this.examInfo.cost);
-
     // this.httpt.get('/oerts/exams').subscribe(data => {
-    //   this.test = data.json();
-    //   console.log('########### this.test', this.test[0].examId);
+    //   this.test = _.values(data);
+    //   // console.log('####  this.test ', this.test[0].examId);
+    //   // this.ttt = data;
+    //   // console.log(this.ttt[0].examId);
+    // });
+    //
+    // this.httpt.get('/oerts/exam/1000006').subscribe(data => {
+    //   this.ttt = data;
+    //   console.log(this.ttt.examId);
     // });
   }
 
   onDetails(item: any) {
-    // console.log(item);
     this.router.navigate(['/layout/test-details', item.examId]);
   }
 }

@@ -60,6 +60,22 @@ export function residentialaddressValidator(control: FormControl): any {
   }
 }
 
+export function userprofessionValidator(control: FormControl): any {
+  if (isEmpty(control.value)) {
+    return {userprofessionValid: {errorDesc: '职业必须选择'}};
+  } else {
+    return null;
+  }
+}
+
+export function usersexValidator(control: FormControl): any {
+  if (isEmpty(control.value)) {
+    return {usersexValid: {errorDesc: '性别必须选择'}};
+  } else {
+    return null;
+  }
+}
+
 function isEmpty(index: any) {
   return index === '' || index === null;
 }

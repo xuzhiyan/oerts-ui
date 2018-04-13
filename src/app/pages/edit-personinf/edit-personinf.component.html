@@ -43,14 +43,21 @@
             <div class="form-group row">
               <label class="col-md-3 form-control-label">性别:</label>
               <div class="col-md-6">
-                <div class="col-md-6">
+                <div class="col-md-6"
+                     [class.hasError]="!(!editModel.hasError('usersexValid', 'usersex') || editModel.get('usersex').untouched && validStatus)">
                   <label class="radio-inline">
-                    <input type="radio" name="usersex" value="1"> 男
+                    <input type="radio" name="usersex" value="1" formControlName="usersex"> 男
                   </label>
                   <label class="radio-inline">
-                    <input type="radio" name="usersex" value="0"> 女
+                    <input type="radio" name="usersex" value="0" formControlName="usersex"> 女
                   </label>
                 </div>
+              </div>
+              <div class="col-md-3 error-message"
+                   [hidden]="!editModel.hasError('usersexValid', 'usersex') || editModel.get('usersex').untouched && validStatus">
+                <label class="error-message-vertical">
+                  {{editModel.getError('usersexValid', 'usersex')?.errorDesc}}
+                </label>
               </div>
             </div>
             <div class="form-group row">
@@ -69,11 +76,18 @@
             <div class="form-group row">
               <label class="col-md-3 form-control-label">职业</label>
               <div class="col-md-6">
-                <select name="userprofession" class="form-control" formControlName="userprofession">
+                <select name="userprofession" class="form-control" formControlName="userprofession"
+                        [class.hasError]="!(!editModel.hasError('userprofessionValid', 'userprofession') || editModel.get('userprofession').untouched && validStatus)">
                   <option value="0">学生</option>
                   <option value="1">在职</option>
                   <option value="2">其他</option>
                 </select>
+              </div>
+              <div class="col-md-3 error-message"
+                   [hidden]="!editModel.hasError('userprofessionValid', 'userprofession') || editModel.get('userprofession').untouched && validStatus">
+                <label class="error-message-vertical">
+                  {{editModel.getError('userprofessionValid', 'userprofession')?.errorDesc}}
+                </label>
               </div>
             </div>
             <div class="form-group row">
