@@ -23,7 +23,7 @@ export class TestDetailsComponent implements OnInit {
   ngOnInit() {
     this.examId = this.routeInfo.snapshot.params['id'];
     this.examService.getExamById(this.examId).subscribe(data => {
-      this.examInfo = data.json();
+      this.examInfo = data.json().data;
     })
   }
 

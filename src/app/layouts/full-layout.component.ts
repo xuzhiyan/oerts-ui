@@ -29,7 +29,7 @@ export class FullLayoutComponent implements OnInit {
 
   ngOnInit(): void {
     this.examService.getAllExams().subscribe(data => {
-      this.examInfoLength = data.json().length;
+      this.examInfoLength = data.json().data.length;
     })
   }
 }

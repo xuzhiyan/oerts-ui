@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {forwardRef, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {LocationStrategy, HashLocationStrategy} from '@angular/common';
 import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
@@ -28,7 +28,9 @@ import {OnlineQaComponent} from './pages/online-qa/online-qa.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RegistComponent} from './regist/regist.component';
 import {ExamManagementService} from './service/exam-management.service';
-import { TestDetailsComponent } from './pages/test-details/test-details.component';
+import {TestDetailsComponent} from './pages/test-details/test-details.component';
+import {ExamineeService} from './service/examinee.service';
+import {Pages404Component} from './pages/pages-404/pages-404.component';
 
 @NgModule({
   imports: [
@@ -60,11 +62,13 @@ import { TestDetailsComponent } from './pages/test-details/test-details.componen
     TestRegistrationComponent,
     OnlineQaComponent,
     RegistComponent,
-    TestDetailsComponent
+    TestDetailsComponent,
+    Pages404Component
   ],
   providers: [
     {provide: LocationStrategy, useClass: HashLocationStrategy},
-    ExamManagementService
+    ExamManagementService,
+    ExamineeService
   ],
   bootstrap: [AppComponent]
 })

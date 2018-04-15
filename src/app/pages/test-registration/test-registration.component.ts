@@ -21,7 +21,7 @@ export class TestRegistrationComponent implements OnInit {
   ngOnInit() {
 
     this.examService.getAllExams().subscribe(data => {
-      this.examInfo = data.json();
+      this.examInfo = data.json().data;
     });
 
     // this.httpt.get('/oerts/exams').subscribe(data => {

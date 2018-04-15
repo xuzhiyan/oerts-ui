@@ -1,4 +1,6 @@
 import {FormControl, FormGroup} from '@angular/forms';
+import {ExamineeService} from '../../service/examinee.service';
+import construct = Reflect.construct;
 
 export function usernameValidator(control: FormControl): any {
   if (isEmpty(control.value)) {

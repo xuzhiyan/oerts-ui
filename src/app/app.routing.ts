@@ -14,6 +14,8 @@ import {EditPersoninfComponent} from './pages/edit-personinf/edit-personinf.comp
 import {OnlineQaComponent} from './pages/online-qa/online-qa.component';
 import {RegistComponent} from './regist/regist.component';
 import {TestDetailsComponent} from './pages/test-details/test-details.component';
+import {LoginGuard} from './shared/guard/login.guard';
+import {Pages404Component} from './pages/pages-404/pages-404.component';
 
 export const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -33,14 +35,15 @@ export const routes: Routes = [
       {path: 'edit-password', component: EditPasswordComponent},
       {path: 'online-qa', component: OnlineQaComponent},
       {path: 'test-details/:id', component: TestDetailsComponent}
-    ]
+    ], canActivate: [LoginGuard]
   },
+  {path: '**', component: Pages404Component}
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  providers: []
+  providers: [LoginGuard]
 })
 export class AppRoutingModule {
 }

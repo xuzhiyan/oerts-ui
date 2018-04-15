@@ -4,7 +4,7 @@
       <div class="col-md-8">
         <div class="card-group mb-0">
           <div class="card p-4">
-            <div class="card-body">
+            <div class="card-body" [formGroup]="loginModel">
               <span class="login-font">考生报名系统</span>
               <p class="text-muted mb-0">登录你的账号</p>
               <div class="input-group mb-1 error-space" [hidden]="!loginStatus">
@@ -16,12 +16,12 @@
               <div class="input-group mb-3">
                 <span class="input-group-addon"><i class="icon-user"></i></span>
                 <input type="text" class="form-control" placeholder="手机号" [class.hasError]="!loginStatus"
-                       [(ngModel)]="userphone" (input)="userInput()">
+                       formControlName="userphone" (input)="userInput()">
               </div>
               <div class="input-group mb-4">
                 <span class="input-group-addon"><i class="icon-lock"></i></span>
                 <input type="password" class="form-control" placeholder="密码" [class.hasError]="!loginStatus"
-                       [(ngModel)]="password" (input)="userInput()">
+                       formControlName="loginpassword" (input)="userInput()">
               </div>
               <div class="row">
                 <div class="col-6">
