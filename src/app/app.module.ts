@@ -31,6 +31,7 @@ import {ExamManagementService} from './service/exam-management.service';
 import {TestDetailsComponent} from './pages/test-details/test-details.component';
 import {ExamineeService} from './service/examinee.service';
 import {Pages404Component} from './pages/pages-404/pages-404.component';
+import {ExamRegistrationService} from './service/exam-registration.service';
 
 @NgModule({
   imports: [
@@ -68,7 +69,8 @@ import {Pages404Component} from './pages/pages-404/pages-404.component';
   providers: [
     {provide: LocationStrategy, useClass: HashLocationStrategy},
     ExamManagementService,
-    ExamineeService
+    ExamineeService,
+    ExamRegistrationService
   ],
   bootstrap: [AppComponent]
 })

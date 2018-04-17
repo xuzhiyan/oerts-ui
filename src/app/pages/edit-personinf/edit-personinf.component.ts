@@ -22,7 +22,6 @@ export class EditPersoninfComponent implements OnInit {
               private examineeService: ExamineeService) {
     this.editModel = fb.group({
       username: ['', usernameValidator],
-      userphone: ['', userphoneValidator],
       usersex: ['', usersexValidator],
       idcard: ['', idcardValidator],
       userprofession: ['', userprofessionValidator],
@@ -38,7 +37,6 @@ export class EditPersoninfComponent implements OnInit {
     this.examineeService.getByUserPhone(sessionStorage.getItem('user_validate')).subscribe(data => {
       this.editModel.setValue({
         username: data.json().data.userName,
-        userphone: data.json().data.userPhone,
         usersex: data.json().data.userSex.toString(),
         idcard: data.json().data.idCard,
         userprofession: data.json().data.userProfession,
@@ -51,12 +49,12 @@ export class EditPersoninfComponent implements OnInit {
   }
 
   onEdit() {
-    console.log(this.editModel.value.usersex);
-    console.log(this.editModel.value.userprofession);
+    // console.log(this.editModel.value.usersex);
+    // console.log(this.editModel.value.userprofession);
     if (this.editModel.valid) {
       const body = {
         'userName': this.editModel.value.username,
-        'userPhone': this.editModel.value.userphone,
+        'userPhone': sessionStorage.getItem('user_validate'),
         'userSex': this.editModel.value.usersex,
         'idCard': this.editModel.value.idcard,
         'userProfession': this.editModel.value.userprofession,

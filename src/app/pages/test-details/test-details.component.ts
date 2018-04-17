@@ -4,6 +4,7 @@ import {ExamManagementService} from '../../service/exam-management.service';
 import {ExamInfo} from '../../model/ExamInfo';
 import {Router} from '@angular/router';
 import * as _ from 'lodash';
+import {ExamRegistrationService} from '../../service/exam-registration.service';
 
 @Component({
   selector: 'app-test-details',
@@ -17,7 +18,8 @@ export class TestDetailsComponent implements OnInit {
 
   constructor(private routeInfo: ActivatedRoute,
               private examService: ExamManagementService,
-              private router: Router) {
+              private router: Router,
+              private examRService: ExamRegistrationService) {
   }
 
   ngOnInit() {
@@ -29,5 +31,16 @@ export class TestDetailsComponent implements OnInit {
 
   onReturn() {
     this.router.navigate(['/layout/test-registration']);
+  }
+
+  onExamRegistration() {
+    this.examRService.examRegistByIdCardAndExamID(this.examId, sessionStorage.getItem('user_validate')).subscribe(data => {
+      console.log(data.json());
+      if (data.json().status === 'success') {
+        alert('报名成功');
+      } else {
+        alert('报名失败');
+      }
+    });
   }
 }

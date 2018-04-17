@@ -28,19 +28,6 @@
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 form-control-label">手机号:</label>
-              <div class="col-md-6">
-                <input type="text" name="userphone" class="form-control" formControlName="userphone"
-                       [class.hasError]="!(!editModel.hasError('userphoneValid', 'userphone') || editModel.get('userphone').untouched && validStatus)">
-              </div>
-              <div class="col-md-3 error-message"
-                   [hidden]="!editModel.hasError('userphoneValid', 'userphone') || editModel.get('userphone').untouched && validStatus">
-                <label class="error-message-vertical">
-                  {{editModel.getError('userphoneValid', 'userphone')?.errorDesc}}
-                </label>
-              </div>
-            </div>
-            <div class="form-group row">
               <label class="col-md-3 form-control-label">性别:</label>
               <div class="col-md-6">
                 <div class="col-md-6"
