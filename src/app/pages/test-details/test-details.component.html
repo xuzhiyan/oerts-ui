@@ -9,6 +9,12 @@
   <div class="animated fadeIn">
     <div class="row">
       <div class="col-md-12">
+        <div class="alert alert-danger alert-dismissible fade show" [hidden]="dangerMessage">
+          <strong>注意！！</strong> 本次考试您已经报名，具体信息请前往已报名考试查看。
+          <button type="button" class="close">
+            <span>×</span>
+          </button>
+        </div>
         <div class="card">
           <div class="card-header">
             <i class="fa fa-align-justify"></i> 考试详情
@@ -54,8 +60,8 @@
             </div>
           </div>
           <div class="card-footer">
-            <button type="submit" class="btn btn-sm btn-success" (click)="onExamRegistration()"><i
-              class="fa fa-dot-circle-o"></i> 报名
+            <button type="submit" class="btn btn-sm btn-success" (click)="onExamRegistration()" [disabled]="buttonFlg">
+              <i class="fa fa-dot-circle-o"></i> 报名
             </button>
             <button type="reset" class="btn btn-sm btn-danger" (click)="onReturn()"><i class="fa fa-ban"></i> 返回
             </button>

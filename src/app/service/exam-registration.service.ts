@@ -13,4 +13,9 @@ export class ExamRegistrationService {
     const url = '/oerts/registration/' + examId + '/' + userPhone;
     return this.http.get(url);
   }
+
+  countByIdCardAndExamID(examId: string, userPhone: string) {
+    const url = '/oerts/countregist/' + examId + '/' + userPhone;
+    return this.http.get(url);
+  }
 }
