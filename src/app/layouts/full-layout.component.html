@@ -39,7 +39,7 @@
           <a class="nav-link" routerLinkActive="active" [routerLink]="['./test-complete']">
             <i class="icon-check"></i>
             已报名考试
-            <span class="badge badge-info">5</span>
+            <span class="badge badge-info" *ngIf="completeRExamInfoLength > 0">{{completeRExamInfoLength}}</span>
           </a>
         </li>
         <li class="nav-title">

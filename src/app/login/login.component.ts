@@ -35,7 +35,8 @@ export class LoginComponent implements OnInit {
     const body = {'userPhone': this.loginModel.value.userphone, 'loginPassword': this.loginModel.value.loginpassword};
     this.examineeService.loginByPassw(body).subscribe(data => {
       if (data.json().status === 'success') {
-        sessionStorage.setItem('user_validate', this.loginModel.value.userphone)
+        sessionStorage.setItem('user_validate', this.loginModel.value.userphone);
+        sessionStorage.setItem('user_idcard', data.json().data.idCard);
         this.router.navigate(['/layout']);
       } else {
         this.loginStatus = false;

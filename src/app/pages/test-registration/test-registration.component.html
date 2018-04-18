@@ -9,6 +9,12 @@
   <div class="animated fadeIn">
     <div class="row">
       <div class="col-lg-12">
+        <div class="alert alert-danger alert-dismissible fade show" [hidden]="dangerMessage">
+          <strong>注意！！</strong> 您完善自身信息后，方可查看考试详情和报名考试。
+          <button type="button" class="close">
+            <span>×</span>
+          </button>
+        </div>
         <div class="card">
           <div class="card-header">
             <i class="fa fa-align-justify"></i> 考试信息
@@ -35,7 +41,7 @@
                 <td>{{exams.examPlace}}</td>
                 <td>{{exams.maxNum}}</td>
                 <td>
-                  <button type="submit" class="btn btn-sm btn-primary" (click)="onDetails(exams)"> 详情</button>
+                  <button type="submit" class="btn btn-sm btn-primary" (click)="onDetails(exams)" [disabled]="!dangerMessage"> 详情</button>
                 </td>
               </tr>
               </tbody>

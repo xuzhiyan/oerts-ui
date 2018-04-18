@@ -9,13 +9,18 @@ export class ExamRegistrationService {
   constructor(private http: Http) {
   }
 
-  examRegistByIdCardAndExamID(examId: string, userPhone: string) {
-    const url = '/oerts/registration/' + examId + '/' + userPhone;
+  examRegistByIdCardAndExamID(examId: string, idCard: string) {
+    const url = '/oerts/registration/' + examId + '/' + idCard;
     return this.http.get(url);
   }
 
-  countByIdCardAndExamID(examId: string, userPhone: string) {
-    const url = '/oerts/countregist/' + examId + '/' + userPhone;
+  countByIdCardAndExamID(examId: string, idCard: string) {
+    const url = '/oerts/countregist/' + examId + '/' + idCard;
+    return this.http.get(url);
+  }
+
+  completeResgistList(idCard: string) {
+    const url = '/oerts/testcompletelist/' + idCard;
     return this.http.get(url);
   }
 }

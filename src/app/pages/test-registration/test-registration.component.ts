@@ -13,16 +13,20 @@ export class TestRegistrationComponent implements OnInit {
   examInfo: Array<ExamInfo> = new Array();
   // test: Array<ExamInfo> = new Array();
   // ttt: any;
+  dangerMessage: boolean;
 
   constructor(private examService: ExamManagementService,
               private router: Router) {
   }
 
   ngOnInit() {
-
+    this.dangerMessage = true;
     this.examService.getAllExams().subscribe(data => {
       this.examInfo = data.json().data;
     });
+    if (sessionStorage.getItem('user_idcard') === 'null') {
+      this.dangerMessage = false;
+    }
 
     // this.httpt.get('/oerts/exams').subscribe(data => {
     //   this.test = _.values(data);
@@ -38,6 +42,10 @@ export class TestRegistrationComponent implements OnInit {
   }
 
   onDetails(item: any) {
-    this.router.navigate(['/layout/test-details', item.examId]);
+    if (sessionStorage.getItem('user_idcard') === 'null') {
+      alert('请先完善用户信息后再报名！');
+    } else {
+      this.router.navigate(['/layout/test-details', item.examId]);
+    }
   }
 }

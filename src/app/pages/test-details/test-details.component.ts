@@ -17,7 +17,6 @@ export class TestDetailsComponent implements OnInit {
   examInfo: Array<ExamInfo> = new Array();
   // 用于不能重复报名的检查
   dangerMessage: boolean;
-  buttonFlg: string;
 
   constructor(private routeInfo: ActivatedRoute,
               private examService: ExamManagementService,
@@ -27,16 +26,14 @@ export class TestDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.dangerMessage = true;
-    this.buttonFlg = '';
     this.examId = this.routeInfo.snapshot.params['id'];
     this.examService.getExamById(this.examId).subscribe(data => {
       this.examInfo = data.json().data;
     });
-    this.examRService.countByIdCardAndExamID(this.examId, sessionStorage.getItem('user_validate')).subscribe(data => {
+    this.examRService.countByIdCardAndExamID(this.examId, sessionStorage.getItem('user_idcard')).subscribe(data => {
       console.log(data.json().status);
       if (data.json().status === 'failed') {
         this.dangerMessage = false;
-        this.buttonFlg = 'disabled';
       }
     });
   }
@@ -46,8 +43,7 @@ export class TestDetailsComponent implements OnInit {
   }
 
   onExamRegistration() {
-    this.examRService.examRegistByIdCardAndExamID(this.examId, sessionStorage.getItem('user_validate')).subscribe(data => {
-      console.log(data.json());
+    this.examRService.examRegistByIdCardAndExamID(this.examId, sessionStorage.getItem('user_idcard')).subscribe(data => {
       if (data.json().status === 'success') {
         alert('报名成功');
       } else {
