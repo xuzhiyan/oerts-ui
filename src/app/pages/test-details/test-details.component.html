@@ -60,7 +60,7 @@
             </div>
           </div>
           <div class="card-footer">
-            <button type="submit" class="btn btn-sm btn-success" (click)="onExamRegistration()" [disabled]="!dangerMessage">
+            <button type="submit" class="btn btn-sm btn-success" (click)="onExamRegistration(examInfo.examId, examInfo.examName)" [disabled]="!dangerMessage">
               <i class="fa fa-dot-circle-o"></i> 报名
             </button>
             <button type="reset" class="btn btn-sm btn-danger" (click)="onReturn()"><i class="fa fa-ban"></i> 返回

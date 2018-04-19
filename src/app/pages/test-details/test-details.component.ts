@@ -31,7 +31,7 @@ export class TestDetailsComponent implements OnInit {
       this.examInfo = data.json().data;
     });
     this.examRService.countByIdCardAndExamID(this.examId, sessionStorage.getItem('user_idcard')).subscribe(data => {
-      console.log(data.json().status);
+      // console.log(data.json().status);
       if (data.json().status === 'failed') {
         this.dangerMessage = false;
       }
@@ -42,13 +42,14 @@ export class TestDetailsComponent implements OnInit {
     this.router.navigate(['/layout/test-registration']);
   }
 
-  onExamRegistration() {
-    this.examRService.examRegistByIdCardAndExamID(this.examId, sessionStorage.getItem('user_idcard')).subscribe(data => {
-      if (data.json().status === 'success') {
-        alert('报名成功');
-      } else {
-        alert('报名失败');
-      }
-    });
+  onExamRegistration(id: string, name: string) {
+    // this.examRService.examRegistByIdCardAndExamID(this.examId, sessionStorage.getItem('user_idcard')).subscribe(data => {
+    //   if (data.json().status === 'success') {
+    //     alert('报名成功');
+    //   } else {
+    //     alert('报名失败');
+    //   }
+    // });
+    this.router.navigate(['/layout/test-improveinfo', id, name]);
   }
 }

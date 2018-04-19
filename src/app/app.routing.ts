@@ -16,6 +16,8 @@ import {RegistComponent} from './regist/regist.component';
 import {TestDetailsComponent} from './pages/test-details/test-details.component';
 import {LoginGuard} from './shared/guard/login.guard';
 import {Pages404Component} from './pages/pages-404/pages-404.component';
+import {TestImproveinfoComponent} from './pages/test-improveinfo/test-improveinfo.component';
+import {TestMessageComponent} from './pages/test-message/test-message.component';
 
 export const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -34,7 +36,9 @@ export const routes: Routes = [
       {path: 'edit-persioninf', component: EditPersoninfComponent},
       {path: 'edit-password', component: EditPasswordComponent},
       {path: 'online-qa', component: OnlineQaComponent},
-      {path: 'test-details/:id', component: TestDetailsComponent}
+      {path: 'test-message', component: TestMessageComponent},
+      {path: 'test-details/:id', component: TestDetailsComponent},
+      {path: 'test-improveinfo/:id/:name', component: TestImproveinfoComponent}
     ], canActivate: [LoginGuard]
   },
   {path: '**', component: Pages404Component}
