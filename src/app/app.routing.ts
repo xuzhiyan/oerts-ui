@@ -37,8 +37,8 @@ export const routes: Routes = [
       {path: 'edit-password', component: EditPasswordComponent},
       {path: 'online-qa', component: OnlineQaComponent},
       {path: 'test-message', component: TestMessageComponent},
-      {path: 'test-details/:id', component: TestDetailsComponent},
-      {path: 'test-improveinfo/:id/:name', component: TestImproveinfoComponent}
+      {path: 'test-details', component: TestDetailsComponent},
+      {path: 'test-improveinfo', component: TestImproveinfoComponent}
     ], canActivate: [LoginGuard]
   },
   {path: '**', component: Pages404Component}

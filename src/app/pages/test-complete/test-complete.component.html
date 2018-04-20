@@ -43,22 +43,21 @@
                   <span class="badge badge-secondary">报名已过期</span>
                 </td>
                 <td *ngIf="creinfos.status == '00'">
-                  <button type="submit" class="btn btn-sm btn-primary"> 详情</button>
+                  <button type="submit" class="btn btn-sm btn-primary" (click)="onCancelRegist(creinfos.examId, '你确定要取消报名吗？')"> 取消报名
+                  </button>
                 </td>
                 <td *ngIf="creinfos.status == '10'">
-                  <button type="submit" class="btn btn-sm btn-primary"> 详情</button>
-                  <button type="submit" class="btn btn-sm btn-primary"> 前往缴费</button>
+                  <button type="submit" class="btn btn-sm btn-primary" [routerLink]="['/layout/test-pay']"> 前往缴费
+                  </button>
                 </td>
                 <td *ngIf="creinfos.status == '11'">
-                  <button type="submit" class="btn btn-sm btn-primary"> 详情</button>
-                  <button type="submit" class="btn btn-sm btn-primary"> 重新报名</button>
+                  <button type="submit" class="btn btn-sm btn-primary" [routerLink]="['/layout/test-registration']"> 重新报名</button>
                 </td>
                 <td *ngIf="creinfos.status == '20'">
-                  <button type="submit" class="btn btn-sm btn-primary"> 详情</button>
+                  <button type="submit" class="btn btn-sm btn-primary"> 报名详情</button>
                 </td>
                 <td *ngIf="creinfos.status == '21'">
-                  <button type="submit" class="btn btn-sm btn-primary"> 详情</button>
-                  <button type="submit" class="btn btn-sm btn-primary"> 删除记录</button>
+                  <button type="submit" class="btn btn-sm btn-primary" (click)="onCancelRegist(creinfos.examId, '你确定要删除这条记录吗？')"> 删除记录</button>
                 </td>
               </tr>
               </tbody>

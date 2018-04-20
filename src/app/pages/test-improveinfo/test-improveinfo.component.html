@@ -107,7 +107,8 @@
             <button type="submit" class="btn btn-sm btn-success" (click)="onSubmitInfo()">
               <i class="fa fa-dot-circle-o"></i> 提交信息
             </button>
-            <button type="reset" class="btn btn-sm btn-danger" (click)="onReturn()"><i class="fa fa-ban"></i> 返回
+            <button type="reset" class="btn btn-sm btn-danger" [routerLink]="['/layout/test-complete']"><i
+              class="fa fa-ban"></i> 返回
             </button>
           </div>
         </div>

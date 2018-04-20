@@ -77,4 +77,5 @@ export class EditPersoninfComponent implements OnInit {
     this.validStatus = true;
     this.editModel.reset();
   }
+
 }

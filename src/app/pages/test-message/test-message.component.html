@@ -24,10 +24,11 @@
             <i class="fa fa-align-justify"></i> 报名状态
           </div>
           <div class="card-body">
-            <h1 class="text-center">报名成功！</h1>
+            <h1 class="text-center">信息提交成功。请等待审核结果！</h1>
           </div>
           <div class="card-footer">
-            <button type="reset" class="btn btn-sm btn-danger" (click)="onReturn()"><i class="fa fa-ban"></i> 返回
+            <button type="reset" class="btn btn-sm btn-danger" [routerLink]="['/layout/test-complete']"><i
+              class="fa fa-ban"></i> 返回
             </button>
           </div>
         </div>

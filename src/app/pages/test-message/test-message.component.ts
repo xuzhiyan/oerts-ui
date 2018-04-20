@@ -13,8 +13,4 @@ export class TestMessageComponent implements OnInit {
 
   ngOnInit() {
   }
-
-  onReturn() {
-    this.router.navigate(['/layout/test-registration']);
-  }
 }

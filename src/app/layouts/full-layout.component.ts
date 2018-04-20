@@ -12,6 +12,7 @@ export class FullLayoutComponent implements OnInit {
 
   examInfoLength: number;
   completeRExamInfoLength: number;
+  unpaidExamInfoLehgth: number;
 
   public disabled = false;
   public status: { isopen: boolean } = {isopen: false};
@@ -36,7 +37,10 @@ export class FullLayoutComponent implements OnInit {
     });
     this.examRService.completeResgistList(sessionStorage.getItem('user_idcard')).subscribe(data => {
       this.completeRExamInfoLength = data.json().data.length;
-    })
+    });
+    this.examRService.getPayList(sessionStorage.getItem('user_idcard'), '10').subscribe(data => {
+      this.unpaidExamInfoLehgth = data.json().data.length;
+    });
     // console.log(sessionStorage.getItem('user_validate'));
     // console.log(sessionStorage.getItem('user_idcard'));
   }

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ExamManagementService} from '../../service/exam-management.service';
 import {ExamInfo} from '../../model/ExamInfo';
 import {Router} from '@angular/router';
+import {PathKeyService} from '../../service/path-key.service';
 
 @Component({
   selector: 'app-test-registration',
@@ -16,7 +17,8 @@ export class TestRegistrationComponent implements OnInit {
   dangerMessage: boolean;
 
   constructor(private examService: ExamManagementService,
-              private router: Router) {
+              private router: Router,
+              private pathKeyService: PathKeyService) {
   }
 
   ngOnInit() {
@@ -45,7 +47,8 @@ export class TestRegistrationComponent implements OnInit {
     if (sessionStorage.getItem('user_idcard') === 'null') {
       alert('请先完善用户信息后再报名！');
     } else {
-      this.router.navigate(['/layout/test-details', item.examId]);
+      this.pathKeyService.examId = item.examId;
+      this.router.navigate(['/layout/test-details']);
     }
   }
 }

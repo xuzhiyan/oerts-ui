@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ExamInfo} from '../../model/ExamInfo';
+import {ExamRegistrationService} from '../../service/exam-registration.service';
 
 @Component({
   selector: 'app-test-pay',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TestPayComponent implements OnInit {
 
-  constructor() { }
+  paidInfo: Array<ExamInfo> = new Array();
+  unpaidInfo: Array<ExamInfo> = new Array();
+
+  constructor(private examRService: ExamRegistrationService) {
+  }
 
   ngOnInit() {
+    this.examRService.getPayList(sessionStorage.getItem('user_idcard'), '20').subscribe(data => {
+      this.paidInfo = data.json().data;
+    });
+    this.examRService.getPayList(sessionStorage.getItem('user_idcard'), '10').subscribe(data => {
+      this.unpaidInfo = data.json().data;
+    });
   }
 
 }

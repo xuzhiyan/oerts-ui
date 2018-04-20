@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {ExamineeService} from '../../service/examinee.service';
 import {ExamRegistrationService} from '../../service/exam-registration.service';
+import {PathKeyService} from '../../service/path-key.service';
 
 @Component({
   selector: 'app-test-improveinfo',
@@ -15,11 +16,11 @@ export class TestImproveinfoComponent implements OnInit {
   examName: string;
   registExamModel: FormGroup;
 
-  constructor(private routeInfo: ActivatedRoute,
-              private fb: FormBuilder,
+  constructor(private fb: FormBuilder,
               private examineeService: ExamineeService,
               private router: Router,
-              private examRService: ExamRegistrationService) {
+              private examRService: ExamRegistrationService,
+              private pathKeyService: PathKeyService) {
     this.registExamModel = fb.group({
       username: [{value: '', disabled: true}],
       usersex: [{value: '', disabled: true}],
@@ -33,8 +34,8 @@ export class TestImproveinfoComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.examId = this.routeInfo.snapshot.params['id'];
-    this.examName = this.routeInfo.snapshot.params['name'];
+    this.examId = this.pathKeyService.examId;
+    this.examName = this.pathKeyService.examName;
     this.examineeService.getByUserPhone(sessionStorage.getItem('user_validate')).subscribe(data => {
       this.registExamModel.setValue({
         username: data.json().data.userName,
@@ -47,10 +48,6 @@ export class TestImproveinfoComponent implements OnInit {
         idcardphoto: ''
       })
     });
-  }
-
-  onReturn() {
-    this.router.navigate(['/layout/test-registration']);
   }
 
   onSubmitInfo() {

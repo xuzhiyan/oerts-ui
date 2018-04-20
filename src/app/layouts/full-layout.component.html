@@ -32,7 +32,7 @@
           <a class="nav-link" routerLinkActive="active" [routerLink]="['./test-pay']">
             <i class="icon-wallet"></i>
             网上缴费
-            <span class="badge badge-info">4</span>
+            <span class="badge badge-info" *ngIf="unpaidExamInfoLehgth > 0">{{unpaidExamInfoLehgth}}</span>
           </a>
         </li>
         <li class="nav-item">

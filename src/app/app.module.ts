@@ -32,8 +32,9 @@ import {TestDetailsComponent} from './pages/test-details/test-details.component'
 import {ExamineeService} from './service/examinee.service';
 import {Pages404Component} from './pages/pages-404/pages-404.component';
 import {ExamRegistrationService} from './service/exam-registration.service';
-import { TestImproveinfoComponent } from './pages/test-improveinfo/test-improveinfo.component';
-import { TestMessageComponent } from './pages/test-message/test-message.component';
+import {TestImproveinfoComponent} from './pages/test-improveinfo/test-improveinfo.component';
+import {TestMessageComponent} from './pages/test-message/test-message.component';
+import {PathKeyService} from './service/path-key.service';
 
 @NgModule({
   imports: [
@@ -74,7 +75,8 @@ import { TestMessageComponent } from './pages/test-message/test-message.componen
     {provide: LocationStrategy, useClass: HashLocationStrategy},
     ExamManagementService,
     ExamineeService,
-    ExamRegistrationService
+    ExamRegistrationService,
+    PathKeyService
   ],
   bootstrap: [AppComponent]
 })

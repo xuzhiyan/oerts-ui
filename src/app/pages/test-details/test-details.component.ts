@@ -3,8 +3,8 @@ import {ActivatedRoute} from '@angular/router';
 import {ExamManagementService} from '../../service/exam-management.service';
 import {ExamInfo} from '../../model/ExamInfo';
 import {Router} from '@angular/router';
-import * as _ from 'lodash';
 import {ExamRegistrationService} from '../../service/exam-registration.service';
+import {PathKeyService} from '../../service/path-key.service';
 
 @Component({
   selector: 'app-test-details',
@@ -18,7 +18,8 @@ export class TestDetailsComponent implements OnInit {
   // 用于不能重复报名的检查
   dangerMessage: boolean;
 
-  constructor(private routeInfo: ActivatedRoute,
+  constructor(private pathKeyService: PathKeyService,
+              private routeInfo: ActivatedRoute,
               private examService: ExamManagementService,
               private router: Router,
               private examRService: ExamRegistrationService) {
@@ -26,20 +27,18 @@ export class TestDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.dangerMessage = true;
-    this.examId = this.routeInfo.snapshot.params['id'];
-    this.examService.getExamById(this.examId).subscribe(data => {
-      this.examInfo = data.json().data;
-    });
-    this.examRService.countByIdCardAndExamID(this.examId, sessionStorage.getItem('user_idcard')).subscribe(data => {
-      // console.log(data.json().status);
-      if (data.json().status === 'failed') {
-        this.dangerMessage = false;
-      }
-    });
-  }
-
-  onReturn() {
-    this.router.navigate(['/layout/test-registration']);
+    this.examId = this.pathKeyService.examId;
+    if (this.examId !== null) {
+      this.examService.getExamById(this.examId).subscribe(data => {
+        this.examInfo = data.json().data;
+      });
+      this.examRService.countByIdCardAndExamID(this.examId, sessionStorage.getItem('user_idcard')).subscribe(data => {
+        // console.log(data.json().status);
+        if (data.json().status === 'failed') {
+          this.dangerMessage = false;
+        }
+      });
+    }
   }
 
   onExamRegistration(id: string, name: string) {
@@ -50,6 +49,8 @@ export class TestDetailsComponent implements OnInit {
     //     alert('报名失败');
     //   }
     // });
-    this.router.navigate(['/layout/test-improveinfo', id, name]);
+    this.pathKeyService.examId = id;
+    this.pathKeyService.examName = name;
+    this.router.navigate(['/layout/test-improveinfo']);
   }
 }

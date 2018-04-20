@@ -23,4 +23,13 @@ export class ExamRegistrationService {
     const url = '/oerts/testcompletelist/' + idCard;
     return this.http.get(url);
   }
+
+  deleteByIdCardAndExamID(body: any) {
+    return this.http.post('/oerts/registration/delete', body, {headers: this.header});
+  }
+
+  getPayList(idCard: string, status: string) {
+    const url = '/oerts/registration/payList/' + idCard + '/' + status;
+    return this.http.get(url);
+  }
 }
