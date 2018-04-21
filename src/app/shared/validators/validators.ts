@@ -76,6 +76,14 @@ export function usersexValidator(control: FormControl): any {
   }
 }
 
+export function admissionticketValidator(control: FormControl): any {
+  if (isEmpty(control.value)) {
+    return {admissionticketValid: {errorDesc: '请输入正确的准考证号'}};
+  } else {
+    return null;
+  }
+}
+
 function isEmpty(index: any) {
   return index === '' || index === null;
 }

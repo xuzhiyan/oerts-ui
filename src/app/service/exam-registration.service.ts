@@ -32,4 +32,9 @@ export class ExamRegistrationService {
     const url = '/oerts/registration/payList/' + idCard + '/' + status;
     return this.http.get(url);
   }
+
+  getScoreByAdmissionTicket(admissionTicket: string) {
+    const url = '/oerts/registration/score/' + admissionTicket;
+    return this.http.get(url);
+  }
 }
