@@ -19,7 +19,7 @@ export class ScoreInquiryComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private examRService: ExamRegistrationService) {
     this.searchModel = fb.group({
-      admissionticket: ['', admissionticketValidator]
+      admissionticket: ['']
     });
   }
 
