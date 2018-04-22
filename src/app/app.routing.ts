@@ -41,7 +41,7 @@ export const routes: Routes = [
       {path: 'test-improveinfo', component: TestImproveinfoComponent}
     ], canActivate: [LoginGuard]
   },
-  {path: '**', component: Pages404Component}
+  // {path: '**', component: Pages404Component}
 ];
 
 @NgModule({

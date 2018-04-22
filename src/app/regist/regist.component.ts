@@ -45,7 +45,7 @@ export class RegistComponent implements OnInit {
           alert('注册成功，快去登录把！');
           this.router.navigate(['/login']);
         } else {
-          alert('注册失败！');
+          alert('注册失败，该手机号已经被注册！');
         }
       })
     } else {

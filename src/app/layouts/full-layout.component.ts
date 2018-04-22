@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ExamManagementService} from '../service/exam-management.service';
 import {ExamInfo} from '../model/ExamInfo';
 import {ExamRegistrationService} from '../service/exam-registration.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -28,7 +29,8 @@ export class FullLayoutComponent implements OnInit {
   }
 
   constructor(private examService: ExamManagementService,
-              private examRService: ExamRegistrationService) {
+              private examRService: ExamRegistrationService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -43,5 +45,10 @@ export class FullLayoutComponent implements OnInit {
     });
     // console.log(sessionStorage.getItem('user_validate'));
     // console.log(sessionStorage.getItem('user_idcard'));
+  }
+
+  onExit() {
+    sessionStorage.clear();
+    this.router.navigate(['/login']);
   }
 }
