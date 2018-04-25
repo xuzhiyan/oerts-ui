@@ -6,6 +6,7 @@ import {
 } from '../../shared/validators/validators';
 import {ExamineeService} from '../../service/examinee.service';
 import {ExamInfo} from '../../model/ExamInfo';
+import {Headers, Http} from '@angular/http';
 
 
 @Component({
@@ -19,7 +20,8 @@ export class EditPersoninfComponent implements OnInit {
   editModel: FormGroup;
 
   constructor(private fb: FormBuilder,
-              private examineeService: ExamineeService) {
+              private examineeService: ExamineeService,
+              private http: Http) {
     this.editModel = fb.group({
       username: ['', usernameValidator],
       usersex: ['', usersexValidator],
@@ -76,6 +78,23 @@ export class EditPersoninfComponent implements OnInit {
   onReset() {
     this.validStatus = true;
     this.editModel.reset();
+  }
+
+  onFileChange(event) {
+    const header = new Headers({'Accept': 'application/json'});
+    const fileList = event.target.files;
+    const file: File = fileList[0];
+    console.log(file);
+
+    const formData = new FormData();
+    formData.append('image', file);
+    formData.append('userPhone', sessionStorage.getItem('user_validate'));
+    formData.append('fileName', 'user_Photo');
+
+    this.http.post('/oerts/userphoto', formData).subscribe(data => {
+      console.log(data);
+    })
+
   }
 
 }
