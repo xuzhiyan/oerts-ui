@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit {
       if (data.json().status === 'success') {
         sessionStorage.setItem('user_validate', this.loginModel.value.userphone);
         sessionStorage.setItem('user_idcard', data.json().data.idCard);
+        sessionStorage.setItem('user_name', data.json().data.userName);
         this.router.navigate(['/layout']);
       } else {
         this.loginStatus = false;

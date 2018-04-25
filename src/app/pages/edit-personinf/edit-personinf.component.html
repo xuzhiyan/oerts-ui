@@ -13,14 +13,14 @@
           <div class="card-header">
             <i class="fa fa-align-justify"></i> 个人信息
           </div>
-          <div class="card-body" [formGroup]="editModel">
+          <div class="card-body text-centre" [formGroup]="editModel">
             <div class="form-group row">
               <label class="col-md-3 form-control-label">姓名:</label>
-              <div class="col-md-6">
+              <div class="col-md-4">
                 <input type="text" name="username" class="form-control" formControlName="username"
                        [class.hasError]="!(!editModel.hasError('usernameValid', 'username') || editModel.get('username').untouched && validStatus)">
               </div>
-              <div class="col-md-3 error-message"
+              <div class="col-md-2 error-message"
                    [hidden]="!editModel.hasError('usernameValid', 'username') || editModel.get('username').untouched && validStatus">
                 <label class="error-message-vertical">
                   {{editModel.getError('usernameValid', 'username')?.errorDesc}}
@@ -29,9 +29,9 @@
             </div>
             <div class="form-group row">
               <label class="col-md-3 form-control-label">性别:</label>
-              <div class="col-md-6">
-                <div class="col-md-6"
-                     [class.hasError]="!(!editModel.hasError('usersexValid', 'usersex') || editModel.get('usersex').untouched && validStatus)">
+              <div class="col-md-4">
+                <div
+                  [class.hasError]="!(!editModel.hasError('usersexValid', 'usersex') || editModel.get('usersex').untouched && validStatus)">
                   <label class="radio-inline">
                     <input type="radio" name="usersex" value="1" formControlName="usersex"> 男
                   </label>
@@ -40,7 +40,7 @@
                   </label>
                 </div>
               </div>
-              <div class="col-md-3 error-message"
+              <div class="col-md-2 error-message"
                    [hidden]="!editModel.hasError('usersexValid', 'usersex') || editModel.get('usersex').untouched && validStatus">
                 <label class="error-message-vertical">
                   {{editModel.getError('usersexValid', 'usersex')?.errorDesc}}
@@ -49,11 +49,11 @@
             </div>
             <div class="form-group row">
               <label class="col-md-3 form-control-label">身份证号:</label>
-              <div class="col-md-6">
+              <div class="col-md-4">
                 <input type="text" name="idcard" class="form-control" formControlName="idcard"
                        [class.hasError]="!(!editModel.hasError('idcardValid', 'idcard') || editModel.get('idcard').untouched && validStatus)">
               </div>
-              <div class="col-md-3 error-message"
+              <div class="col-md-2 error-message"
                    [hidden]="!editModel.hasError('idcardValid', 'idcard') || editModel.get('idcard').untouched && validStatus">
                 <label class="error-message-vertical">
                   {{editModel.getError('idcardValid', 'idcard')?.errorDesc}}
@@ -62,7 +62,7 @@
             </div>
             <div class="form-group row">
               <label class="col-md-3 form-control-label">职业</label>
-              <div class="col-md-6">
+              <div class="col-md-4">
                 <select name="userprofession" class="form-control" formControlName="userprofession"
                         [class.hasError]="!(!editModel.hasError('userprofessionValid', 'userprofession') || editModel.get('userprofession').untouched && validStatus)">
                   <option value="0">学生</option>
@@ -70,7 +70,7 @@
                   <option value="2">其他</option>
                 </select>
               </div>
-              <div class="col-md-3 error-message"
+              <div class="col-md-2 error-message"
                    [hidden]="!editModel.hasError('userprofessionValid', 'userprofession') || editModel.get('userprofession').untouched && validStatus">
                 <label class="error-message-vertical">
                   {{editModel.getError('userprofessionValid', 'userprofession')?.errorDesc}}
@@ -79,11 +79,11 @@
             </div>
             <div class="form-group row">
               <label class="col-md-3 form-control-label">邮箱地址:</label>
-              <div class="col-md-6">
+              <div class="col-md-4">
                 <input type="text" name="emailaddress" class="form-control" formControlName="emailaddress"
                        [class.hasError]="!(!editModel.hasError('emailaddressValid', 'emailaddress') || editModel.get('emailaddress').untouched && validStatus)">
               </div>
-              <div class="col-md-3 error-message"
+              <div class="col-md-2 error-message"
                    [hidden]="!editModel.hasError('emailaddressValid', 'emailaddress') || editModel.get('emailaddress').untouched && validStatus">
                 <label class="error-message-vertical">
                   {{editModel.getError('emailaddressValid', 'emailaddress')?.errorDesc}}
@@ -92,11 +92,11 @@
             </div>
             <div class="form-group row">
               <label class="col-md-3 form-control-label">居住地址:</label>
-              <div class="col-md-6">
+              <div class="col-md-4">
                 <input type="text" name="residentialaddress" class="form-control" formControlName="residentialaddress"
                        [class.hasError]="!(!editModel.hasError('residentialaddressValid', 'residentialaddress') || editModel.get('residentialaddress').untouched && validStatus)">
               </div>
-              <div class="col-md-3 error-message"
+              <div class="col-md-2 error-message"
                    [hidden]="!editModel.hasError('residentialaddressValid', 'residentialaddress') || editModel.get('residentialaddress').untouched && validStatus">
                 <label class="error-message-vertical">
                   {{editModel.getError('residentialaddressValid', 'residentialaddress')?.errorDesc}}
@@ -105,13 +105,13 @@
             </div>
             <div class="form-group row">
               <label class="col-md-3 form-control-label">照片:</label>
-              <div class="col-md-6">
+              <div class="col-md-4">
                 <input type="file" name="userphoto" formControlName="userphoto">
               </div>
             </div>
             <div class="form-group row">
               <label class="col-md-3 form-control-label">证件照片:</label>
-              <div class="col-md-6">
+              <div class="col-md-4">
                 <input type="file" name="idcardphoto" formControlName="idcardphoto">
               </div>
             </div>
