@@ -15,6 +15,7 @@ export class TestImproveinfoComponent implements OnInit {
   examId: string;
   examName: string;
   registExamModel: FormGroup;
+  imagesPath: string;
 
   constructor(private fb: FormBuilder,
               private examineeService: ExamineeService,
@@ -34,6 +35,7 @@ export class TestImproveinfoComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.imagesPath = sessionStorage.getItem('user_photo');
     this.examId = this.pathKeyService.examId;
     this.examName = this.pathKeyService.examName;
     this.examineeService.getByUserPhone(sessionStorage.getItem('user_validate')).subscribe(data => {

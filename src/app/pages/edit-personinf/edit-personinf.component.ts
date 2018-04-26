@@ -2,11 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {FormGroup, FormBuilder} from '@angular/forms';
 import {
   emailaddressValidator, idcardValidator, residentialaddressValidator, usernameValidator,
-  userphoneValidator, userprofessionValidator, usersexValidator
+  userprofessionValidator, usersexValidator
 } from '../../shared/validators/validators';
 import {ExamineeService} from '../../service/examinee.service';
-import {ExamInfo} from '../../model/ExamInfo';
-import {Headers, Http} from '@angular/http';
+import {ImagesService} from '../../service/images.service';
+import {DomSanitizer} from '@angular/platform-browser';
 
 
 @Component({
@@ -16,12 +16,17 @@ import {Headers, Http} from '@angular/http';
 })
 export class EditPersoninfComponent implements OnInit {
 
+  imageMessage: string;
+  imageStatus: boolean;
   validStatus: boolean;
   editModel: FormGroup;
+  imagesPath: any;
+  savePath: string;
 
   constructor(private fb: FormBuilder,
               private examineeService: ExamineeService,
-              private http: Http) {
+              private imagesService: ImagesService,
+              private sanitizer: DomSanitizer) {
     this.editModel = fb.group({
       username: ['', usernameValidator],
       usersex: ['', usersexValidator],
@@ -30,12 +35,14 @@ export class EditPersoninfComponent implements OnInit {
       emailaddress: ['', emailaddressValidator],
       residentialaddress: ['', residentialaddressValidator],
       userphoto: [''],
-      idcardphoto: ['']
     })
   }
 
   ngOnInit() {
+    this.imagesPath = sessionStorage.getItem('user_photo');
+    console.log(this.imagesPath);
     this.validStatus = true;
+    this.imageStatus = true;
     this.examineeService.getByUserPhone(sessionStorage.getItem('user_validate')).subscribe(data => {
       this.editModel.setValue({
         username: data.json().data.userName,
@@ -45,15 +52,15 @@ export class EditPersoninfComponent implements OnInit {
         emailaddress: data.json().data.emailAddress,
         residentialaddress: data.json().data.residentialAddress,
         userphoto: '',
-        idcardphoto: ''
-      })
+      });
     });
   }
 
   onEdit() {
     // console.log(this.editModel.value.usersex);
     // console.log(this.editModel.value.userprofession);
-    if (this.editModel.valid) {
+    if (this.editModel.valid && this.imagesPath !== 'assets/img/timg.jpg' && this.imageStatus) {
+      // 用户信息更新
       const body = {
         'userName': this.editModel.value.username,
         'userPhone': sessionStorage.getItem('user_validate'),
@@ -62,15 +69,21 @@ export class EditPersoninfComponent implements OnInit {
         'userProfession': this.editModel.value.userprofession,
         'emailAddress': this.editModel.value.emailaddress,
         'residentialAddress': this.editModel.value.residentialaddress,
+        'userPhoto': this.savePath
       };
-      this.examineeService.updateByUserPhone(body).subscribe(data => {
-        if (data.json().status === 'success') {
+      this.examineeService.updateByUserPhone(body).subscribe(res => {
+        if (res.json().status === 'success') {
+          sessionStorage.setItem('user_photo', this.savePath);
           alert('更新成功！');
         } else {
           alert('更新失败！');
         }
       });
     } else {
+      if (this.imagesPath === 'assets/img/timg.jpg') {
+        this.imageStatus = false;
+        this.imageMessage = '图片必须上传';
+      }
       this.validStatus = false;
     }
   }
@@ -81,20 +94,26 @@ export class EditPersoninfComponent implements OnInit {
   }
 
   onFileChange(event) {
-    const header = new Headers({'Accept': 'application/json'});
     const fileList = event.target.files;
     const file: File = fileList[0];
-    console.log(file);
+    if (file.type === 'image/jpeg' || file.type === 'image/png') {
+      this.imagesPath = this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(file));
+      this.imageStatus = true;
 
-    const formData = new FormData();
-    formData.append('image', file);
-    formData.append('userPhone', sessionStorage.getItem('user_validate'));
-    formData.append('fileName', 'user_Photo');
-
-    this.http.post('/oerts/userphoto', formData).subscribe(data => {
-      console.log(data);
-    })
-
+      // 图片上传
+      const formData = new FormData();
+      formData.append('image', file);
+      formData.append('userPhone', sessionStorage.getItem('user_validate'));
+      formData.append('fileName', 'user_Photo');
+      this.imagesService.upLoadImages(formData).subscribe(data => {
+        if (data.json().status === 'success') {
+          this.savePath = '/oerts/images/' + sessionStorage.getItem('user_validate') + '/user_Photo' + data.json().data;
+        }
+      });
+    } else {
+      this.imageStatus = false;
+      this.imageMessage = '图片格式不正确';
+    }
   }
 
 }

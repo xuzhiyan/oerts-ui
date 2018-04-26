@@ -38,6 +38,11 @@ export class LoginComponent implements OnInit {
         sessionStorage.setItem('user_validate', this.loginModel.value.userphone);
         sessionStorage.setItem('user_idcard', data.json().data.idCard);
         sessionStorage.setItem('user_name', data.json().data.userName);
+        if (data.json().data.userPhoto === '') {
+          sessionStorage.setItem('user_photo', 'assets/img/timg.jpg');
+        } else {
+          sessionStorage.setItem('user_photo', data.json().data.userPhoto);
+        }
         this.router.navigate(['/layout']);
       } else {
         this.loginStatus = false;

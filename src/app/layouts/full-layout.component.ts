@@ -15,6 +15,7 @@ export class FullLayoutComponent implements OnInit {
   completeRExamInfoLength: number;
   unpaidExamInfoLehgth: number;
   userName: string;
+  userPhotoPath: string;
 
   public disabled = false;
   public status: { isopen: boolean } = {isopen: false};
@@ -46,7 +47,9 @@ export class FullLayoutComponent implements OnInit {
     });
     // console.log(sessionStorage.getItem('user_validate'));
     // console.log(sessionStorage.getItem('user_idcard'));
+    // console.log(sessionStorage.getItem('uesr_photo'));
     this.userName = sessionStorage.getItem('user_name');
+    this.userPhotoPath = sessionStorage.getItem('user_photo');
   }
 
   onExit() {
