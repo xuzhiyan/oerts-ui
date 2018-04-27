@@ -92,14 +92,32 @@
             </div>
             <div class="form-group row">
               <label class="col-md-3 form-control-label">证件照片(正面):</label>
-              <div class="col-md-6">
-                <input type="file" name="idcardphoto" formControlName="idcardphoto">
+              <div class="col-md-3">
+                <img [src]="idCardFrontPath" width="301px" height="186px">
+              </div>
+              <div class="col-md-3 d-flex align-items-center">
+                <input type="file" name="idcardphoto" formControlName="idcardphoto" (change)="onFileChange($event, 'front')">
+              </div>
+              <div class="col-md-2 error-message"
+                   [hidden]="frontStatus">
+                <label class="error-message-vertical">
+                  {{frontMessage}}
+                </label>
               </div>
             </div>
             <div class="form-group row">
               <label class="col-md-3 form-control-label">证件照片(反面):</label>
-              <div class="col-md-6">
-                <input type="file" name="idcardphoto" formControlName="idcardphoto">
+              <div class="col-md-3">
+                <img [src]="idCardBackPath" width="301px" height="186px">
+              </div>
+              <div class="col-md-3 d-flex align-items-center">
+                <input type="file" name="idcardphoto" formControlName="idcardphoto" (change)="onFileChange($event, 'back')">
+              </div>
+              <div class="col-md-2 error-message"
+                   [hidden]="backStatus">
+                <label class="error-message-vertical">
+                  {{backMessage}}
+                </label>
               </div>
             </div>
           </div>
@@ -107,7 +125,7 @@
             <button type="submit" class="btn btn-sm btn-success" (click)="onSubmitInfo()">
               <i class="fa fa-dot-circle-o"></i> 提交信息
             </button>
-            <button type="reset" class="btn btn-sm btn-danger" [routerLink]="['/layout/test-complete']"><i
+            <button type="reset" class="btn btn-sm btn-danger" [routerLink]="['/layout/test-registration']"><i
               class="fa fa-ban"></i> 返回
             </button>
           </div>

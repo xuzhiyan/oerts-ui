@@ -89,6 +89,7 @@ export class EditPersoninfComponent implements OnInit {
   }
 
   onReset() {
+    this.imageStatus = true;
     this.validStatus = true;
     this.editModel.reset();
   }

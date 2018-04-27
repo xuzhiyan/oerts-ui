@@ -39,12 +39,15 @@ export class FullLayoutComponent implements OnInit {
     this.examService.getAllExams().subscribe(data => {
       this.examInfoLength = data.json().data.length;
     });
-    this.examRService.completeResgistList(sessionStorage.getItem('user_idcard')).subscribe(data => {
-      this.completeRExamInfoLength = data.json().data.length;
-    });
-    this.examRService.getPayList(sessionStorage.getItem('user_idcard'), '10').subscribe(data => {
-      this.unpaidExamInfoLehgth = data.json().data.length;
-    });
+    const idCard = sessionStorage.getItem('user_idcard');
+    if (idCard !== 'null' ) {
+      this.examRService.completeResgistList(idCard).subscribe(data => {
+        this.completeRExamInfoLength = data.json().data.length;
+      });
+      this.examRService.getPayList(idCard, '10').subscribe(data => {
+        this.unpaidExamInfoLehgth = data.json().data.length;
+      });
+    }
     // console.log(sessionStorage.getItem('user_validate'));
     // console.log(sessionStorage.getItem('user_idcard'));
     // console.log(sessionStorage.getItem('uesr_photo'));
