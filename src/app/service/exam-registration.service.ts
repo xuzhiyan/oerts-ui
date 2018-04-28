@@ -9,9 +9,8 @@ export class ExamRegistrationService {
   constructor(private http: Http) {
   }
 
-  examRegistByIdCardAndExamID(examId: string, idCard: string) {
-    const url = '/oerts/registration/' + examId + '/' + idCard;
-    return this.http.get(url);
+  examRegistByIdCardAndExamID(body: any) {
+    return this.http.post('/oerts/exam/registration/regist', body, {headers: this.header});
   }
 
   countByIdCardAndExamID(examId: string, idCard: string) {

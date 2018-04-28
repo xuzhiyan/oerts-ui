@@ -24,6 +24,7 @@ export class TestImproveinfoComponent implements OnInit {
   backMessage: string;
   frontStatus: boolean;
   backStatus: boolean;
+  imagesType: string;
 
   constructor(private fb: FormBuilder,
               private examineeService: ExamineeService,
@@ -77,7 +78,13 @@ export class TestImproveinfoComponent implements OnInit {
     }
 
     if (this.frontStatus && this.backStatus) {
-      this.examRService.examRegistByIdCardAndExamID(this.examId, sessionStorage.getItem('user_idcard')).subscribe(data => {
+      const body = {
+        'examId': this.examId,
+        'idCard': sessionStorage.getItem('user_idcard'),
+        'idCardFront': sessionStorage.getItem('user_validate') + '\\' + this.examId + 'front' + this.imagesType,
+        'idCardBack': sessionStorage.getItem('user_validate') + '\\' + this.examId + 'back' + this.imagesType
+      };
+      this.examRService.examRegistByIdCardAndExamID(body).subscribe(data => {
         if (data.json().status === 'success') {
           this.router.navigate(['/layout/test-message']);
         } else {
@@ -105,7 +112,11 @@ export class TestImproveinfoComponent implements OnInit {
       formData.append('image', file);
       formData.append('userPhone', sessionStorage.getItem('user_validate'));
       formData.append('fileName', this.examId + item);
-      this.imagesService.upLoadImages(formData).subscribe();
+      this.imagesService.upLoadImages(formData).subscribe(data => {
+        if (data.json().status === 'success') {
+          this.imagesType = data.json().data;
+        }
+      });
     } else {
       if (item === 'front') {
         this.frontStatus = false;
