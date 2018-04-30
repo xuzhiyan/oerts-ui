@@ -7,6 +7,55 @@
 
 <div class="container-fluid">
   <div class="animated fadeIn">
-    online-qa works!
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-header">
+            <i class="fa fa-align-justify"></i> 问答信息
+          </div>
+          <div class="card-body chat-window">
+
+            <div class="form-group row mb-0 col-5">
+              <div class="alert alert-info alert-dismissible fade show">
+                <h3>你可能遇到的问题</h3>
+                <div *ngFor="let questions of onlineQAInfo">
+                  <button class="btn-link"
+                          (click)="onCommonAnswer(questions.questionContent, questions.questionAnswer)">
+                    {{questions.questionContent}}
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row col-5 mb-0 ml-auto" [hidden]="questionStatus">
+              <div class="alert alert-info alert-dismissible fade show ml-auto">
+                <!--提问区域-->
+                {{questionMessage}}
+              </div>
+            </div>
+            <div class="form-group row col-5 mb-0" [hidden]="answerStatus">
+              <div class="alert alert-info alert-dismissible fade show">
+                <!--回答区域-->
+                <h4>{{answerContent}}</h4>
+                <span [innerHTML]="answerMessage"></span>
+              </div>
+            </div>
+
+          </div>
+          <div class="card-footer pb-0">
+            <div class="form-group row" [formGroup]="questionModel">
+              <div class="col-md-11">
+                <input type="text" class="form-control" name="questionsend" formControlName="questionsend"
+                       (keyup.enter)="onSendMessage()">
+              </div>
+              <div class="col-md-1">
+                <button type="botton" class="btn btn-primary" (click)="onSendMessage()"><i class="fa fa-send"></i> 发送
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--/.col-->
+    </div>
   </div>
 </div>

@@ -36,6 +36,7 @@ import {TestImproveinfoComponent} from './pages/test-improveinfo/test-improveinf
 import {TestMessageComponent} from './pages/test-message/test-message.component';
 import {PathKeyService} from './service/path-key.service';
 import {ImagesService} from './service/images.service';
+import {OnlineQaService} from './service/online-qa.service';
 
 @NgModule({
   imports: [
@@ -78,7 +79,8 @@ import {ImagesService} from './service/images.service';
     ExamineeService,
     ExamRegistrationService,
     PathKeyService,
-    ImagesService
+    ImagesService,
+    OnlineQaService
   ],
   bootstrap: [AppComponent]
 })

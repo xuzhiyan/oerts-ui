@@ -40,7 +40,6 @@ export class EditPersoninfComponent implements OnInit {
 
   ngOnInit() {
     this.imagesPath = sessionStorage.getItem('user_photo');
-    console.log(this.imagesPath);
     this.validStatus = true;
     this.imageStatus = true;
     this.examineeService.getByUserPhone(sessionStorage.getItem('user_validate')).subscribe(data => {
@@ -57,9 +56,10 @@ export class EditPersoninfComponent implements OnInit {
   }
 
   onEdit() {
-    // console.log(this.editModel.value.usersex);
-    // console.log(this.editModel.value.userprofession);
     if (this.editModel.valid && this.imagesPath !== 'assets/img/timg.jpg' && this.imageStatus) {
+      if (this.savePath === undefined) {
+        this.savePath = this.imagesPath;
+      }
       // 用户信息更新
       const body = {
         'userName': this.editModel.value.username,
