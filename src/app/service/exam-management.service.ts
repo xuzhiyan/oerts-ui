@@ -8,7 +8,7 @@ export class ExamManagementService {
   }
 
   getAllExams() {
-    return this.http.get('/oerts/exams');
+    return this.http.get('/oerts/exam/info/all');
   }
 
   getExamById(id: string) {

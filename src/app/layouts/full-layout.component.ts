@@ -16,6 +16,7 @@ export class FullLayoutComponent implements OnInit {
   unpaidExamInfoLehgth: number;
   userName: string;
   userPhotoPath: string;
+  isRootIdentify: boolean;
 
   public disabled = false;
   public status: { isopen: boolean } = {isopen: false};
@@ -36,17 +37,20 @@ export class FullLayoutComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.isRootIdentify = sessionStorage.getItem('user_validate') === 'root';
     this.examService.getAllExams().subscribe(data => {
       this.examInfoLength = data.json().data.length;
     });
     const idCard = sessionStorage.getItem('user_idcard');
-    if (idCard !== 'null' ) {
-      this.examRService.completeResgistList(idCard).subscribe(data => {
-        this.completeRExamInfoLength = data.json().data.length;
-      });
-      this.examRService.getPayList(idCard, '10').subscribe(data => {
-        this.unpaidExamInfoLehgth = data.json().data.length;
-      });
+    if (idCard !== 'null') {
+      if (idCard !== 'root') {
+        this.examRService.completeResgistList(idCard).subscribe(data => {
+          this.completeRExamInfoLength = data.json().data.length;
+        });
+        this.examRService.getPayList(idCard, '10').subscribe(data => {
+          this.unpaidExamInfoLehgth = data.json().data.length;
+        });
+      }
     }
     // console.log(sessionStorage.getItem('user_validate'));
     // console.log(sessionStorage.getItem('user_idcard'));

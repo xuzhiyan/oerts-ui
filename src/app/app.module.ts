@@ -37,6 +37,10 @@ import {TestMessageComponent} from './pages/test-message/test-message.component'
 import {PathKeyService} from './service/path-key.service';
 import {ImagesService} from './service/images.service';
 import {OnlineQaService} from './service/online-qa.service';
+import {AdministratorService} from './service/administrator.service';
+import { ManageUserinfoComponent } from './pages/manage-userinfo/manage-userinfo.component';
+import { TestEntryComponent } from './pages/test-entry/test-entry.component';
+import { ScoreEntryComponent } from './pages/score-entry/score-entry.component';
 
 @NgModule({
   imports: [
@@ -71,7 +75,10 @@ import {OnlineQaService} from './service/online-qa.service';
     TestDetailsComponent,
     Pages404Component,
     TestImproveinfoComponent,
-    TestMessageComponent
+    TestMessageComponent,
+    ManageUserinfoComponent,
+    TestEntryComponent,
+    ScoreEntryComponent
   ],
   providers: [
     {provide: LocationStrategy, useClass: HashLocationStrategy},
@@ -80,7 +87,8 @@ import {OnlineQaService} from './service/online-qa.service';
     ExamRegistrationService,
     PathKeyService,
     ImagesService,
-    OnlineQaService
+    OnlineQaService,
+    AdministratorService
   ],
   bootstrap: [AppComponent]
 })

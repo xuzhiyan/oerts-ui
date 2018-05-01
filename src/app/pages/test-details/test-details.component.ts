@@ -17,6 +17,7 @@ export class TestDetailsComponent implements OnInit {
   examInfo: Array<ExamInfo> = new Array();
   // 用于不能重复报名的检查
   dangerMessage: boolean;
+  identifyStatus: boolean;
 
   constructor(private pathKeyService: PathKeyService,
               private routeInfo: ActivatedRoute,
@@ -26,6 +27,8 @@ export class TestDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(sessionStorage.getItem('user_idcard') === 'root')
+    this.identifyStatus = sessionStorage.getItem('user_idcard') === 'root';
     this.dangerMessage = true;
     this.examId = this.pathKeyService.examId;
     if (this.examId !== null) {

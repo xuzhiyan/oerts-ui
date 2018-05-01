@@ -31,4 +31,9 @@ export class ExamineeService {
     const url = '/oerts/updatebyuserphone';
     return this.http.post(url, body, {headers: this.header});
   }
+
+  getAllExaminee() {
+    const url = '/oerts/examinee/list/all';
+    return this.http.get(url);
+  }
 }

@@ -18,6 +18,8 @@ import {LoginGuard} from './shared/guard/login.guard';
 import {Pages404Component} from './pages/pages-404/pages-404.component';
 import {TestImproveinfoComponent} from './pages/test-improveinfo/test-improveinfo.component';
 import {TestMessageComponent} from './pages/test-message/test-message.component';
+import {ManageUserinfoComponent} from './pages/manage-userinfo/manage-userinfo.component';
+import {TestEntryComponent} from './pages/test-entry/test-entry.component';
 
 export const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -38,7 +40,9 @@ export const routes: Routes = [
       {path: 'online-qa', component: OnlineQaComponent},
       {path: 'test-message', component: TestMessageComponent},
       {path: 'test-details', component: TestDetailsComponent},
-      {path: 'test-improveinfo', component: TestImproveinfoComponent}
+      {path: 'test-improveinfo', component: TestImproveinfoComponent},
+      {path: 'manage-userinfo', component: ManageUserinfoComponent},
+      {path: 'test-entry', component: TestEntryComponent},
     ], canActivate: [LoginGuard]
   },
   // {path: '**', component: Pages404Component}
