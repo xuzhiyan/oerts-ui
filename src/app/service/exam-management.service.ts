@@ -1,8 +1,10 @@
 import {Injectable} from '@angular/core';
-import {Http} from '@angular/http';
+import {Headers, Http} from '@angular/http';
 
 @Injectable()
 export class ExamManagementService {
+
+  header = new Headers({'Content-Type': 'application/json'});
 
   constructor(private http: Http) {
   }
@@ -14,6 +16,10 @@ export class ExamManagementService {
   getExamById(id: string) {
     const url = '/oerts/exam/' + id;
     return this.http.get(url);
+  }
+
+  addExam(body: any) {
+    return this.http.post('/oerts/exam/info/add', body, {headers: this.header});
   }
 
 }

@@ -20,6 +20,7 @@ import {TestImproveinfoComponent} from './pages/test-improveinfo/test-improveinf
 import {TestMessageComponent} from './pages/test-message/test-message.component';
 import {ManageUserinfoComponent} from './pages/manage-userinfo/manage-userinfo.component';
 import {TestEntryComponent} from './pages/test-entry/test-entry.component';
+import {ScoreEntryComponent} from './pages/score-entry/score-entry.component';
 
 export const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -43,6 +44,7 @@ export const routes: Routes = [
       {path: 'test-improveinfo', component: TestImproveinfoComponent},
       {path: 'manage-userinfo', component: ManageUserinfoComponent},
       {path: 'test-entry', component: TestEntryComponent},
+      {path: 'score-entry', component: ScoreEntryComponent}
     ], canActivate: [LoginGuard]
   },
   // {path: '**', component: Pages404Component}

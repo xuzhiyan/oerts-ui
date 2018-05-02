@@ -24,37 +24,35 @@
               <thead>
               <tr>
                 <th>考试名称</th>
-                <th>报名开始时间</th>
-                <th>报名结束时间</th>
                 <th>报名费用</th>
-                <th>考试地点</th>
-                <th>上限人数</th>
+                <th>报名截止日期</th>
+                <th>已报名人数/上限人数</th>
                 <th>操作</th>
               </tr>
               </thead>
               <tbody>
               <tr *ngFor="let exams of examInfo">
                 <td>{{exams.examName}}</td>
-                <td>{{exams.regTimeFrom}}</td>
-                <td>{{exams.regTimeTo}}</td>
                 <td>{{exams.cost}}</td>
-                <td>{{exams.examPlace}}</td>
-                <td>{{exams.maxNum}}</td>
+                <td>{{exams.regTimeTo}}</td>
+                <td>{{exams.registNum}}/{{exams.maxNum}}</td>
                 <td>
-                  <button type="submit" class="btn btn-sm btn-primary" (click)="onDetails(exams)" [disabled]="!dangerMessage"> 详情</button>
+                  <button type="submit" class="btn btn-sm btn-primary" (click)="onDetails(exams)"
+                          [disabled]="!dangerMessage"> 详情
+                  </button>
                 </td>
               </tr>
               </tbody>
             </table>
             <!--<ul class="pagination">-->
-              <!--<li class="page-item"><a class="page-link" href="#">Prev</a></li>-->
-              <!--<li class="page-item active">-->
-                <!--<a class="page-link" href="#">1</a>-->
-              <!--</li>-->
-              <!--<li class="page-item"><a class="page-link" href="#">2</a></li>-->
-              <!--<li class="page-item"><a class="page-link" href="#">3</a></li>-->
-              <!--<li class="page-item"><a class="page-link" href="#">4</a></li>-->
-              <!--<li class="page-item"><a class="page-link" href="#">Next</a></li>-->
+            <!--<li class="page-item"><a class="page-link" href="#">Prev</a></li>-->
+            <!--<li class="page-item active">-->
+            <!--<a class="page-link" href="#">1</a>-->
+            <!--</li>-->
+            <!--<li class="page-item"><a class="page-link" href="#">2</a></li>-->
+            <!--<li class="page-item"><a class="page-link" href="#">3</a></li>-->
+            <!--<li class="page-item"><a class="page-link" href="#">4</a></li>-->
+            <!--<li class="page-item"><a class="page-link" href="#">Next</a></li>-->
             <!--</ul>-->
           </div>
         </div>

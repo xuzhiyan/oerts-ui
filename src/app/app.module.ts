@@ -1,6 +1,6 @@
 import {forwardRef, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-import {LocationStrategy, HashLocationStrategy} from '@angular/common';
+import {LocationStrategy, HashLocationStrategy, DatePipe} from '@angular/common';
 import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
 import {TabsModule} from 'ngx-bootstrap/tabs';
 import {AppRoutingModule} from './app.routing';
@@ -38,9 +38,10 @@ import {PathKeyService} from './service/path-key.service';
 import {ImagesService} from './service/images.service';
 import {OnlineQaService} from './service/online-qa.service';
 import {AdministratorService} from './service/administrator.service';
-import { ManageUserinfoComponent } from './pages/manage-userinfo/manage-userinfo.component';
-import { TestEntryComponent } from './pages/test-entry/test-entry.component';
-import { ScoreEntryComponent } from './pages/score-entry/score-entry.component';
+import {ManageUserinfoComponent} from './pages/manage-userinfo/manage-userinfo.component';
+import {TestEntryComponent} from './pages/test-entry/test-entry.component';
+import {ScoreEntryComponent} from './pages/score-entry/score-entry.component';
+import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
 
 @NgModule({
   imports: [
@@ -48,6 +49,7 @@ import { ScoreEntryComponent } from './pages/score-entry/score-entry.component';
     AppRoutingModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
+    BsDatepickerModule.forRoot(),
     ChartsModule,
     FormsModule,
     ReactiveFormsModule,
@@ -88,7 +90,8 @@ import { ScoreEntryComponent } from './pages/score-entry/score-entry.component';
     PathKeyService,
     ImagesService,
     OnlineQaService,
-    AdministratorService
+    AdministratorService,
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

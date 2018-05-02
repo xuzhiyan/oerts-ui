@@ -9,11 +9,17 @@
   <div class="animated fadeIn">
     <div class="row">
       <div class="col-lg-12">
+        <div class="alert alert-warning alert-dismissible fade show">
+          <strong>注意！！</strong> 考试信息一旦提交用户即可进行报名，无法进行修改和删除，请核对信息并确认后提交！
+          <button type="button" class="close">
+            <span>×</span>
+          </button>
+        </div>
         <div class="card">
           <div class="card-header">
             <i class="fa fa-align-justify"></i> 考试录入信息
           </div>
-          <div class="card-body">
+          <div class="card-body" [formGroup]="examModel">
             <div class="form-group row">
               <label class="col-md-3 form-control-label">考试编号:</label>
               <div class="col-md-5">
@@ -23,47 +29,238 @@
             <div class="form-group row">
               <label class="col-md-3 form-control-label">考试名称:</label>
               <div class="col-md-5">
-                <input type="text" name="examname" class="form-control" placeholder="请输入考试名称">
+                <input type="text" class="form-control" placeholder="请输入考试名称" formControlName="examname"
+                       [class.hasError]="!(!examModel.hasError('examnameValid', 'examname') || examModel.get('examname').untouched && validStatus)">
+              </div>
+              <div class="col-md-2 error-message"
+                   [hidden]="!examModel.hasError('examnameValid', 'examname') || examModel.get('examname').untouched && validStatus">
+                <label class="error-message-vertical">
+                  {{examModel.getError('examnameValid', 'examname')?.errorDesc}}
+                </label>
               </div>
             </div>
             <div class="form-group row">
               <label class="col-md-3 form-control-label">报名费用:</label>
               <div class="col-md-5 input-group">
-                <input type="number" class="form-control" placeholder="请输入报名费用">
+                <input type="number" class="form-control" placeholder="请输入报名费用" formControlName="cost"
+                       [class.hasError]="!(!examModel.hasError('costValid', 'cost') || examModel.get('cost').untouched && validStatus)">
                 <span class="input-group-addon">元/人</span>
+              </div>
+              <div class="col-md-2 error-message"
+                   [hidden]="!examModel.hasError('costValid', 'cost') || examModel.get('cost').untouched && validStatus">
+                <label class="error-message-vertical">
+                  {{examModel.getError('costValid', 'cost')?.errorDesc}}
+                </label>
               </div>
             </div>
             <div class="form-group row">
               <label class="col-md-3 form-control-label">报名人数上限:</label>
               <div class="col-md-5 input-group">
-                <input type="number" class="form-control" placeholder="请输入报名人数上限">
+                <input type="number" class="form-control" placeholder="请输入报名人数上限" formControlName="maxnum"
+                       [class.hasError]="!(!examModel.hasError('maxnumValid', 'maxnum') || examModel.get('maxnum').untouched && validStatus)">
                 <span class="input-group-addon">人</span>
+              </div>
+              <div class="col-md-2 error-message"
+                   [hidden]="!examModel.hasError('maxnumValid', 'maxnum') || examModel.get('maxnum').untouched && validStatus">
+                <label class="error-message-vertical">
+                  {{examModel.getError('maxnumValid', 'maxnum')?.errorDesc}}
+                </label>
               </div>
             </div>
             <div class="form-group row">
               <label class="col-md-3 form-control-label">考试总分数:</label>
               <div class="col-md-5 input-group">
-                <input type="number" class="form-control" placeholder="请输入考试总分数">
+                <input type="number" class="form-control" placeholder="请输入考试总分数" formControlName="totalscore"
+                       [class.hasError]="!(!examModel.hasError('totalscoreValid', 'totalscore') || examModel.get('totalscore').untouched && validStatus)">
                 <span class="input-group-addon">分</span>
+              </div>
+              <div class="col-md-2 error-message"
+                   [hidden]="!examModel.hasError('totalscoreValid', 'totalscore') || examModel.get('totalscore').untouched && validStatus">
+                <label class="error-message-vertical">
+                  {{examModel.getError('totalscoreValid', 'totalscore')?.errorDesc}}
+                </label>
               </div>
             </div>
             <div class="form-group row">
               <label class="col-md-3 form-control-label">考试通过分数:</label>
               <div class="col-md-5 input-group">
-                <input type="number" class="form-control" placeholder="请输入考试通过分数">
+                <input type="number" class="form-control" placeholder="请输入考试通过分数" formControlName="pasescore"
+                       [class.hasError]="!(!examModel.hasError('pasescoreValid', 'pasescore') || examModel.get('pasescore').untouched && validStatus)">
                 <span class="input-group-addon">分</span>
+              </div>
+              <div class="col-md-2 error-message"
+                   [hidden]="!examModel.hasError('pasescoreValid', 'pasescore') || examModel.get('pasescore').untouched && validStatus">
+                <label class="error-message-vertical">
+                  {{examModel.getError('pasescoreValid', 'pasescore')?.errorDesc}}
+                </label>
+              </div>
+            </div>
+            <div class="form-group row" formGroupName="regTimeGroup">
+              <label class="col-md-3 form-control-label">考试报名时间:</label>
+              <div class="col-md-2">
+                <input type="text" class="form-control" placeholder="请选择考试报名开始时间" bsDatepicker
+                       [bsConfig]="bsConfig" formControlName="regtimefrom"
+                       [class.hasError]="!(!examModel.hasError('regtimeValid', 'regTimeGroup') || examModel.get('regTimeGroup').untouched && validStatus)">
+              </div>
+              <div class="col-md-1 text-center">
+                <h5>~</h5>
+              </div>
+              <div class="col-md-2">
+                <input type="text" class="form-control" placeholder="请选择考试报名截止时间" bsDatepicker
+                       [bsConfig]="bsConfig" formControlName="regtimeto"
+                       [class.hasError]="!(!examModel.hasError('regtimeValid', 'regTimeGroup') || examModel.get('regTimeGroup').untouched && validStatus)">
+              </div>
+              <div class="col-md-2 error-message"
+                   [hidden]="!examModel.hasError('regtimeValid', 'regTimeGroup') || examModel.get('regTimeGroup').untouched && validStatus">
+                <label class="error-message-vertical">
+                  {{examModel.getError('regtimeValid', 'regTimeGroup')?.errorDesc}}
+                </label>
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 form-control-label">考试报名时间:</label>
+              <label class="col-md-3 form-control-label">考试日期:</label>
+              <div class="col-md-2">
+                <input type="text" class="form-control" placeholder="请选择考试日期" bsDatepicker
+                       [bsConfig]="bsConfig" formControlName="examtimeday"
+                       [class.hasError]="!(!examModel.hasError('examtimedayValid', 'examtimeday') || examModel.get('examtimeday').untouched && validStatus)">
+              </div>
+              <div class="col-md-3">
+                &nbsp;
+              </div>
+              <div class="col-md-2 error-message"
+                   [hidden]="!examModel.hasError('examtimedayValid', 'examtimeday') || examModel.get('examtimeday').untouched && validStatus">
+                <label class="error-message-vertical">
+                  {{examModel.getError('examtimedayValid', 'examtimeday')?.errorDesc}}
+                </label>
+              </div>
+            </div>
+            <div class="form-group row" formGroupName="examTimePeriod1">
+              <label class="col-md-3 form-control-label">&nbsp;</label>
+              <div class="col-md-4 input-group">
+                <input type="number" class="form-control" formControlName="examtimefh1"
+                       [class.hasError]="!(!examModel.hasError('examtimefm1Valid', 'examTimePeriod1') || examModel.get('examTimePeriod1').untouched && validStatus)">
+                <span class="input-group-addon">:</span>
+                <input type="number" class="form-control" formControlName="examtimefm1"
+                       [class.hasError]="!(!examModel.hasError('examtimefm1Valid', 'examTimePeriod1') || examModel.get('examTimePeriod1').untouched && validStatus)">
+                <span class="input-group-addon">~</span>
+                <input type="number" class="form-control" formControlName="examtimeth1"
+                       [class.hasError]="!(!examModel.hasError('examtimefm1Valid', 'examTimePeriod1') || examModel.get('examTimePeriod1').untouched && validStatus)">
+                <span class="input-group-addon">:</span>
+                <input type="number" class="form-control" formControlName="examtimetm1"
+                       [class.hasError]="!(!examModel.hasError('examtimefm1Valid', 'examTimePeriod1') || examModel.get('examTimePeriod1').untouched && validStatus)">
+              </div>
+              <div class="col-md-1">
+                <button type="button" class="btn btn-sm btn-primary" (click)="onPeriodAdd()"><i
+                  class="fa fa-plus fa-lg"></i></button>
+              </div>
+              <div class="col-md-2 error-message"
+                   [hidden]="!examModel.hasError('examtimefm1Valid', 'examTimePeriod1') || examModel.get('examTimePeriod1').untouched && validStatus">
+                <label class="error-message-vertical">
+                  {{examModel.getError('examtimefm1Valid', 'examTimePeriod1')?.errorDesc}}
+                </label>
+              </div>
+            </div>
+            <div class="form-group row" formGroupName="examTimePeriod2" [hidden]="!period2">
+              <label class="col-md-1 form-control-label">&nbsp;</label>
+              <label class="col-md-2 form-control-label">(选填，没有请置空)</label>
+              <div class="col-md-4 input-group">
+                <input type="number" class="form-control" formControlName="examtimefh2"
+                       [class.hasError]="!(!examModel.hasError('examtimefm2Valid', 'examTimePeriod2') || examModel.get('examTimePeriod2').untouched && validStatus)">
+                <span class="input-group-addon">:</span>
+                <input type="number" class="form-control" formControlName="examtimefm2"
+                       [class.hasError]="!(!examModel.hasError('examtimefm2Valid', 'examTimePeriod2') || examModel.get('examTimePeriod2').untouched && validStatus)">
+                <span class="input-group-addon">~</span>
+                <input type="number" class="form-control" formControlName="examtimeth2"
+                       [class.hasError]="!(!examModel.hasError('examtimefm2Valid', 'examTimePeriod2') || examModel.get('examTimePeriod2').untouched && validStatus)">
+                <span class="input-group-addon">:</span>
+                <input type="number" class="form-control" formControlName="examtimetm2"
+                       [class.hasError]="!(!examModel.hasError('examtimefm2Valid', 'examTimePeriod2') || examModel.get('examTimePeriod2').untouched && validStatus)">
+              </div>
+              <div class="col-md-1">
+                <button type="button" class="btn btn-sm btn-danger" (click)="onPeriodRemove(2)"><i
+                  class="fa fa-minus fa-lg"></i></button>
+              </div>
+              <div class="col-md-2 error-message"
+                   [hidden]="!examModel.hasError('examtimefm2Valid', 'examTimePeriod2') || examModel.get('examTimePeriod2').untouched && validStatus">
+                <label class="error-message-vertical">
+                  {{examModel.getError('examtimefm2Valid', 'examTimePeriod2')?.errorDesc}}
+                </label>
+              </div>
+            </div>
+            <div class="form-group row" formGroupName="examTimePeriod3" [hidden]="!period3">
+              <label class="col-md-1 form-control-label">&nbsp;</label>
+              <label class="col-md-2 form-control-label">(选填，没有请置空)</label>
+              <div class="col-md-4 input-group">
+                <input type="number" class="form-control" formControlName="examtimefh3"
+                       [class.hasError]="!(!examModel.hasError('examtimefm3Valid', 'examTimePeriod3') || examModel.get('examTimePeriod3').untouched && validStatus)">
+                <span class="input-group-addon">:</span>
+                <input type="number" class="form-control" formControlName="examtimefm3"
+                       [class.hasError]="!(!examModel.hasError('examtimefm3Valid', 'examTimePeriod3') || examModel.get('examTimePeriod3').untouched && validStatus)">
+                <span class="input-group-addon">~</span>
+                <input type="number" class="form-control" formControlName="examtimeth3"
+                       [class.hasError]="!(!examModel.hasError('examtimefm3Valid', 'examTimePeriod3') || examModel.get('examTimePeriod3').untouched && validStatus)">
+                <span class="input-group-addon">:</span>
+                <input type="number" class="form-control" formControlName="examtimetm3"
+                       [class.hasError]="!(!examModel.hasError('examtimefm3Valid', 'examTimePeriod3') || examModel.get('examTimePeriod3').untouched && validStatus)">
+              </div>
+              <div class="col-md-1">
+                <button type="button" class="btn btn-sm btn-danger" (click)="onPeriodRemove(3)"><i
+                  class="fa fa-minus fa-lg"></i></button>
+              </div>
+              <div class="col-md-2 error-message"
+                   [hidden]="!examModel.hasError('examtimefm3Valid', 'examTimePeriod3') || examModel.get('examTimePeriod3').untouched && validStatus">
+                <label class="error-message-vertical">
+                  {{examModel.getError('examtimefm3Valid', 'examTimePeriod3')?.errorDesc}}
+                </label>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 form-control-label">考试是否有证书:</label>
+              <div class="col-md-5 input-group">
+                <div
+                  [class.hasError]="!(!examModel.hasError('iscertificateValid', 'iscertificate') || examModel.get('iscertificate').untouched && validStatus)">
+                  <label class="radio-inline">
+                    <input type="radio" name="iscertificate" value="1" formControlName="iscertificate"> 是
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio" name="iscertificate" value="0" formControlName="iscertificate"> 否
+                  </label>
+                </div>
+              </div>
+              <div class="col-md-2 error-message"
+                   [hidden]="!examModel.hasError('iscertificateValid', 'iscertificate') || examModel.get('iscertificate').untouched && validStatus">
+                <label class="error-message-vertical">
+                  {{examModel.getError('iscertificateValid', 'iscertificate')?.errorDesc}}
+                </label>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 form-control-label">考试地点:</label>
               <div class="col-md-5">
-
+                <input type="text" name="examname" class="form-control" placeholder="请输入考试地点"
+                       formControlName="examplace"
+                       [class.hasError]="!(!examModel.hasError('examplaceValid', 'examplace') || examModel.get('examplace').untouched && validStatus)">
+              </div>
+              <div class="col-md-2 error-message"
+                   [hidden]="!examModel.hasError('examplaceValid', 'examplace') || examModel.get('examplace').untouched && validStatus">
+                <label class="error-message-vertical">
+                  {{examModel.getError('examplaceValid', 'examplace')?.errorDesc}}
+                </label>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 form-control-label">考试介绍:</label>
+              <div class="col-md-5">
+                <textarea rows="8" class="form-control" placeholder="请输入考试介绍"
+                          formControlName="examintroduce"></textarea>
               </div>
             </div>
           </div>
           <div class="card-footer">
-            <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-dot-circle-o"></i> 提交</button>
-            <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> 重置</button>
+            <button type="button" class="btn btn-sm btn-success" (click)="onExamAdd()"><i
+              class="fa fa-dot-circle-o"></i> 提交
+            </button>
+            <button type="reset" class="btn btn-sm btn-danger" (click)="onReset()"><i class="fa fa-ban"></i> 重置</button>
           </div>
         </div>
       </div>

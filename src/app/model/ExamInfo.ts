@@ -4,8 +4,14 @@ export class ExamInfo {
   cost: number;
   maxNum: number;
   examPlace: string;
-  examTimeFrom: Date;
-  examTimeTo: Date;
-  regTimeFrom: Date;
-  regTimeTo: Date;
+  examTimePeriod1: string;
+  examTimePeriod2: string;
+  examTimePeriod3: string
+  regTimeFrom: string;
+  regTimeTo: string;
+  examIntroduce: string;
+  registNum: number;
+  paseScore: number;
+  totalScore: number;
+  isCertificate: string;
 }

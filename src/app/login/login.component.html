@@ -11,24 +11,32 @@
                 <span>&nbsp;</span>
               </div>
               <div class="input-group mb-1 error-message" [hidden]="loginStatus">
-                <span>手机号或密码错误，请重新输入！</span>
+                <span>手机号或密码/验证码错误，请重新输入！</span>
               </div>
               <div class="input-group mb-3">
                 <span class="input-group-addon"><i class="icon-user"></i></span>
                 <input type="text" class="form-control" placeholder="手机号" [class.hasError]="!loginStatus"
                        formControlName="userphone" (input)="userInput()">
               </div>
-              <div class="input-group mb-4">
+              <div class="input-group mb-4" *ngIf="!loginMode">
                 <span class="input-group-addon"><i class="icon-lock"></i></span>
                 <input type="password" class="form-control" placeholder="密码" [class.hasError]="!loginStatus"
                        formControlName="loginpassword" (input)="userInput()">
+              </div>
+              <div class="input-group mb-4" *ngIf="loginMode">
+                <span class="input-group-addon"><i class="icon-lock"></i></span>
+                <input type="password" class="form-control" placeholder="验证码" [class.hasError]="!loginStatus"
+                       formControlName="loginidentifycode" (input)="userInput()">
+                &nbsp;
+                <button type="button" class="btn btn-primary" (click)="onGetIdentifyCode()">{{countDownMessage}}</button>
               </div>
               <div class="row">
                 <div class="col-6">
                   <button type="button" class="btn btn-primary px-4" (click)="userLogin()">登录</button>
                 </div>
                 <div class="col-6 text-right">
-                  <button type="button" class="btn btn-link px-0">忘记密码?</button>
+                  <button type="button" class="btn btn-link px-0" (click)="onChangeLoginMode()">{{changeLoginMode}}
+                  </button>
                 </div>
               </div>
             </div>

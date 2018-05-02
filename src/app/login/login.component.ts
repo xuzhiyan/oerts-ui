@@ -14,6 +14,10 @@ export class LoginComponent implements OnInit {
   // 用于登录界面验证失败提醒
   loginStatus: boolean;
   loginModel: FormGroup;
+  loginMode: boolean;
+  changeLoginMode: string;
+  countDownMessage: string;
+  cdNum: number;
 
   constructor(private router: Router,
               private examineeService: ExamineeService,
@@ -21,12 +25,17 @@ export class LoginComponent implements OnInit {
               private fb: FormBuilder) {
     this.loginModel = fb.group({
       userphone: [''],
-      loginpassword: ['']
+      loginpassword: [''],
+      loginidentifycode: ['']
     });
   }
 
   ngOnInit() {
     this.loginStatus = true;
+    this.loginMode = true;
+    this.changeLoginMode = '使用密码登录';
+    this.countDownMessage = '获取验证码';
+    this.cdNum = 60;
   }
 
   userInput() {
@@ -66,6 +75,37 @@ export class LoginComponent implements OnInit {
         }
       });
     }
+  }
+
+  onChangeLoginMode() {
+    if (this.loginMode) {
+      this.loginMode = false;
+      this.changeLoginMode = '使用验证码登录';
+    } else {
+      this.loginMode = true;
+      this.changeLoginMode = '使用密码登录';
+    }
+  }
+
+  onGetIdentifyCode() {
+    // let second = 60;
+    // this.countDownMessage = second + '后可重发';
+    // setInterval(function () {
+    //   console.log(second);
+    //   second--;
+    //   this.countDownMessage = second + '后可重发';
+    //   console.log(this.countDownMessage);
+    //   if (second < 0) {
+    //     this.countDownMessage = '获取验证码';
+    //   }
+    // }, 1000);
+
+    setInterval(this.countDown(), 1000);
+  }
+
+  countDown() {
+    this.cdNum--;
+    this.countDownMessage = this.cdNum.toString();
   }
 
 }

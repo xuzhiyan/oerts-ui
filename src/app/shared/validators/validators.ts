@@ -84,6 +84,185 @@ export function admissionticketValidator(control: FormControl): any {
   }
 }
 
+export function examnameValidator(control: FormControl): any {
+  if (isEmpty(control.value)) {
+    return {examnameValid: {errorDesc: '考试名称不能为空'}};
+  } else {
+    return null;
+  }
+}
+
+export function costValidator(control: FormControl): any {
+  if (isEmpty(control.value)) {
+    return {costValid: {errorDesc: '报名费用不能为空'}};
+  } else {
+    if (control.value < 0 || control.value >= 10000) {
+      return {costValid: {errorDesc: '报名费用超出范围'}};
+    } else {
+      return null;
+    }
+  }
+}
+
+export function maxnumValidator(control: FormControl): any {
+  if (isEmpty(control.value)) {
+    return {maxnumValid: {errorDesc: '报名人数上限不能为空'}};
+  } else {
+    if (control.value <= 0) {
+      return {maxnumValid: {errorDesc: '报名人数上限超出范围'}};
+    } else {
+      return null;
+    }
+  }
+}
+
+export function totalscoreValidator(control: FormControl): any {
+  if (isEmpty(control.value)) {
+    return {totalscoreValid: {errorDesc: '考试总分数不能为空'}};
+  } else {
+    if (control.value <= 0 || control.value >= 1000) {
+      return {totalscoreValid: {errorDesc: '考试总分数超出范围'}};
+    } else {
+      return null;
+    }
+  }
+}
+
+export function pasescoreValidator(control: FormControl): any {
+  if (isEmpty(control.value)) {
+    return {pasescoreValid: {errorDesc: '考试通过分数不能为空'}};
+  } else {
+    if (control.value <= 0 || control.value >= 1000) {
+      return {pasescoreValid: {errorDesc: '考试通过分数超出范围'}};
+    } else {
+      return null;
+    }
+  }
+}
+
+export function regtimeValidator(group: FormGroup): any {
+  const regtimefrom: FormControl = group.get('regtimefrom') as FormControl;
+  const regtimeto: FormControl = group.get('regtimeto') as FormControl;
+  if (isEmpty(regtimefrom.value) || isEmpty(regtimeto.value)) {
+    return {regtimeValid: {errorDesc: '考试报名时间不能为空'}};
+  } else {
+    if (regtimefrom.value > regtimeto.value) {
+      return {regtimeValid: {errorDesc: '考试报名前后时间大小错误'}};
+    } else {
+      if (regtimefrom.value.toString() === regtimeto.value.toString()) {
+        return {regtimeValid: {errorDesc: '考试报名前后时间不能同一天'}};
+      }
+      return null;
+    }
+  }
+}
+
+export function examtimedayValidator(control: FormControl): any {
+  if (isEmpty(control.value)) {
+    return {examtimedayValid: {errorDesc: '考试日期不能为空'}};
+  } else {
+    return null;
+  }
+}
+
+export function iscertificateValidator(control: FormControl): any {
+  if (isEmpty(control.value)) {
+    return {iscertificateValid: {errorDesc: '考试是否有证书必须选择'}};
+  } else {
+    return null;
+  }
+}
+
+export function examplaceValidator(control: FormControl): any {
+  if (isEmpty(control.value)) {
+    return {examplaceValid: {errorDesc: '考试是否有证书必须选择'}};
+  } else {
+    return null;
+  }
+}
+
+export function examtimefm1Validator(group: FormGroup): any {
+  const examtimefh1: FormControl = group.get('examtimefh1') as FormControl;
+  const examtimefm1: FormControl = group.get('examtimefm1') as FormControl;
+  const examtimeth1: FormControl = group.get('examtimeth1') as FormControl;
+  const examtimetm1: FormControl = group.get('examtimetm1') as FormControl;
+  if (isEmpty(examtimefh1.value) || isEmpty(examtimefm1.value) || isEmpty(examtimeth1.value) || isEmpty(examtimetm1.value)) {
+    return {examtimefm1Valid: {errorDesc: '具体时间段不能有空'}};
+  } else {
+    if ((examtimefh1.value < 6 || examtimefh1.value > 23) ||
+      (examtimeth1.value < 6 || examtimeth1.value > 23) ||
+      (examtimefm1.value < 0 || examtimefm1.value > 59) ||
+      (examtimetm1.value < 0 || examtimetm1.value > 59)) {
+      return {examtimefm1Valid: {errorDesc: '分/时不在正确范围内'}};
+    } else {
+      if (examtimefh1.value > examtimeth1.value ||
+        (examtimefh1.value === examtimeth1.value && examtimefm1.value >= examtimetm1.value)) {
+        return {examtimefm1Valid: {errorDesc: '前后时间大小错误'}};
+      } else {
+        return null;
+      }
+    }
+  }
+}
+
+export function examtimefm2Validator(group: FormGroup, isshow: boolean): any {
+  const examtimefh2: FormControl = group.get('examtimefh2') as FormControl;
+  const examtimefm2: FormControl = group.get('examtimefm2') as FormControl;
+  const examtimeth2: FormControl = group.get('examtimeth2') as FormControl;
+  const examtimetm2: FormControl = group.get('examtimetm2') as FormControl;
+
+  if (isEmpty(examtimefh2.value) && isEmpty(examtimefm2.value) && isEmpty(examtimeth2.value) && isEmpty(examtimetm2.value)) {
+    return null;
+  }
+
+  if (isEmpty(examtimefh2.value) || isEmpty(examtimefm2.value) || isEmpty(examtimeth2.value) || isEmpty(examtimetm2.value)) {
+    return {examtimefm2Valid: {errorDesc: '具体时间段不能有空'}};
+  } else {
+    if ((examtimefh2.value < 6 || examtimefh2.value > 23) ||
+      (examtimeth2.value < 6 || examtimeth2.value > 23) ||
+      (examtimefm2.value < 0 || examtimefm2.value > 59) ||
+      (examtimetm2.value < 0 || examtimetm2.value > 59)) {
+      return {examtimefm2Valid: {errorDesc: '分/时不在正确范围内'}};
+    } else {
+      if (examtimefh2.value > examtimeth2.value ||
+        (examtimefh2.value === examtimeth2.value && examtimefm2.value >= examtimetm2.value)) {
+        return {examtimefm2Valid: {errorDesc: '前后时间大小错误'}};
+      } else {
+        return null;
+      }
+    }
+  }
+}
+
+export function examtimefm3Validator(group: FormGroup): any {
+  const examtimefh3: FormControl = group.get('examtimefh3') as FormControl;
+  const examtimefm3: FormControl = group.get('examtimefm3') as FormControl;
+  const examtimeth3: FormControl = group.get('examtimeth3') as FormControl;
+  const examtimetm3: FormControl = group.get('examtimetm3') as FormControl;
+
+  if (isEmpty(examtimefh3.value) && isEmpty(examtimefm3.value) && isEmpty(examtimeth3.value) && isEmpty(examtimetm3.value)) {
+    return null;
+  }
+
+  if (isEmpty(examtimefh3.value) || isEmpty(examtimefm3.value) || isEmpty(examtimeth3.value) || isEmpty(examtimetm3.value)) {
+    return {examtimefm3Valid: {errorDesc: '具体时间段不能有空'}};
+  } else {
+    if ((examtimefh3.value < 6 || examtimefh3.value > 23) ||
+      (examtimeth3.value < 6 || examtimeth3.value > 23) ||
+      (examtimefm3.value < 0 || examtimefm3.value > 59) ||
+      (examtimetm3.value < 0 || examtimetm3.value > 59)) {
+      return {examtimefm3Valid: {errorDesc: '分/时不在正确范围内'}};
+    } else {
+      if (examtimefh3.value > examtimeth3.value ||
+        (examtimefh3.value === examtimeth3.value && examtimefm3.value >= examtimetm3.value)) {
+        return {examtimefm3Valid: {errorDesc: '前后时间大小错误'}};
+      } else {
+        return null;
+      }
+    }
+  }
+}
+
 function isEmpty(index: any) {
   return index === '' || index === null;
 }

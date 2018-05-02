@@ -1,4 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {BsDatepickerConfig, BsLocaleService, defineLocale, zhCnLocale} from 'ngx-bootstrap';
+import {
+  costValidator, examnameValidator, examplaceValidator, examtimedayValidator, examtimefm1Validator, examtimefm2Validator,
+  examtimefm3Validator,
+  iscertificateValidator,
+  maxnumValidator, pasescoreValidator,
+  regtimeValidator,
+  totalscoreValidator
+} from '../../shared/validators/validators';
+import {DatePipe} from '@angular/common';
+import {ExamManagementService} from '../../service/exam-management.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-test-entry',
@@ -7,9 +20,151 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TestEntryComponent implements OnInit {
 
-  constructor() { }
+  arr: Array<string>;
+  examModel: FormGroup;
+  bsConfig: Partial<BsDatepickerConfig>;
+  period2 = false;
+  period3 = false;
+  validStatus = true;
+
+  constructor(private fb: FormBuilder,
+              private _localeService: BsLocaleService,
+              private datePipe: DatePipe,
+              private examManagementService: ExamManagementService,
+              private router: Router) {
+    this.examModel = this.fb.group({
+      examname: ['', examnameValidator],
+      cost: ['', costValidator],
+      maxnum: ['', maxnumValidator],
+      totalscore: ['', totalscoreValidator],
+      pasescore: ['', pasescoreValidator],
+      regTimeGroup: fb.group({
+        regtimefrom: [''],
+        regtimeto: [''],
+      }, {validator: regtimeValidator}),
+      examtimeday: ['', examtimedayValidator],
+      iscertificate: ['', iscertificateValidator],
+      examplace: ['', examplaceValidator],
+      examintroduce: [''],
+      examTimePeriod1: fb.group({
+        examtimefh1: [''],
+        examtimefm1: [''],
+        examtimeth1: [''],
+        examtimetm1: ['']
+      }, {validator: examtimefm1Validator}),
+      examTimePeriod2: fb.group({
+        examtimefh2: [''],
+        examtimefm2: [''],
+        examtimeth2: [''],
+        examtimetm2: [''],
+      }, {validator: examtimefm2Validator}),
+      examTimePeriod3: fb.group({
+        examtimefh3: [''],
+        examtimefm3: [''],
+        examtimeth3: [''],
+        examtimetm3: [''],
+      }, {validator: examtimefm3Validator}),
+    });
+  }
 
   ngOnInit() {
+    this.bsConfig = {containerClass: 'theme-blue', dateInputFormat: 'YYYY-MM-DD'};
+    defineLocale('zh-cn', zhCnLocale);
+    this._localeService.use('zh-cn');
+  }
+
+  onPeriodRemove(item: number) {
+    if (item === 2) {
+      this.period2 = false;
+    } else {
+      this.period3 = false;
+    }
+  }
+
+  onPeriodAdd() {
+    if (this.period2) {
+      this.period3 = true;
+    } else {
+      this.period2 = true;
+    }
+  }
+
+  onExamAdd() {
+    if (this.examModel.valid) {
+      const value = this.examModel.value;
+      const period1Time = this.datePipe.transform(value.examtimeday, 'yyyy-MM-dd') + ' '
+        + this.changeTimeNumberToString(value.examTimePeriod1.examtimefh1, value.examTimePeriod1.examtimefm1) + '~'
+        + this.changeTimeNumberToString(value.examTimePeriod1.examtimeth1, value.examTimePeriod1.examtimetm1);
+      let period2Time: string;
+      let period3Time: string;
+      // 选填的时间段2
+      if (this.period2) {
+        period2Time = this.datePipe.transform(value.examtimeday, 'yyyy-MM-dd') + ' '
+          + this.changeTimeNumberToString(value.examTimePeriod2.examtimefh2, value.examTimePeriod2.examtimefm2) + '~'
+          + this.changeTimeNumberToString(value.examTimePeriod2.examtimeth2, value.examTimePeriod2.examtimetm2);
+      } else {
+        period2Time = '';
+      }
+      // 选填的时间段3
+      if (this.period3) {
+        period3Time = this.datePipe.transform(value.examtimeday, 'yyyy-MM-dd') + ' '
+          + this.changeTimeNumberToString(value.examTimePeriod3.examtimefh3, value.examTimePeriod3.examtimefm3) + '~'
+          + this.changeTimeNumberToString(value.examTimePeriod3.examtimeth3, value.examTimePeriod3.examtimetm3);
+      } else {
+        period3Time = '';
+      }
+      // json拼接
+      const body = {
+        'examId': '',
+        'examName': value.examname,
+        'cost': value.cost,
+        'maxNum': value.maxnum,
+        'examPlace': value.examplace,
+        'examTimePeriod1': period1Time,
+        'examTimePeriod2': period2Time,
+        'examTimePeriod3': period3Time,
+        'regTimeFrom': this.datePipe.transform(value.regTimeGroup.regtimefrom, 'yyyy-MM-dd'),
+        'regTimeTo': this.datePipe.transform(value.regTimeGroup.regtimeto, 'yyyy-MM-dd'),
+        'examIntroduce': value.examintroduce,
+        'registNum': 0,
+        'paseScore': value.pasescore,
+        'totalScore': value.totalscore,
+        'isCertificate': value.iscertificate
+      };
+      this.examManagementService.addExam(body).subscribe(data => {
+        if (data.json().status === 'success') {
+          alert('提交考试信息成功');
+          this.router.navigate(['/layout/test-registration']);
+        }
+      });
+    } else {
+      this.validStatus = false;
+    }
+  }
+
+  onReset() {
+    this.validStatus = true;
+    this.period3 = false;
+    this.period2 = false;
+    this.examModel.reset();
+  }
+
+  changeTimeNumberToString(hour: number, min: number): string {
+
+    let hour_str: string;
+    let min_str: string;
+
+    if (hour <= 9) {
+      hour_str = '0' + hour;
+    } else {
+      hour_str = hour.toString();
+    }
+    if (min <= 9) {
+      min_str = '0' + min;
+    } else {
+      min_str = min.toString();
+    }
+    return hour_str + ':' + min_str;
   }
 
 }
