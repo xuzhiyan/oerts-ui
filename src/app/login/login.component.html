@@ -7,15 +7,18 @@
             <div class="card-body" [formGroup]="loginModel">
               <span class="login-font">考生报名系统</span>
               <p class="text-muted mb-0">登录你的账号</p>
-              <div class="input-group mb-1 error-space" [hidden]="!loginStatus">
+              <div class="input-group mb-1 error-space" [hidden]="!loginStatus || !userPhoneError">
                 <span>&nbsp;</span>
               </div>
               <div class="input-group mb-1 error-message" [hidden]="loginStatus">
                 <span>手机号或密码/验证码错误，请重新输入！</span>
               </div>
+              <div class="input-group mb-1 error-message" [hidden]="userPhoneError">
+                <span>手机号格式不正确!</span>
+              </div>
               <div class="input-group mb-3">
                 <span class="input-group-addon"><i class="icon-user"></i></span>
-                <input type="text" class="form-control" placeholder="手机号" [class.hasError]="!loginStatus"
+                <input type="text" class="form-control" placeholder="手机号" [class.hasError]="!loginStatus || !userPhoneError"
                        formControlName="userphone" (input)="userInput()">
               </div>
               <div class="input-group mb-4" *ngIf="!loginMode">
@@ -28,7 +31,8 @@
                 <input type="password" class="form-control" placeholder="验证码" [class.hasError]="!loginStatus"
                        formControlName="loginidentifycode" (input)="userInput()">
                 &nbsp;
-                <button type="button" class="btn btn-primary" (click)="onGetIdentifyCode()">{{countDownMessage}}</button>
+                <button type="button" class="btn btn-primary" [disabled]="!countDownStatus" (click)="onGetIdentifyCode()">{{countDownMessage}}
+                </button>
               </div>
               <div class="row">
                 <div class="col-6">

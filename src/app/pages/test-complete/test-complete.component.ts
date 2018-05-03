@@ -17,13 +17,15 @@ export class TestCompleteComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.examRService.completeResgistList(sessionStorage.getItem('user_idcard')).subscribe(data => {
-      this.completeREInfo = data.json().data;
-    })
+    if (sessionStorage.getItem('user_idcard') !== '') {
+      this.examRService.completeResgistList(sessionStorage.getItem('user_idcard')).subscribe(data => {
+        this.completeREInfo = data.json().data;
+      });
+    }
   }
 
   onCancelRegist(item: string, message: string) {
-    console.log(item);
+    // console.log(item);
     if (window.confirm(message)) {
       const body = {'examId': item, 'idCard': sessionStorage.getItem('user_idcard')};
       this.examRService.deleteByIdCardAndExamID(body).subscribe(data => {

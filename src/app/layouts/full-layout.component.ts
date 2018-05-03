@@ -42,7 +42,7 @@ export class FullLayoutComponent implements OnInit {
       this.examInfoLength = data.json().data.length;
     });
     const idCard = sessionStorage.getItem('user_idcard');
-    if (idCard !== 'null') {
+    if (idCard !== '') {
       if (idCard !== 'root') {
         this.examRService.completeResgistList(idCard).subscribe(data => {
           this.completeRExamInfoLength = data.json().data.length;

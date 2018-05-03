@@ -36,4 +36,16 @@ export class ExamineeService {
     const url = '/oerts/examinee/list/all';
     return this.http.get(url);
   }
+
+  loginByIdentifycode(body: any) {
+    return this.http.post('/oerts/examinee/login/identifycode', body, {headers: this.header})
+  }
+
+  registByIdentifycode(body: any) {
+    return this.http.post('/oerts/examinee/regist/identifycode', body, {headers: this.header});
+  }
+
+  updatePasswByIdentifycode(body: any) {
+    return this.http.post('/oerts/examinee/update/password', body, {headers: this.header});
+  }
 }

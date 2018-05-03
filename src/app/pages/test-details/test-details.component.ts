@@ -27,7 +27,7 @@ export class TestDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(sessionStorage.getItem('user_idcard') === 'root')
+    // console.log(sessionStorage.getItem('user_idcard') === 'root')
     this.identifyStatus = sessionStorage.getItem('user_idcard') === 'root';
     this.dangerMessage = true;
     this.examId = this.pathKeyService.examId;

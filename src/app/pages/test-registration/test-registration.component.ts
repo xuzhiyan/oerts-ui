@@ -26,7 +26,7 @@ export class TestRegistrationComponent implements OnInit {
     this.examService.getAllExams().subscribe(data => {
       this.examInfo = data.json().data;
     });
-    if (sessionStorage.getItem('user_idcard') === 'null') {
+    if (sessionStorage.getItem('user_idcard') === '') {
       this.dangerMessage = false;
     }
 
@@ -44,7 +44,7 @@ export class TestRegistrationComponent implements OnInit {
   }
 
   onDetails(item: any) {
-    if (sessionStorage.getItem('user_idcard') === 'null') {
+    if (sessionStorage.getItem('user_idcard') === '') {
       alert('请先完善用户信息后再报名！');
     } else {
       this.pathKeyService.examId = item.examId;

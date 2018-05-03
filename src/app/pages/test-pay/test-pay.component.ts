@@ -16,12 +16,14 @@ export class TestPayComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.examRService.getPayList(sessionStorage.getItem('user_idcard'), '20').subscribe(data => {
-      this.paidInfo = data.json().data;
-    });
-    this.examRService.getPayList(sessionStorage.getItem('user_idcard'), '10').subscribe(data => {
-      this.unpaidInfo = data.json().data;
-    });
+    if (sessionStorage.getItem('user_idcard') !== '') {
+      this.examRService.getPayList(sessionStorage.getItem('user_idcard'), '20').subscribe(data => {
+        this.paidInfo = data.json().data;
+      });
+      this.examRService.getPayList(sessionStorage.getItem('user_idcard'), '10').subscribe(data => {
+        this.unpaidInfo = data.json().data;
+      });
+    }
   }
 
 }

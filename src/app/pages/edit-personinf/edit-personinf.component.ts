@@ -73,7 +73,10 @@ export class EditPersoninfComponent implements OnInit {
       };
       this.examineeService.updateByUserPhone(body).subscribe(res => {
         if (res.json().status === 'success') {
+          // 更新session里面的信息
           sessionStorage.setItem('user_photo', this.savePath);
+          sessionStorage.setItem('user_name', this.editModel.value.username);
+          sessionStorage.setItem('user_idcard', this.editModel.value.idcard);
           alert('更新成功！');
         } else {
           alert('更新失败！');
