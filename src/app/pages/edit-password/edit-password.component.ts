@@ -35,7 +35,7 @@ export class EditPasswordComponent implements OnInit {
     this.userName = sessionStorage.getItem('user_name');
     this.userPhone = sessionStorage.getItem('user_validate');
     this.countDownStatus = true;
-    this.countDownMessage = '获取验证码'
+    this.countDownMessage = '获取验证码';
     this.validStatus = true;
     this.identifyError = true;
   }
@@ -43,7 +43,7 @@ export class EditPasswordComponent implements OnInit {
   onGetIdentifyCode() {
     // 从后台获取验证码和手机号
     const body = {'userPhone': this.userPhone};
-    this.examineeService.updatePasswByIdentifycode(body).subscribe(data => {
+    this.examineeService.updateByIdentifycode(body).subscribe(data => {
       if (data.json().status === 'success') {
         this.identifyCodeFromServer = data.json().data.code;
       } else {
@@ -67,7 +67,17 @@ export class EditPasswordComponent implements OnInit {
     if (this.changeModel.valid) {
       if (this.changeModel.value.identifycode === this.identifyCodeFromServer) {
         // 更新表中密码数据
-        
+        const body = {
+          'userPhone': this.userPhone,
+          'loginPassword': this.changeModel.value.loginPasswordsGroup.loginpassword
+        };
+        this.examineeService.updatePasswByUserPhone(body).subscribe(data => {
+          if (data.json().status === 'success') {
+            this.onReset();
+            alert('更新密码成功，下次请用新密码登录');
+            this.identifyCodeFromServer = '验证码重置，防止再次利用！！！！';
+          }
+        });
       } else {
         this.identifyError = false;
       }
@@ -80,6 +90,10 @@ export class EditPasswordComponent implements OnInit {
     this.changeModel.reset();
     this.identifyError = true;
     this.validStatus = true;
+  }
+
+  userInput() {
+    this.identifyError = true;
   }
 
 }

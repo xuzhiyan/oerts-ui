@@ -18,6 +18,7 @@ export class TestDetailsComponent implements OnInit {
   // 用于不能重复报名的检查
   dangerMessage: boolean;
   identifyStatus: boolean;
+  numStatus: boolean;
 
   constructor(private pathKeyService: PathKeyService,
               private routeInfo: ActivatedRoute,
@@ -30,10 +31,16 @@ export class TestDetailsComponent implements OnInit {
     // console.log(sessionStorage.getItem('user_idcard') === 'root')
     this.identifyStatus = sessionStorage.getItem('user_idcard') === 'root';
     this.dangerMessage = true;
+    this.numStatus = true;
     this.examId = this.pathKeyService.examId;
     if (this.examId !== null) {
       this.examService.getExamById(this.examId).subscribe(data => {
         this.examInfo = data.json().data;
+        if (data.json().data.registNum === data.json().data.maxNum) {
+          this.numStatus = false;
+        } else {
+          this.numStatus = true;
+        }
       });
       this.examRService.countByIdCardAndExamID(this.examId, sessionStorage.getItem('user_idcard')).subscribe(data => {
         // console.log(data.json().status);

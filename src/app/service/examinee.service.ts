@@ -45,7 +45,11 @@ export class ExamineeService {
     return this.http.post('/oerts/examinee/regist/identifycode', body, {headers: this.header});
   }
 
-  updatePasswByIdentifycode(body: any) {
+  updateByIdentifycode(body: any) {
+    return this.http.post('/oerts/examinee/update/identifycode', body, {headers: this.header});
+  }
+
+  updatePasswByUserPhone(body: any) {
     return this.http.post('/oerts/examinee/update/password', body, {headers: this.header});
   }
 }

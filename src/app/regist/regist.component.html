@@ -3,9 +3,11 @@
     <div class="row justify-content-center">
       <div class="col-md-6">
         <div class="card mx-4" [formGroup]="registModel">
+          <div>
+            <button class="btn btn-primary" [routerLink]="['/login']"><i class="fa fa-chevron-left "></i></button>
+          </div>
           <div class="card-body pl-4 pr-4 pb-0">
-
-            <span class="regist-font">注册</span>
+            <p class="regist-font mb-0">注册</p>
             <p class="text-muted">创建你的账号</p>
             <div class="input-group mb-1">
               <span class="input-group-addon"><i class="icon-user"></i></span>

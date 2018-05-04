@@ -15,6 +15,12 @@
             <span>×</span>
           </button>
         </div>
+        <div class="alert alert-warning alert-dismissible fade show" [hidden]="numStatus">
+          <strong>注意！！</strong> 本次考试报名人数(包括正在审核人数)已满，请等待人数出现空缺后再报名。
+          <button type="button" class="close">
+            <span>×</span>
+          </button>
+        </div>
         <div class="card">
           <div class="card-header">
             <i class="fa fa-align-justify"></i> 考试详情
@@ -85,7 +91,7 @@
           <div class="card-footer">
             <button type="submit" class="btn btn-sm btn-success"
                     (click)="onExamRegistration(examInfo.examId, examInfo.examName)"
-                    [disabled]="!dangerMessage || identifyStatus">
+                    [disabled]="!dangerMessage || identifyStatus || !numStatus">
               <i class="fa fa-dot-circle-o"></i> 报名
             </button>
             <button type="reset" class="btn btn-sm btn-danger" [routerLink]="['/layout/test-registration']"><i
