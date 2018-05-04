@@ -12,8 +12,7 @@ export class TestCompleteComponent implements OnInit {
 
   completeREInfo: Array<CompleteRegistExamInfo> = new Array();
 
-  constructor(private examRService: ExamRegistrationService,
-              private router: Router) {
+  constructor(private examRService: ExamRegistrationService) {
   }
 
   ngOnInit() {

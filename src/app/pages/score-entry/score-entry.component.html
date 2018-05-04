@@ -7,6 +7,64 @@
 
 <div class="container-fluid">
   <div class="animated fadeIn">
-    score-entry works!
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-header">
+            <i class="fa fa-align-justify"></i> 考试信息
+          </div>
+          <div class="card-body">
+            <table class="table table-responsive-sm table-bordered thead-default">
+              <thead>
+              <tr>
+                <th>考试编号</th>
+                <th>考试名称</th>
+                <th>报考人数</th>
+                <th>考试日期</th>
+                <th>操作</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let exams of examInfo">
+                <td>{{exams.examId}}</td>
+                <td>{{exams.examName}}</td>
+                <td>{{exams.registNum}}</td>
+                <td>{{exams.examTimePeriod1 | strLength: 10}}</td>
+                <td>
+                  <button type="submit" class="btn btn-sm btn-primary" (click)="onGetEntryList(exams.examId)"> 录入成绩
+                  </button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+            <hr>
+            <div [hidden]="isnoInfo">
+              <h2>没有数据</h2>
+            </div>
+            <div [hidden]="showEntryInfo">
+              <table class="table table-responsive-sm table-bordered thead-default">
+                <thead>
+                <tr>
+                  <th>考生姓名</th>
+                  <th>考生准考证</th>
+                  <th>考生成绩</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let examEntry of examEntryInfo">
+                  <td>{{examEntry.userName}}</td>
+                  <td>{{examEntry.admissionTicket}}</td>
+                  <td><input type="number" class="form-control" placeholder="请输入考生成绩" [(ngModel)]="examEntry.score"></td>
+                </tr>
+                </tbody>
+              </table>
+              <button class="btn btn-sm btn-success" (click)="onEntryScore()">提交成绩</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--/.col-->
+    </div>
+    <!--/.row-->
   </div>
 </div>

@@ -22,7 +22,7 @@ export class ExamineeService {
     return this.http.get(url);
   }
 
-  getByUserPhone(userPhone: String) {
+  getByUserPhone(userPhone: string) {
     const url = '/oerts/getbyuserphone/' + userPhone;
     return this.http.get(url);
   }
@@ -51,5 +51,10 @@ export class ExamineeService {
 
   updatePasswByUserPhone(body: any) {
     return this.http.post('/oerts/examinee/update/password', body, {headers: this.header});
+  }
+
+  getBalanceByUserPhone(userPhone: string) {
+    const url = '/oerts/examinee/get/balance/' + userPhone;
+    return this.http.get(url);
   }
 }

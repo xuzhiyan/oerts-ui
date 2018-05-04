@@ -14,12 +14,17 @@ export class ExamManagementService {
   }
 
   getExamById(id: string) {
-    const url = '/oerts/exam/' + id;
+    const url = '/oerts/exam/info/id/' + id;
     return this.http.get(url);
   }
 
   addExam(body: any) {
     return this.http.post('/oerts/exam/info/add', body, {headers: this.header});
+  }
+
+  getExamByIsEntry(isEntry: number) {
+    const url = '/oerts/exam/info/' + isEntry;
+    return this.http.get(url);
   }
 
 }

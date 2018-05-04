@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ExamInfo} from '../../model/ExamInfo';
 import {ExamRegistrationService} from '../../service/exam-registration.service';
+import {PathKeyService} from '../../service/path-key.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-test-pay',
@@ -12,7 +14,9 @@ export class TestPayComponent implements OnInit {
   paidInfo: Array<ExamInfo> = new Array();
   unpaidInfo: Array<ExamInfo> = new Array();
 
-  constructor(private examRService: ExamRegistrationService) {
+  constructor(private examRService: ExamRegistrationService,
+              private pathKeyService: PathKeyService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -24,6 +28,13 @@ export class TestPayComponent implements OnInit {
         this.unpaidInfo = data.json().data;
       });
     }
+  }
+
+  onPayTest(examName: string, cost: number, examId: string) {
+    this.pathKeyService.examName = examName;
+    this.pathKeyService.cost = cost;
+    this.pathKeyService.examId = examId;
+    this.router.navigate(['/layout/pay-page']);
   }
 
 }

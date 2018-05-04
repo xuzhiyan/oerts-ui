@@ -14,4 +14,5 @@ export class ExamInfo {
   paseScore: number;
   totalScore: number;
   isCertificate: string;
+  isEntry: number;
 }

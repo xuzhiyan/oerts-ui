@@ -42,6 +42,8 @@ import {ManageUserinfoComponent} from './pages/manage-userinfo/manage-userinfo.c
 import {TestEntryComponent} from './pages/test-entry/test-entry.component';
 import {ScoreEntryComponent} from './pages/score-entry/score-entry.component';
 import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
+import {StrLengthPipe} from './shared/pipe/StrLengthPipe';
+import { PayPageComponent } from './pages/pay-page/pay-page.component';
 
 @NgModule({
   imports: [
@@ -80,7 +82,9 @@ import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
     TestMessageComponent,
     ManageUserinfoComponent,
     TestEntryComponent,
-    ScoreEntryComponent
+    ScoreEntryComponent,
+    StrLengthPipe,
+    PayPageComponent
   ],
   providers: [
     {provide: LocationStrategy, useClass: HashLocationStrategy},

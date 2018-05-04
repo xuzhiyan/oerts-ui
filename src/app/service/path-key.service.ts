@@ -5,5 +5,6 @@ export class PathKeyService {
 
   examId: string;
   examName: string;
+  cost: number;
 
 }

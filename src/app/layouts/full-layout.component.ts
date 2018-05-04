@@ -3,6 +3,7 @@ import {ExamManagementService} from '../service/exam-management.service';
 import {ExamInfo} from '../model/ExamInfo';
 import {ExamRegistrationService} from '../service/exam-registration.service';
 import {Router} from '@angular/router';
+import {ExamineeService} from '../service/examinee.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,6 +18,7 @@ export class FullLayoutComponent implements OnInit {
   userName: string;
   userPhotoPath: string;
   isRootIdentify: boolean;
+  balance: number;
 
   public disabled = false;
   public status: { isopen: boolean } = {isopen: false};
@@ -33,7 +35,8 @@ export class FullLayoutComponent implements OnInit {
 
   constructor(private examService: ExamManagementService,
               private examRService: ExamRegistrationService,
-              private router: Router) {
+              private router: Router,
+              private examineeService: ExamineeService) {
   }
 
   ngOnInit(): void {
@@ -50,6 +53,11 @@ export class FullLayoutComponent implements OnInit {
         this.examRService.getPayList(idCard, '10').subscribe(data => {
           this.unpaidExamInfoLehgth = data.json().data.length;
         });
+        this.examineeService.getBalanceByUserPhone(sessionStorage.getItem('user_validate')).subscribe(data => {
+          this.balance = data.json().data;
+        });
+      } else {
+        this.balance = 0;
       }
     }
     // console.log(sessionStorage.getItem('user_validate'));

@@ -36,4 +36,17 @@ export class ExamRegistrationService {
     const url = '/oerts/registration/score/' + admissionTicket;
     return this.http.get(url);
   }
+
+  getScoreEntryListById(examId: string) {
+    const url = '/oerts/registration/score/list/' + examId;
+    return this.http.get(url);
+  }
+
+  entryScore(body: any) {
+    return this.http.post('/oerts/registration/score/entry', body, {headers: this.header});
+  }
+
+  updatePayRegistration(body: any) {
+    return this.http.post('/oerts/registration/pay/update', body, {headers: this.header});
+  }
 }

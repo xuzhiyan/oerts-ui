@@ -21,6 +21,7 @@ import {TestMessageComponent} from './pages/test-message/test-message.component'
 import {ManageUserinfoComponent} from './pages/manage-userinfo/manage-userinfo.component';
 import {TestEntryComponent} from './pages/test-entry/test-entry.component';
 import {ScoreEntryComponent} from './pages/score-entry/score-entry.component';
+import {PayPageComponent} from './pages/pay-page/pay-page.component';
 
 export const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -44,10 +45,11 @@ export const routes: Routes = [
       {path: 'test-improveinfo', component: TestImproveinfoComponent},
       {path: 'manage-userinfo', component: ManageUserinfoComponent},
       {path: 'test-entry', component: TestEntryComponent},
-      {path: 'score-entry', component: ScoreEntryComponent}
+      {path: 'score-entry', component: ScoreEntryComponent},
+      {path: 'pay-page', component: PayPageComponent}
     ], canActivate: [LoginGuard]
   },
-  // {path: '**', component: Pages404Component}
+  {path: '**', component: Pages404Component}
 ];
 
 @NgModule({

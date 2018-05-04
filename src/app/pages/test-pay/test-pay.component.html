@@ -30,10 +30,12 @@
                 <td>{{unpaid.examId}}</td>
                 <td>{{unpaid.examName}}</td>
                 <td>{{unpaid.cost}}</td>
-                <td>{{unpaid.examTimeFrom}}-{{unpaid.examTimeTo}}</td>
+                <td>{{unpaid.examTimePeriod1 | strLength: 10}}</td>
                 <td>{{unpaid.regTimeTo}}</td>
                 <td>
-                  <button type="submit" class="btn btn-sm btn-primary"> 缴费</button>
+                  <button type="submit" class="btn btn-sm btn-primary"
+                          (click)="onPayTest(unpaid.examName, unpaid.cost, unpaid.examId)"> 缴费
+                  </button>
                 </td>
               </tr>
               </tbody>
@@ -59,7 +61,7 @@
                 <td>{{paid.examId}}</td>
                 <td>{{paid.examName}}</td>
                 <td>{{paid.cost}}</td>
-                <td>{{paid.examTimeFrom}}-{{paid.examTimeTo}}</td>
+                <td>{{paid.examTimePeriod1 | strLength: 10}}</td>
               </tr>
               </tbody>
             </table>

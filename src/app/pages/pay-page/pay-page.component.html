@@ -1,0 +1,64 @@
+<!-- Breadcrumb -->
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <span>支付页面</span>
+  </li>
+</ol>
+
+<div class="container-fluid">
+  <div class="animated fadeIn">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-header">
+            <i class="fa fa-align-justify"></i> 选择支付方式
+          </div>
+          <div class="card-body">
+            <div class="form-group row pt-3">
+              <div class="col-md-6 text-center">
+                <h3>考试名称:
+                  <span class="badge badge-secondary">{{examName}}</span>
+                </h3>
+              </div>
+              <div class="col-md-6 text-center">
+                <h3>报名费用:
+                  <span class="badge badge-secondary">{{cost}}</span>
+                </h3>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group row">
+              <div class="col-md-2">
+                <h3>支付方式:</h3>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-2">
+
+              </div>
+              <div class="col-md-3">
+                <input type="radio" name="payway" value="1" checked [disabled]="!canPay">
+                <span class="pay-font"
+                      [class.text-muted]="!canPay"
+                >余额 ({{balance}}元)</span>
+                <br>
+                <input type="radio" name="payway" value="2" disabled> <span class="pay-font text-muted">支付宝(暂不支持)</span>
+                <br>
+                <input type="radio" name="payway" value="3" disabled> <span class="pay-font text-muted">网银(暂不支持)</span>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <button type="button" class="btn btn-primary" (click)="onPay()" [disabled]="!canPay"><i class="fa fa-spinner"></i> 支付
+            </button>
+            <button type="button" class="btn btn-danger" [routerLink]="['/layout/test-pay']"><i
+              class="fa fa-chevron-left"></i> 返回
+            </button>
+          </div>
+        </div>
+      </div>
+      <!--/.col-->
+    </div>
+    <!--/.row-->
+  </div>
+</div>
