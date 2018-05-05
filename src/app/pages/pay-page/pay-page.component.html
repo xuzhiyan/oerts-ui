@@ -9,6 +9,16 @@
   <div class="animated fadeIn">
     <div class="row">
       <div class="col-lg-12">
+        <div class="row mb-3">
+          <div class="col-md-3 text-center p-0"><h6 class="text-muted m-0">完善报名信息</h6></div>
+          <div class="col-md-3 text-center p-0"><h6 class="text-muted m-0">报名信息审核</h6></div>
+          <div class="col-md-3 text-center p-0"><h4 class="m-0">考试费用缴纳</h4></div>
+          <div class="col-md-3 text-center p-0"><h6 class="text-muted m-0">完成考试报名</h6></div>
+        </div>
+        <div class="progress mb-4" style="height: 3px;">
+          <div class="progress-bar" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0"
+               aria-valuemax="100"></div>
+        </div>
         <div class="card">
           <div class="card-header">
             <i class="fa fa-align-justify"></i> 选择支付方式
@@ -49,7 +59,8 @@
             </div>
           </div>
           <div class="card-footer">
-            <button type="button" class="btn btn-primary" (click)="onPay()" [disabled]="!canPay"><i class="fa fa-spinner"></i> 支付
+            <button type="button" class="btn btn-primary" (click)="onPay()" [disabled]="!canPay"><i
+              class="fa fa-spinner"></i> 支付
             </button>
             <button type="button" class="btn btn-danger" [routerLink]="['/layout/test-pay']"><i
               class="fa fa-chevron-left"></i> 返回

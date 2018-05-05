@@ -22,6 +22,7 @@ import {ManageUserinfoComponent} from './pages/manage-userinfo/manage-userinfo.c
 import {TestEntryComponent} from './pages/test-entry/test-entry.component';
 import {ScoreEntryComponent} from './pages/score-entry/score-entry.component';
 import {PayPageComponent} from './pages/pay-page/pay-page.component';
+import {TestSuccessinfoComponent} from './pages/test-successinfo/test-successinfo.component';
 
 export const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -46,7 +47,8 @@ export const routes: Routes = [
       {path: 'manage-userinfo', component: ManageUserinfoComponent},
       {path: 'test-entry', component: TestEntryComponent},
       {path: 'score-entry', component: ScoreEntryComponent},
-      {path: 'pay-page', component: PayPageComponent}
+      {path: 'pay-page', component: PayPageComponent},
+      {path: 'test-successinfo', component: TestSuccessinfoComponent}
     ], canActivate: [LoginGuard]
   },
   {path: '**', component: Pages404Component}

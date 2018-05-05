@@ -43,7 +43,9 @@ import {TestEntryComponent} from './pages/test-entry/test-entry.component';
 import {ScoreEntryComponent} from './pages/score-entry/score-entry.component';
 import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
 import {StrLengthPipe} from './shared/pipe/StrLengthPipe';
-import { PayPageComponent } from './pages/pay-page/pay-page.component';
+import {PayPageComponent} from './pages/pay-page/pay-page.component';
+import {TestSuccessinfoComponent} from './pages/test-successinfo/test-successinfo.component';
+import {ModalModule} from 'ngx-bootstrap/modal';
 
 @NgModule({
   imports: [
@@ -52,6 +54,7 @@ import { PayPageComponent } from './pages/pay-page/pay-page.component';
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
     BsDatepickerModule.forRoot(),
+    ModalModule.forRoot(),
     ChartsModule,
     FormsModule,
     ReactiveFormsModule,
@@ -84,7 +87,8 @@ import { PayPageComponent } from './pages/pay-page/pay-page.component';
     TestEntryComponent,
     ScoreEntryComponent,
     StrLengthPipe,
-    PayPageComponent
+    PayPageComponent,
+    TestSuccessinfoComponent
   ],
   providers: [
     {provide: LocationStrategy, useClass: HashLocationStrategy},

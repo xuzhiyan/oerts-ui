@@ -24,13 +24,13 @@ export class TestCompleteComponent implements OnInit {
     }
   }
 
-  onCancelRegist(item: string, message: string) {
+  onCancelRegist(item: string, message: string, status: string) {
     // console.log(item);
     if (window.confirm(message)) {
       const body = {
         'examId': item,
         'idCard': sessionStorage.getItem('user_idcard'),
-        'status': '00'
+        'status': status
       };
       this.examRService.deleteByIdCardAndExamID(body).subscribe(data => {
         if (data.json().status === 'success') {
@@ -58,5 +58,9 @@ export class TestCompleteComponent implements OnInit {
         }
       });
     }
+  }
+
+  onSuccessInfo() {
+    this.router.navigate(['/layout/test-successinfo']);
   }
 }
