@@ -51,7 +51,7 @@
                   </button>
                 </td>
                 <td *ngIf="creinfos.status == '11'">
-                  <button type="button" class="btn btn-sm btn-primary" [routerLink]="['/layout/test-registration']"> 重新报名</button>
+                  <button type="button" class="btn btn-sm btn-primary" (click)="onReReg(creinfos.examId)"> 重新报名</button>
                 </td>
                 <td *ngIf="creinfos.status == '20'">
                   <button type="button" class="btn btn-sm btn-primary"> 报名详情</button>

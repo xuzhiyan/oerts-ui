@@ -12,7 +12,8 @@ export class TestCompleteComponent implements OnInit {
 
   completeREInfo: Array<CompleteRegistExamInfo> = new Array();
 
-  constructor(private examRService: ExamRegistrationService) {
+  constructor(private examRService: ExamRegistrationService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -26,12 +27,34 @@ export class TestCompleteComponent implements OnInit {
   onCancelRegist(item: string, message: string) {
     // console.log(item);
     if (window.confirm(message)) {
-      const body = {'examId': item, 'idCard': sessionStorage.getItem('user_idcard')};
+      const body = {
+        'examId': item,
+        'idCard': sessionStorage.getItem('user_idcard'),
+        'status': '00'
+      };
       this.examRService.deleteByIdCardAndExamID(body).subscribe(data => {
         if (data.json().status === 'success') {
           this.examRService.completeResgistList(sessionStorage.getItem('user_idcard')).subscribe(value => {
             this.completeREInfo = value.json().data;
           });
+        }
+      });
+    }
+  }
+
+  onReReg(item: string) {
+    if (window.confirm('重新报名将删除此条记录，你确定嘛？')) {
+      const body = {
+        'examId': item,
+        'idCard': sessionStorage.getItem('user_idcard'),
+        'status': '11'
+      };
+      this.examRService.deleteByIdCardAndExamID(body).subscribe(data => {
+        if (data.json().status === 'success') {
+          // this.examRService.completeResgistList(sessionStorage.getItem('user_idcard')).subscribe(value => {
+          //   this.completeREInfo = value.json().data;
+          // });
+          this.router.navigate(['/layout/test-registration']);
         }
       });
     }

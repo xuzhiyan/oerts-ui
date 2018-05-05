@@ -59,6 +59,8 @@ export class FullLayoutComponent implements OnInit {
       } else {
         this.balance = 0;
       }
+    } else {
+      this.balance = 0;
     }
     // console.log(sessionStorage.getItem('user_validate'));
     // console.log(sessionStorage.getItem('user_idcard'));
