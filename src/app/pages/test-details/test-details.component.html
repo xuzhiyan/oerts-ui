@@ -63,8 +63,8 @@
               </div>
               <label class="col-md-2 form-control-label"><strong>是否有证书:</strong></label>
               <div class="col-md-4">
-                <p class="form-control-static" *ngIf="examInfo.isCertificate == 1">是</p>
-                <p class="form-control-static" *ngIf="examInfo.isCertificate == 0">否</p>
+                <p class="form-control-static" *ngIf="examInfo.isCertificate === '1'">是</p>
+                <p class="form-control-static" *ngIf="examInfo.isCertificate === '0'">否</p>
               </div>
             </div>
             <div class="form-group row">

@@ -49,4 +49,9 @@ export class ExamRegistrationService {
   updatePayRegistration(body: any) {
     return this.http.post('/oerts/registration/pay/update', body, {headers: this.header});
   }
+
+  getCompleteResgistInfo(idCard: string, examId: string) {
+    const url = '/oerts/registration/info/' + idCard + '/' + examId;
+    return this.http.get(url);
+  }
 }

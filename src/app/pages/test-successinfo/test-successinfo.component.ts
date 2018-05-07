@@ -1,4 +1,7 @@
 import {Component, OnInit} from '@angular/core';
+import {PathKeyService} from '../../service/path-key.service';
+import {ExamRegistrationService} from '../../service/exam-registration.service';
+import {CompleteRegistExamInfo} from '../../model/ExamineeRegistInfo';
 
 @Component({
   selector: 'app-test-successinfo',
@@ -7,10 +10,18 @@ import {Component, OnInit} from '@angular/core';
 })
 export class TestSuccessinfoComponent implements OnInit {
 
-  constructor() {
+  regInfo: Array<CompleteRegistExamInfo> = new Array<CompleteRegistExamInfo>();
+
+  constructor(private pathKeyService: PathKeyService,
+              private examRService: ExamRegistrationService) {
   }
 
   ngOnInit() {
+    this.examRService.getCompleteResgistInfo(sessionStorage.getItem('user_idcard'), this.pathKeyService.examId)
+      .subscribe(data => {
+        this.regInfo = data.json().data;
+      });
+
   }
 
 }

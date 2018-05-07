@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ExamRegistrationService} from '../../service/exam-registration.service';
 import {CompleteRegistExamInfo} from '../../model/CompleteRegistExamInfo';
 import {Router} from '@angular/router';
+import {PathKeyService} from '../../service/path-key.service';
 
 @Component({
   selector: 'app-test-complete',
@@ -13,7 +14,8 @@ export class TestCompleteComponent implements OnInit {
   completeREInfo: Array<CompleteRegistExamInfo> = new Array();
 
   constructor(private examRService: ExamRegistrationService,
-              private router: Router) {
+              private router: Router,
+              private pathKeyService: PathKeyService) {
   }
 
   ngOnInit() {
@@ -60,7 +62,8 @@ export class TestCompleteComponent implements OnInit {
     }
   }
 
-  onSuccessInfo() {
+  onSuccessInfo(examId: string) {
+    this.pathKeyService.examId = examId;
     this.router.navigate(['/layout/test-successinfo']);
   }
 }

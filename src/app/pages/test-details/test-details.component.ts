@@ -14,7 +14,7 @@ import {PathKeyService} from '../../service/path-key.service';
 export class TestDetailsComponent implements OnInit {
 
   examId: string;
-  examInfo: Array<ExamInfo> = new Array();
+  examInfo: Array<ExamInfo> = new Array<ExamInfo>();
   // 用于不能重复报名的检查
   dangerMessage: boolean;
   identifyStatus: boolean;

@@ -54,7 +54,7 @@
                   <button type="button" class="btn btn-sm btn-primary" (click)="onReReg(creinfos.examId)"> 重新报名</button>
                 </td>
                 <td *ngIf="creinfos.status == '20'">
-                  <button type="button" class="btn btn-sm btn-primary" (click)="onSuccessInfo()"> 报名详情</button>
+                  <button type="button" class="btn btn-sm btn-primary" (click)="onSuccessInfo(creinfos.examId)"> 报名详情</button>
                 </td>
                 <td *ngIf="creinfos.status == '21'">
                   <button type="button" class="btn btn-sm btn-primary" (click)="onCancelRegist(creinfos.examId, '你确定要删除这条记录吗？', '21')"> 删除记录</button>
