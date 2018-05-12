@@ -12,9 +12,8 @@ import {PathKeyService} from '../../service/path-key.service';
 export class TestRegistrationComponent implements OnInit {
 
   examInfo: Array<ExamInfo> = new Array();
-  // test: Array<ExamInfo> = new Array();
-  // ttt: any;
   dangerMessage: boolean;
+  isShowExamInfo: boolean;
 
   constructor(private examService: ExamManagementService,
               private router: Router,
@@ -23,24 +22,15 @@ export class TestRegistrationComponent implements OnInit {
 
   ngOnInit() {
     this.dangerMessage = true;
-    this.examService.getAllExams().subscribe(data => {
-      this.examInfo = data.json().data;
-    });
+    this.isShowExamInfo = false;
+    // this.examService.getAllExams().subscribe(data => {
+    //   this.examInfo = data.json().data;
+    //   console.log(this.examInfo.length)
+    //   this.isShowExamInfo = this.examInfo.length !== 0;
+    // });
     if (sessionStorage.getItem('user_idcard') === '') {
       this.dangerMessage = false;
     }
-
-    // this.httpt.get('/oerts/exams').subscribe(data => {
-    //   this.test = _.values(data);
-    //   // console.log('####  this.test ', this.test[0].examId);
-    //   // this.ttt = data;
-    //   // console.log(this.ttt[0].examId);
-    // });
-    //
-    // this.httpt.get('/oerts/exam/1000006').subscribe(data => {
-    //   this.ttt = data;
-    //   console.log(this.ttt.examId);
-    // });
   }
 
   onDetails(item: any) {
@@ -50,5 +40,12 @@ export class TestRegistrationComponent implements OnInit {
       this.pathKeyService.examId = item.examId;
       this.router.navigate(['/layout/test-details']);
     }
+  }
+
+  onGetExamInfo(examType: string) {
+    this.examService.getExamByType(examType).subscribe(data => {
+      this.examInfo = data.json().data;
+      this.isShowExamInfo = this.examInfo.length !== 0;
+    });
   }
 }

@@ -12,7 +12,6 @@ import {ExamineeService} from '../service/examinee.service';
 })
 export class FullLayoutComponent implements OnInit {
 
-  examInfoLength: number;
   completeRExamInfoLength: number;
   unpaidExamInfoLehgth: number;
   userName: string;
@@ -41,9 +40,6 @@ export class FullLayoutComponent implements OnInit {
 
   ngOnInit(): void {
     this.isRootIdentify = sessionStorage.getItem('user_validate') === 'root';
-    this.examService.getAllExams().subscribe(data => {
-      this.examInfoLength = data.json().data.length;
-    });
     const idCard = sessionStorage.getItem('user_idcard');
     if (idCard !== '') {
       if (idCard !== 'root') {

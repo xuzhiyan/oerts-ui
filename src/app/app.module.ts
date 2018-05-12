@@ -46,6 +46,8 @@ import {StrLengthPipe} from './shared/pipe/StrLengthPipe';
 import {PayPageComponent} from './pages/pay-page/pay-page.component';
 import {TestSuccessinfoComponent} from './pages/test-successinfo/test-successinfo.component';
 import {ModalModule} from 'ngx-bootstrap/modal';
+import {CarouselModule} from 'ngx-bootstrap/carousel';
+import {ExamPlaceManagementService} from './service/examPlace-management.service';
 
 @NgModule({
   imports: [
@@ -55,6 +57,7 @@ import {ModalModule} from 'ngx-bootstrap/modal';
     TabsModule.forRoot(),
     BsDatepickerModule.forRoot(),
     ModalModule.forRoot(),
+    CarouselModule.forRoot(),
     ChartsModule,
     FormsModule,
     ReactiveFormsModule,
@@ -99,7 +102,8 @@ import {ModalModule} from 'ngx-bootstrap/modal';
     ImagesService,
     OnlineQaService,
     AdministratorService,
-    DatePipe
+    DatePipe,
+    ExamPlaceManagementService
   ],
   bootstrap: [AppComponent]
 })

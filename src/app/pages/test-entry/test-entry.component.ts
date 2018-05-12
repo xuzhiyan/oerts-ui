@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {BsDatepickerConfig, BsLocaleService, defineLocale, zhCnLocale} from 'ngx-bootstrap';
 import {
   costValidator, examnameValidator, examplaceValidator, examtimedayValidator, examtimefm1Validator, examtimefm2Validator,
-  examtimefm3Validator,
+  examtimefm3Validator, examtypeValidator,
   iscertificateValidator,
   maxnumValidator, pasescoreValidator,
   regtimeValidator,
@@ -12,6 +12,8 @@ import {
 import {DatePipe} from '@angular/common';
 import {ExamManagementService} from '../../service/exam-management.service';
 import {Router} from '@angular/router';
+import {ExamPlaceManagementService} from '../../service/examPlace-management.service';
+import {ExamPlaceInfo} from '../../model/ExamPlaceInfo';
 
 @Component({
   selector: 'app-test-entry',
@@ -20,20 +22,24 @@ import {Router} from '@angular/router';
 })
 export class TestEntryComponent implements OnInit {
 
-  arr: Array<string>;
   examModel: FormGroup;
   bsConfig: Partial<BsDatepickerConfig>;
   period2 = false;
   period3 = false;
   validStatus = true;
+  cites: Array<ExamPlaceInfo> = new Array<ExamPlaceInfo>();
+  districts: Array<ExamPlaceInfo> = new Array<ExamPlaceInfo>();
+  places: Array<ExamPlaceInfo> = new Array<ExamPlaceInfo>();
 
   constructor(private fb: FormBuilder,
               private _localeService: BsLocaleService,
               private datePipe: DatePipe,
               private examManagementService: ExamManagementService,
-              private router: Router) {
+              private router: Router,
+              private examPMService: ExamPlaceManagementService) {
     this.examModel = this.fb.group({
       examname: ['', examnameValidator],
+      examtype: ['', examtypeValidator],
       cost: ['', costValidator],
       maxnum: ['', maxnumValidator],
       totalscore: ['', totalscoreValidator],
@@ -44,7 +50,11 @@ export class TestEntryComponent implements OnInit {
       }, {validator: regtimeValidator}),
       examtimeday: ['', examtimedayValidator],
       iscertificate: ['', iscertificateValidator],
-      examplace: ['', examplaceValidator],
+      examPlaceGroup: fb.group({
+        examplacec: [''],
+        examplaced: [''],
+        examplacep: [''],
+      }, {validator: examplaceValidator}),
       examintroduce: [''],
       examTimePeriod1: fb.group({
         examtimefh1: [''],
@@ -71,6 +81,9 @@ export class TestEntryComponent implements OnInit {
     this.bsConfig = {containerClass: 'theme-blue', dateInputFormat: 'YYYY-MM-DD'};
     defineLocale('zh-cn', zhCnLocale);
     this._localeService.use('zh-cn');
+    this.examPMService.getAllCity().subscribe(data => {
+      this.cites = data.json().data;
+    });
   }
 
   onPeriodRemove(item: number) {
@@ -117,9 +130,10 @@ export class TestEntryComponent implements OnInit {
       const body = {
         'examId': '',
         'examName': value.examname,
+        'examType': value.examtype,
         'cost': value.cost,
         'maxNum': value.maxnum,
-        'examPlace': value.examplace,
+        'examPlace': value.examPlaceGroup.examplacec + value.examPlaceGroup.examplaced + value.examPlaceGroup.examplacep,
         'examTimePeriod1': period1Time,
         'examTimePeriod2': period2Time,
         'examTimePeriod3': period3Time,
@@ -165,6 +179,18 @@ export class TestEntryComponent implements OnInit {
       min_str = min.toString();
     }
     return hour_str + ':' + min_str;
+  }
+
+  onGetDistrict() {
+    this.examPMService.getDistrictByCity(this.examModel.value.examPlaceGroup.examplacec).subscribe(data => {
+      this.districts = data.json().data;
+    });
+  }
+
+  onGetPlace() {
+    this.examPMService.getPlaceByDistrict(this.examModel.value.examPlaceGroup.examplaced).subscribe(data => {
+      this.places = data.json().data;
+    });
   }
 
 }

@@ -20,10 +20,146 @@
             <i class="fa fa-align-justify"></i> 考试信息
           </div>
           <div class="card-body">
-            <table class="table table-responsive-sm table-bordered thead-default">
+            <div class="row">
+              <div class="col-2">
+                <a style="cursor:pointer;" (click)="onGetExamInfo('学历类考试')">
+                  <div class="card">
+                    <div class="card-body p-0 d-flex align-items-center">
+                      <i class="icon-graduation icons bg-info p-2 font-2xl mr-3"></i>
+                      <div>
+                        <div class="text-value-sm text-info">学历类考试</div>
+                        <div class="text-muted text-uppercase font-weight-bold small">报名中</div>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="col-2">
+                <a style="cursor:pointer;" (click)="onGetExamInfo('计算机类考试')">
+                  <div class="card">
+                    <div class="card-body p-0 d-flex align-items-center">
+                      <i class="icon-screen-desktop icons bg-warning p-2 font-2xl mr-3"></i>
+                      <div>
+                        <div class="text-value-sm text-warning">计算机类考试</div>
+                        <div class="text-muted text-uppercase font-weight-bold small">报名中</div>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="col-2">
+                <a style="cursor:pointer;" (click)="onGetExamInfo('外语类考试')">
+                  <div class="card">
+                    <div class="card-body p-0 d-flex align-items-center">
+                      <i class="icon-speech icons bg-success p-2 font-2xl mr-3"></i>
+                      <div>
+                        <div class="text-value-sm text-success">外语类考试</div>
+                        <div class="text-muted text-uppercase font-weight-bold small">报名中</div>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="col-2">
+                <a style="cursor:pointer;" (click)="onGetExamInfo('会计类考试')">
+                  <div class="card">
+                    <div class="card-body p-0 d-flex align-items-center">
+                      <i class="icon-calculator icons bg-danger p-2 font-2xl mr-3"></i>
+                      <div>
+                        <div class="text-value-sm text-danger">会计类考试</div>
+                        <div class="text-muted text-uppercase font-weight-bold small">报名中</div>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="col-2">
+                <a style="cursor:pointer;" (click)="onGetExamInfo('资格类考试')">
+                  <div class="card">
+                    <div class="card-body p-0 d-flex align-items-center">
+                      <i class="icon-badge icons bg-primary p-2 font-2xl mr-3"></i>
+                      <div>
+                        <div class="text-value-sm text-primary">资格类考试</div>
+                        <div class="text-muted text-uppercase font-weight-bold small">报名中</div>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="col-2">
+                <a style="cursor:pointer;" (click)="onGetExamInfo('工程类考试')">
+                  <div class="card">
+                    <div class="card-body p-0 d-flex align-items-center">
+                      <i class="icon-wrench icons bg-indigo p-2 font-2xl mr-3"></i>
+                      <div>
+                        <div class="text-value-sm text-indigo">工程类考试</div>
+                        <div class="text-muted text-uppercase font-weight-bold small">报名中</div>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-2">
+                <a style="cursor:pointer;" (click)="onGetExamInfo('医学类考试')">
+                  <div class="card">
+                    <div class="card-body p-0 d-flex align-items-center">
+                      <i class="icon-chemistry icons bg-pink p-2 font-2xl mr-3"></i>
+                      <div>
+                        <div class="text-value-sm text-pink">医学类考试</div>
+                        <div class="text-muted text-uppercase font-weight-bold small">报名中</div>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="col-2">
+                <a style="cursor:pointer;" (click)="onGetExamInfo('金融类考试')">
+                  <div class="card">
+                    <div class="card-body p-0 d-flex align-items-center">
+                      <i class="icon-wallet icons bg-wheat p-2 font-2xl mr-3"></i>
+                      <div>
+                        <div class="text-value-sm text-wheat">金融类考试</div>
+                        <div class="text-muted text-uppercase font-weight-bold small">报名中</div>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="col-2">
+                <a style="cursor:pointer;" (click)="onGetExamInfo('在校考试')">
+                  <div class="card">
+                    <div class="card-body p-0 d-flex align-items-center">
+                      <i class="icon-note icons bg-purple p-2 font-2xl mr-3"></i>
+                      <div>
+                        <div class="text-value-sm text-purple">在校考试</div>
+                        <div class="text-muted text-uppercase font-weight-bold small">报名中</div>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="col-2">
+                <a style="cursor:pointer;" (click)="onGetExamInfo('其他')">
+                  <div class="card">
+                    <div class="card-body p-0 d-flex align-items-center">
+                      <i class="icon-options icons bg-gray p-2 font-2xl mr-3"></i>
+                      <div>
+                        <div class="text-value-sm text-gray">其他</div>
+                        <div class="text-muted text-uppercase font-weight-bold small">报名中</div>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <hr>
+            <table class="table table-responsive-sm table-bordered thead-default" *ngIf="isShowExamInfo">
               <thead>
               <tr>
                 <th>考试名称</th>
+                <th>考试类型</th>
                 <th>报名费用</th>
                 <th>报名截止日期</th>
                 <th>已报名人数/上限人数</th>
@@ -33,9 +169,16 @@
               <tbody>
               <tr *ngFor="let exams of examInfo">
                 <td>{{exams.examName}}</td>
-                <td>{{exams.cost}}</td>
+                <td>{{exams.examType}}</td>
+                <td>{{exams.cost}}元</td>
                 <td>{{exams.regTimeTo}}</td>
-                <td>{{exams.registNum}}/{{exams.maxNum}}</td>
+                <td>{{exams.registNum}}/{{exams.maxNum}}
+                  <!--<div class="progress progress-xs">-->
+                  <!--<div class="progress-bar bg-info" role="progressbar" style="width: 25%" aria-valuenow="25"-->
+                  <!--aria-valuemin="0" aria-valuemax="100"></div>-->
+                  <!--</div>-->
+                  <!--{{exams.registNum}}/{{exams.maxNum}}-->
+                </td>
                 <td>
                   <button type="submit" class="btn btn-sm btn-primary" (click)="onDetails(exams)"
                           [disabled]="!dangerMessage"> 详情
@@ -44,16 +187,6 @@
               </tr>
               </tbody>
             </table>
-            <!--<ul class="pagination">-->
-            <!--<li class="page-item"><a class="page-link" href="#">Prev</a></li>-->
-            <!--<li class="page-item active">-->
-            <!--<a class="page-link" href="#">1</a>-->
-            <!--</li>-->
-            <!--<li class="page-item"><a class="page-link" href="#">2</a></li>-->
-            <!--<li class="page-item"><a class="page-link" href="#">3</a></li>-->
-            <!--<li class="page-item"><a class="page-link" href="#">4</a></li>-->
-            <!--<li class="page-item"><a class="page-link" href="#">Next</a></li>-->
-            <!--</ul>-->
           </div>
         </div>
       </div>

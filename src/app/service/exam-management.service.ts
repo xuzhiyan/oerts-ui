@@ -27,4 +27,8 @@ export class ExamManagementService {
     return this.http.get(url);
   }
 
+  getExamByType(examType: string) {
+    const url = '/oerts/exam/info/type/' + examType;
+    return this.http.get(url);
+  }
 }

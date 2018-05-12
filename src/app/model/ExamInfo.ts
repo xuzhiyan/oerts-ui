@@ -15,4 +15,5 @@ export class ExamInfo {
   totalScore: number;
   isCertificate: string;
   isEntry: number;
+  examType: string;
 }

@@ -92,6 +92,14 @@ export function examnameValidator(control: FormControl): any {
   }
 }
 
+export function examtypeValidator(control: FormControl): any {
+  if (isEmpty(control.value)) {
+    return {examtypeValid: {errorDesc: '考试类型不能为空'}};
+  } else {
+    return null;
+  }
+}
+
 export function costValidator(control: FormControl): any {
   if (isEmpty(control.value)) {
     return {costValid: {errorDesc: '报名费用不能为空'}};
@@ -173,9 +181,12 @@ export function iscertificateValidator(control: FormControl): any {
   }
 }
 
-export function examplaceValidator(control: FormControl): any {
-  if (isEmpty(control.value)) {
-    return {examplaceValid: {errorDesc: '考试是否有证书必须选择'}};
+export function examplaceValidator(group: FormGroup): any {
+  const examplacec: FormControl = group.get('examplacec') as FormControl;
+  const examplaced: FormControl = group.get('examplaced') as FormControl;
+  const examplacep: FormControl = group.get('examplacep') as FormControl;
+  if (isEmpty(examplacec.value) || isEmpty(examplaced.value) || isEmpty(examplacep.value)) {
+    return {examplaceValid: {errorDesc: '考试地点不能为空'}};
   } else {
     return null;
   }
