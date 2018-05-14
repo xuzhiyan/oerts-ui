@@ -274,6 +274,30 @@ export function examtimefm3Validator(group: FormGroup): any {
   }
 }
 
+export function cityValidator(control: FormControl): any {
+  if (isEmpty(control.value)) {
+    return {cityValid: {errorDesc: '市不能为空'}};
+  } else {
+    return null;
+  }
+}
+
+export function districtValidator(control: FormControl): any {
+  if (isEmpty(control.value)) {
+    return {districtValid: {errorDesc: '区/镇不能为空'}};
+  } else {
+    return null;
+  }
+}
+
+export function placeValidator(control: FormControl): any {
+  if (isEmpty(control.value)) {
+    return {placeValid: {errorDesc: '具体位置不能为空'}};
+  } else {
+    return null;
+  }
+}
+
 function isEmpty(index: any) {
   return index === '' || index === null;
 }

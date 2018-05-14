@@ -47,7 +47,9 @@ import {PayPageComponent} from './pages/pay-page/pay-page.component';
 import {TestSuccessinfoComponent} from './pages/test-successinfo/test-successinfo.component';
 import {ModalModule} from 'ngx-bootstrap/modal';
 import {CarouselModule} from 'ngx-bootstrap/carousel';
-import {ExamPlaceManagementService} from './service/examPlace-management.service';
+import {ExamPlaceManagementService} from './service/exam-place-management.service';
+import {AlertModule} from 'ngx-bootstrap/alert';
+import {PlaceEntryComponent} from './pages/place-entry/place-entry.component';
 
 @NgModule({
   imports: [
@@ -58,6 +60,7 @@ import {ExamPlaceManagementService} from './service/examPlace-management.service
     BsDatepickerModule.forRoot(),
     ModalModule.forRoot(),
     CarouselModule.forRoot(),
+    AlertModule.forRoot(),
     ChartsModule,
     FormsModule,
     ReactiveFormsModule,
@@ -91,7 +94,8 @@ import {ExamPlaceManagementService} from './service/examPlace-management.service
     ScoreEntryComponent,
     StrLengthPipe,
     PayPageComponent,
-    TestSuccessinfoComponent
+    TestSuccessinfoComponent,
+    PlaceEntryComponent
   ],
   providers: [
     {provide: LocationStrategy, useClass: HashLocationStrategy},

@@ -23,6 +23,7 @@ import {TestEntryComponent} from './pages/test-entry/test-entry.component';
 import {ScoreEntryComponent} from './pages/score-entry/score-entry.component';
 import {PayPageComponent} from './pages/pay-page/pay-page.component';
 import {TestSuccessinfoComponent} from './pages/test-successinfo/test-successinfo.component';
+import {PlaceEntryComponent} from './pages/place-entry/place-entry.component';
 
 export const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -48,7 +49,8 @@ export const routes: Routes = [
       {path: 'test-entry', component: TestEntryComponent},
       {path: 'score-entry', component: ScoreEntryComponent},
       {path: 'pay-page', component: PayPageComponent},
-      {path: 'test-successinfo', component: TestSuccessinfoComponent}
+      {path: 'test-successinfo', component: TestSuccessinfoComponent},
+      {path: 'place-entry', component: PlaceEntryComponent}
     ], canActivate: [LoginGuard]
   },
   {path: '**', component: Pages404Component}

@@ -12,7 +12,7 @@ import {
 import {DatePipe} from '@angular/common';
 import {ExamManagementService} from '../../service/exam-management.service';
 import {Router} from '@angular/router';
-import {ExamPlaceManagementService} from '../../service/examPlace-management.service';
+import {ExamPlaceManagementService} from '../../service/exam-place-management.service';
 import {ExamPlaceInfo} from '../../model/ExamPlaceInfo';
 
 @Component({

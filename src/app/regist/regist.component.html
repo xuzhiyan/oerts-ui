@@ -66,7 +66,8 @@
           <div class="card-footer p-4">
             <div class="row">
               <div class="col-6">
-                <button class="btn btn-block btn-success" type="botton" (click)="onRegist()"><span>注册</span></button>
+                <button class="btn btn-block btn-success" type="botton" (click)="onRegist(registSuccess, registFailed)">
+                  <span>注册</span></button>
               </div>
               <div class="col-6">
                 <button class="btn btn-block btn-danger" type="button" (click)="onReset()"><span>重置</span></button>
@@ -78,3 +79,10 @@
     </div>
   </div>
 </div>
+
+<ng-template #registSuccess>
+  1111
+</ng-template>
+<ng-template #registFailed>
+  2222
+</ng-template>

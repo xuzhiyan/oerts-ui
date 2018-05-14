@@ -9,6 +9,11 @@ import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 export class ScoreDetailsComponent implements OnInit {
 
   modalRef: BsModalRef;
+  config = {
+    backdrop: true,
+    ignoreBackdropClick: true,
+    keyboard: false
+  };
 
   constructor(private modalService: BsModalService) {
   }
@@ -17,7 +22,13 @@ export class ScoreDetailsComponent implements OnInit {
   }
 
   openModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template);
+
+    const that = this;
+    that.modalRef = that.modalService.show(template, this.config);
+
+    // setTimeout(function () {
+    //   that.modalRef.hide();
+    // }, 2000);
   }
 
 }
