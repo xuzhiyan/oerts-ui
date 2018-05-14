@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {BsDatepickerConfig, BsLocaleService, defineLocale, zhCnLocale} from 'ngx-bootstrap';
 import {
   costValidator, examnameValidator, examplaceValidator, examtimedayValidator, examtimefm1Validator, examtimefm2Validator,
-  examtimefm3Validator, examtypeValidator,
+  examtimefm3Validator, examtypeValidator, hallnumValidator,
   iscertificateValidator,
   maxnumValidator, pasescoreValidator,
   regtimeValidator,
@@ -42,6 +42,7 @@ export class TestEntryComponent implements OnInit {
       examtype: ['', examtypeValidator],
       cost: ['', costValidator],
       maxnum: ['', maxnumValidator],
+      hallnum: ['', hallnumValidator],
       totalscore: ['', totalscoreValidator],
       pasescore: ['', pasescoreValidator],
       regTimeGroup: fb.group({
@@ -133,6 +134,7 @@ export class TestEntryComponent implements OnInit {
         'examType': value.examtype,
         'cost': value.cost,
         'maxNum': value.maxnum,
+        'hallNum': value.hallnum,
         'examPlace': value.examPlaceGroup.examplacec + value.examPlaceGroup.examplaced + value.examPlaceGroup.examplacep,
         'examTimePeriod1': period1Time,
         'examTimePeriod2': period2Time,

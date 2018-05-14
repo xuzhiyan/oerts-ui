@@ -6,4 +6,6 @@ export class CompleteRegistExamInfo extends ExamineeInfo {
   status: string;
   score: number;
   examId: string;
+  setNum: number;
+  roomNum: number;
 }

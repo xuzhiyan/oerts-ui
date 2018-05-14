@@ -5,4 +5,6 @@ export class CompleteRegistExamInfo extends ExamInfo {
   admissionTicket: string;
   status: string;
   score: number;
+  setNum: number;
+  roomNum: number;
 }

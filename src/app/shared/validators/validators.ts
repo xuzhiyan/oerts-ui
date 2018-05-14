@@ -124,6 +124,14 @@ export function maxnumValidator(control: FormControl): any {
   }
 }
 
+export function hallnumValidator(control: FormControl): any {
+  if (isEmpty(control.value)) {
+    return {hallnumValid: {errorDesc: '考场人数上限不能为空'}};
+  } else {
+    return null;
+  }
+}
+
 export function totalscoreValidator(control: FormControl): any {
   if (isEmpty(control.value)) {
     return {totalscoreValid: {errorDesc: '考试总分数不能为空'}};

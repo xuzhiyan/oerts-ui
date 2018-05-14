@@ -92,6 +92,20 @@
               </div>
             </div>
             <div class="form-group row">
+              <label class="col-md-3 form-control-label">考场人数上限:</label>
+              <div class="col-md-5 input-group">
+                <input type="number" class="form-control" placeholder="请输入考场人数上限" formControlName="hallnum"
+                       [class.hasError]="!(!examModel.hasError('hallnumValid', 'hallnum') || examModel.get('hallnum').untouched && validStatus)">
+                <span class="input-group-addon">人</span>
+              </div>
+              <div class="col-md-2 error-message"
+                   [hidden]="!examModel.hasError('hallnumValid', 'hallnum') || examModel.get('hallnum').untouched && validStatus">
+                <label class="error-message-vertical">
+                  {{examModel.getError('hallnumValid', 'hallnum')?.errorDesc}}
+                </label>
+              </div>
+            </div>
+            <div class="form-group row">
               <label class="col-md-3 form-control-label">考试总分数:</label>
               <div class="col-md-5 input-group">
                 <input type="number" class="form-control" placeholder="请输入考试总分数" formControlName="totalscore"
