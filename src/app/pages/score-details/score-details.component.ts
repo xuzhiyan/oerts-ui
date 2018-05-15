@@ -22,6 +22,6 @@ export class ScoreDetailsComponent implements OnInit {
   }
 
   onGetExamReport(item: string) {
-    window.open('/oerts/exam/' + item + '/report/report.html');
+    window.open('/oerts/exam/' + item + '/examReport/report.html');
   }
 }
