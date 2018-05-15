@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {ExamRegistrationService} from '../../service/exam-registration.service';
-import {admissionticketValidator} from '../../shared/validators/validators';
 
 @Component({
   selector: 'app-score-inquiry',

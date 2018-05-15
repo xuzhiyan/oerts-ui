@@ -11,7 +11,7 @@
       <div class="col-lg-12">
         <div class="card">
           <div class="card-header">
-            <i class="fa fa-align-justify"></i> 考试信息
+            待录入成绩考试
           </div>
           <div class="card-body">
             <table class="table table-responsive-sm table-bordered thead-default">
@@ -38,7 +38,7 @@
               </tbody>
             </table>
             <hr>
-            <div [hidden]="isnoInfo">
+            <div [hidden]="isNoInfo">
               <h2>没有数据</h2>
             </div>
             <div [hidden]="showEntryInfo">
@@ -54,7 +54,8 @@
                 <tr *ngFor="let examEntry of examEntryInfo">
                   <td>{{examEntry.userName}}</td>
                   <td>{{examEntry.admissionTicket}}</td>
-                  <td><input type="number" class="form-control" placeholder="请输入考生成绩" [(ngModel)]="examEntry.score"></td>
+                  <td><input type="number" class="form-control" placeholder="请输入考生成绩" [(ngModel)]="examEntry.score">
+                  </td>
                 </tr>
                 </tbody>
               </table>

@@ -14,7 +14,7 @@ export class ScoreEntryComponent implements OnInit {
   examInfo: Array<ExamInfo>;
   examEntryInfo: Array<CompleteRegistExamInfo>;
   showEntryInfo: boolean;
-  isnoInfo: boolean;
+  isNoInfo: boolean;
 
   constructor(private examService: ExamManagementService,
               private examRService: ExamRegistrationService) {
@@ -22,7 +22,7 @@ export class ScoreEntryComponent implements OnInit {
 
   ngOnInit() {
     this.showEntryInfo = true;
-    this.isnoInfo = true;
+    this.isNoInfo = true;
     this.examService.getExamByIsEntry(0).subscribe(data => {
       this.examInfo = data.json().data;
     });
@@ -34,11 +34,11 @@ export class ScoreEntryComponent implements OnInit {
         this.examRService.getScoreEntryListById(examId).subscribe(data => {
           if (data.json().data.length === 0) {
             this.showEntryInfo = true;
-            this.isnoInfo = false;
+            this.isNoInfo = false;
           } else {
             this.examEntryInfo = data.json().data;
             this.showEntryInfo = false;
-            this.isnoInfo = true;
+            this.isNoInfo = true;
           }
         });
       }
@@ -46,18 +46,18 @@ export class ScoreEntryComponent implements OnInit {
       this.examRService.getScoreEntryListById(examId).subscribe(data => {
         if (data.json().data.length === 0) {
           this.showEntryInfo = true;
-          this.isnoInfo = false;
+          this.isNoInfo = false;
         } else {
           this.examEntryInfo = data.json().data;
           this.showEntryInfo = false;
-          this.isnoInfo = true;
+          this.isNoInfo = true;
         }
       });
     }
   }
 
   onEntryScore() {
-    this.examRService.entryScore(this.examEntryInfo).subscribe(data => {
+    this.examRService.entryScore(this.examEntryInfo).subscribe(value => {
       alert('更新成功');
       this.showEntryInfo = true;
       this.examService.getExamByIsEntry(0).subscribe(data => {

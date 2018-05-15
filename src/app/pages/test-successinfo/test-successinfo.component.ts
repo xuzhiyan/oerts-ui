@@ -21,7 +21,8 @@ export class TestSuccessinfoComponent implements OnInit {
     this.examRService.getCompleteResgistInfo(sessionStorage.getItem('user_idcard'), this.pathKeyService.examId)
       .subscribe(data => {
         this.regInfo = data.json().data;
-        this.admissionTicketURL = '/oerts/exam/' + data.json().data.examId + '/' + data.json().data.admissionTicket + '.html';
+        this.admissionTicketURL =
+          '/oerts/exam/' + data.json().data.examId + '/admissionTicket/' + data.json().data.admissionTicket + '.html';
       });
 
   }

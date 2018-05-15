@@ -1,5 +1,7 @@
 import {Component, OnInit, TemplateRef} from '@angular/core';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
+import {ExamManagementService} from '../../service/exam-management.service';
+import {ExamInfo} from '../../model/ExamInfo';
 
 @Component({
   selector: 'app-score-details',
@@ -8,27 +10,18 @@ import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 })
 export class ScoreDetailsComponent implements OnInit {
 
-  modalRef: BsModalRef;
-  config = {
-    backdrop: true,
-    ignoreBackdropClick: true,
-    keyboard: false
-  };
+  examInfo: Array<ExamInfo>;
 
-  constructor(private modalService: BsModalService) {
+  constructor(private examService: ExamManagementService) {
   }
 
   ngOnInit() {
+    this.examService.getExamByIsEntry(1).subscribe(data => {
+      this.examInfo = data.json().data;
+    });
   }
 
-  openModal(template: TemplateRef<any>) {
-
-    const that = this;
-    that.modalRef = that.modalService.show(template, this.config);
-
-    // setTimeout(function () {
-    //   that.modalRef.hide();
-    // }, 2000);
+  onGetExamReport(item: string) {
+    window.open('/oerts/exam/' + item + '/report/report.html');
   }
-
 }
