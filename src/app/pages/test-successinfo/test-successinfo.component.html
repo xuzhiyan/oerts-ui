@@ -93,8 +93,8 @@
             </div>
           </div>
           <div class="card-footer">
-            <button type="submit" class="btn btn-sm btn-success"><i
-              class="fa fa-dot-circle-o"></i> 下载准考证
+            <button type="button" class="btn btn-sm btn-success" (click)="onGetAdmissionTicket()"><i
+              class="fa fa-dot-circle-o"></i> 查看/下载准考证
             </button>
             <button type="reset" class="btn btn-sm btn-danger" [routerLink]="['/layout/test-complete']"><i
               class="fa fa-ban"></i> 返回

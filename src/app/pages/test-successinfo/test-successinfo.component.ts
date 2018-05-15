@@ -11,6 +11,7 @@ import {CompleteRegistExamInfo} from '../../model/ExamineeRegistInfo';
 export class TestSuccessinfoComponent implements OnInit {
 
   regInfo: Array<CompleteRegistExamInfo> = new Array<CompleteRegistExamInfo>();
+  admissionTicketURL: string;
 
   constructor(private pathKeyService: PathKeyService,
               private examRService: ExamRegistrationService) {
@@ -20,8 +21,13 @@ export class TestSuccessinfoComponent implements OnInit {
     this.examRService.getCompleteResgistInfo(sessionStorage.getItem('user_idcard'), this.pathKeyService.examId)
       .subscribe(data => {
         this.regInfo = data.json().data;
+        this.admissionTicketURL = '/oerts/exam/' + data.json().data.examId + '/' + data.json().data.admissionTicket + '.html';
       });
 
+  }
+
+  onGetAdmissionTicket() {
+    window.open(this.admissionTicketURL);
   }
 
 }
