@@ -1,0 +1,76 @@
+<!-- Breadcrumb -->
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <span>充值中心</span>
+  </li>
+</ol>
+
+<div class="container-fluid">
+  <div class="animated fadeIn">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-header">
+            选择充值金额
+          </div>
+          <div class="card-body">
+            <div class="form-group row pt-3">
+              <div class="col-md-6 text-center">
+                <h3>当前账户余额:
+                  <span>{{balance}}元</span>
+                </h3>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group row pt-3">
+              <div class="col-md-6 text-center" [formGroup]="payModel">
+                <div class="form-group row">
+                  <label class="col-md-3 form-control-label"><span class="pull-right">充值金额:</span></label>
+                  <div class="col-md-5">
+                    <input type="number" class="form-control" formControlName="rechargeNum" placeholder="请输入充值金额"
+                           [class.hasError]="!(!payModel.hasError('rechargeNumValid', 'rechargeNum') || payModel.get('rechargeNum').untouched && validStatus)">
+                  </div>
+                  <div class="col-md-3 error-message"
+                       [hidden]="!payModel.hasError('rechargeNumValid', 'rechargeNum') || payModel.get('rechargeNum').untouched && validStatus">
+                    <label class="error-message-vertical">
+                      {{payModel.getError('rechargeNumValid', 'rechargeNum')?.errorDesc}}
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <button type="button" class="btn btn-primary" (click)="onShowQrCode(QrCode, Success)"><i
+              class="fa fa-spinner"></i> 充值
+            </button>
+          </div>
+        </div>
+      </div>
+      <!--/.col-->
+    </div>
+    <!--/.row-->
+  </div>
+</div>
+
+<ng-template #QrCode>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">请使用支付宝扫一扫功能进行付款</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="onCloseQrCode()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="text-center">
+      <qr-code [value]="qrCode" [size]="qrSize" level="H"></qr-code>
+      <h5>(付款后请不要关闭窗口，等待系统响应！)</h5>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #Success>
+  <div class="alert alert-success mb-0">
+    充值成功！
+    <button type="button" class="close" (click)="modalRef1.hide()"><i class="icon-check icons font-2xl"></i></button>
+  </div>
+</ng-template>

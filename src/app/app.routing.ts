@@ -25,6 +25,7 @@ import {PayPageComponent} from './pages/pay-page/pay-page.component';
 import {TestSuccessinfoComponent} from './pages/test-successinfo/test-successinfo.component';
 import {PlaceEntryComponent} from './pages/place-entry/place-entry.component';
 import {TestInfoComponent} from './pages/test-info/test-info.component';
+import {PayRechargeComponent} from './pages/pay-recharge/pay-recharge.component';
 
 export const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -52,7 +53,8 @@ export const routes: Routes = [
       {path: 'pay-page', component: PayPageComponent},
       {path: 'test-successinfo', component: TestSuccessinfoComponent},
       {path: 'place-entry', component: PlaceEntryComponent},
-      {path: 'test-info', component: TestInfoComponent}
+      {path: 'test-info', component: TestInfoComponent},
+      {path: 'pay-recharge', component: PayRechargeComponent}
     ], canActivate: [LoginGuard]
   },
   {path: '**', component: Pages404Component}

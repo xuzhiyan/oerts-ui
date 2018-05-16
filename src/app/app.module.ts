@@ -50,8 +50,11 @@ import {CarouselModule} from 'ngx-bootstrap/carousel';
 import {ExamPlaceManagementService} from './service/exam-place-management.service';
 import {AlertModule} from 'ngx-bootstrap/alert';
 import {PlaceEntryComponent} from './pages/place-entry/place-entry.component';
-import { TestInfoComponent } from './pages/test-info/test-info.component';
+import {TestInfoComponent} from './pages/test-info/test-info.component';
 import {ExcelService} from './service/excel.service';
+import {PayRechargeComponent} from './pages/pay-recharge/pay-recharge.component';
+import {QRCodeModule} from 'angular2-qrcode';
+import {AlipayService} from './service/alipay.service';
 
 @NgModule({
   imports: [
@@ -67,7 +70,8 @@ import {ExcelService} from './service/excel.service';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    HttpModule
+    HttpModule,
+    QRCodeModule
   ],
   declarations: [
     NAV_DROPDOWN_DIRECTIVES,
@@ -98,7 +102,8 @@ import {ExcelService} from './service/excel.service';
     PayPageComponent,
     TestSuccessinfoComponent,
     PlaceEntryComponent,
-    TestInfoComponent
+    TestInfoComponent,
+    PayRechargeComponent
   ],
   providers: [
     {provide: LocationStrategy, useClass: HashLocationStrategy},
@@ -111,7 +116,8 @@ import {ExcelService} from './service/excel.service';
     AdministratorService,
     DatePipe,
     ExamPlaceManagementService,
-    ExcelService
+    ExcelService,
+    AlipayService
   ],
   bootstrap: [AppComponent]
 })

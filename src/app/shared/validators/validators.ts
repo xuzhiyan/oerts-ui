@@ -306,6 +306,18 @@ export function placeValidator(control: FormControl): any {
   }
 }
 
+export function rechargeNumValidator(control: FormControl): any {
+  if (isEmpty(control.value)) {
+    return {rechargeNumValid: {errorDesc: '充值金额不能为空'}};
+  } else {
+    if (control.value.toString().includes('.')) {
+      return {rechargeNumValid: {errorDesc: '充值金额不能有小数'}};
+    } else {
+      return null;
+    }
+  }
+}
+
 function isEmpty(index: any) {
   return index === '' || index === null;
 }
