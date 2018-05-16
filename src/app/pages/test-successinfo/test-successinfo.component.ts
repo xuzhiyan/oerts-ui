@@ -30,5 +30,4 @@ export class TestSuccessinfoComponent implements OnInit {
   onGetAdmissionTicket() {
     window.open(this.admissionTicketURL);
   }
-
 }

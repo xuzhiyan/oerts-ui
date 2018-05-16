@@ -23,11 +23,6 @@ export class TestRegistrationComponent implements OnInit {
   ngOnInit() {
     this.dangerMessage = true;
     this.isShowExamInfo = false;
-    // this.examService.getAllExams().subscribe(data => {
-    //   this.examInfo = data.json().data;
-    //   console.log(this.examInfo.length)
-    //   this.isShowExamInfo = this.examInfo.length !== 0;
-    // });
     if (sessionStorage.getItem('user_idcard') === '') {
       this.dangerMessage = false;
     }

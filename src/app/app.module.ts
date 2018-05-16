@@ -50,6 +50,8 @@ import {CarouselModule} from 'ngx-bootstrap/carousel';
 import {ExamPlaceManagementService} from './service/exam-place-management.service';
 import {AlertModule} from 'ngx-bootstrap/alert';
 import {PlaceEntryComponent} from './pages/place-entry/place-entry.component';
+import { TestInfoComponent } from './pages/test-info/test-info.component';
+import {ExcelService} from './service/excel.service';
 
 @NgModule({
   imports: [
@@ -95,7 +97,8 @@ import {PlaceEntryComponent} from './pages/place-entry/place-entry.component';
     StrLengthPipe,
     PayPageComponent,
     TestSuccessinfoComponent,
-    PlaceEntryComponent
+    PlaceEntryComponent,
+    TestInfoComponent
   ],
   providers: [
     {provide: LocationStrategy, useClass: HashLocationStrategy},
@@ -107,7 +110,8 @@ import {PlaceEntryComponent} from './pages/place-entry/place-entry.component';
     OnlineQaService,
     AdministratorService,
     DatePipe,
-    ExamPlaceManagementService
+    ExamPlaceManagementService,
+    ExcelService
   ],
   bootstrap: [AppComponent]
 })

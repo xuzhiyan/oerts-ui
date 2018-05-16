@@ -31,7 +31,9 @@
                 <td>{{exams.registNum}}</td>
                 <td>{{exams.examTimePeriod1 | strLength: 10}}</td>
                 <td>
-                  <button type="submit" class="btn btn-sm btn-primary" (click)="onGetExamReport(exams.examId)"> 查看/下载报表
+                  <button type="button" class="btn btn-sm btn-primary" (click)="onGetExamReport(exams.examId)"> 查看/下载报表
+                  </button>
+                  <button type="button" class="btn btn-sm btn-primary" (click)="onGetExcel(exams.examId)"> 下载成绩信息excel
                   </button>
                 </td>
               </tr>

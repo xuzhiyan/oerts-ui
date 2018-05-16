@@ -9,8 +9,9 @@ export class ExamManagementService {
   constructor(private http: Http) {
   }
 
-  getAllExams() {
-    return this.http.get('/oerts/exam/info/all');
+  getAllExams(examType: string) {
+    const url = '/oerts/exam/info/all/' + examType;
+    return this.http.get(url);
   }
 
   getExamById(id: string) {

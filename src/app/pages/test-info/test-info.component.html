@@ -1,7 +1,7 @@
 <!-- Breadcrumb -->
 <ol class="breadcrumb">
   <li class="breadcrumb-item">
-    <span>考试报名</span>
+    <span>考试列表</span>
   </li>
 </ol>
 
@@ -9,15 +9,9 @@
   <div class="animated fadeIn">
     <div class="row">
       <div class="col-lg-12">
-        <div class="alert alert-danger alert-dismissible fade show" [hidden]="dangerMessage">
-          <strong>注意！！</strong> 您完善自身信息后，方可查看考试详情和报名考试。
-          <button type="button" class="close">
-            <span>×</span>
-          </button>
-        </div>
         <div class="card">
           <div class="card-header">
-            <i class="fa fa-align-justify"></i> 考试信息
+            考试信息
           </div>
           <div class="card-body">
             <div class="row">
@@ -163,6 +157,7 @@
                 <th>报名费用</th>
                 <th>报名截止日期</th>
                 <th>已报名人数/上限人数</th>
+                <th>状态</th>
                 <th>操作</th>
               </tr>
               </thead>
@@ -173,9 +168,17 @@
                 <td>{{exams.cost}}元</td>
                 <td>{{exams.regTimeTo}}</td>
                 <td>{{exams.registNum}}/{{exams.maxNum}}</td>
+                <td *ngIf="exams.regTimeTo >= nowDay">
+                  <span class="badge badge-warning">报名进行中</span>
+                </td>
+                <td *ngIf="exams.regTimeTo < nowDay">
+                  <span class="badge badge-success">报名完成</span>
+                </td>
                 <td>
-                  <button type="submit" class="btn btn-sm btn-primary" (click)="onDetails(exams)"
-                          [disabled]="!dangerMessage"> 详情
+                  <button type="button" class="btn btn-sm btn-primary" (click)="onDetails(exams)"> 详情
+                  </button>
+                  <button *ngIf="exams.regTimeTo < nowDay" type="button" class="btn btn-sm btn-primary"
+                          (click)="onGetExcel(exams.examId)"> 下载考生信息excel
                   </button>
                 </td>
               </tr>
