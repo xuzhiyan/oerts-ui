@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, TemplateRef} from '@angular/core';
 import {FormGroup, FormBuilder} from '@angular/forms';
 import {
   emailaddressValidator, idcardValidator, residentialaddressValidator, usernameValidator,
@@ -7,6 +7,7 @@ import {
 import {ExamineeService} from '../../service/examinee.service';
 import {ImagesService} from '../../service/images.service';
 import {DomSanitizer} from '@angular/platform-browser';
+import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 
 
 @Component({
@@ -21,12 +22,19 @@ export class EditPersoninfComponent implements OnInit {
   validStatus: boolean;
   editModel: FormGroup;
   imagesPath: any;
-  savePath: string;
+  savePath: string
+  modalRef: BsModalRef;
+  config = {
+    backdrop: true,
+    ignoreBackdropClick: true,
+    keyboard: false
+  };
 
   constructor(private fb: FormBuilder,
               private examineeService: ExamineeService,
               private imagesService: ImagesService,
-              private sanitizer: DomSanitizer) {
+              private sanitizer: DomSanitizer,
+              private modalService: BsModalService) {
     this.editModel = fb.group({
       username: ['', usernameValidator],
       usersex: ['', usersexValidator],
@@ -55,7 +63,7 @@ export class EditPersoninfComponent implements OnInit {
     });
   }
 
-  onEdit() {
+  onEdit(success: TemplateRef<any>, failed: TemplateRef<any>) {
     if (this.editModel.valid && this.imagesPath !== 'assets/img/timg.jpg' && this.imageStatus) {
       if (this.savePath === undefined) {
         this.savePath = this.imagesPath;
@@ -77,9 +85,9 @@ export class EditPersoninfComponent implements OnInit {
           sessionStorage.setItem('user_photo', this.savePath);
           sessionStorage.setItem('user_name', this.editModel.value.username);
           sessionStorage.setItem('user_idcard', this.editModel.value.idcard);
-          alert('更新成功！');
+          this.modalRef = this.modalService.show(success, this.config);
         } else {
-          alert('更新失败！');
+          this.modalRef = this.modalService.show(failed, this.config);
         }
       });
     } else {

@@ -81,8 +81,14 @@
 </div>
 
 <ng-template #registSuccess>
-  1111
+  <div class="alert alert-success mb-0">
+    <strong>注册成功</strong>，快去登录把！
+    <button type="button" class="close" (click)="onSuccess()"><i class="icon-check icons font-2xl"></i></button>
+  </div>
 </ng-template>
 <ng-template #registFailed>
-  2222
+  <div class="alert alert-danger mb-0">
+    <strong>注册失败</strong>，该手机号已经被注册，请重新确认后再次注册！
+    <button type="button" class="close" (click)="modalRef.hide()"><i class="icon-close icons font-2xl"></i></button>
+  </div>
 </ng-template>

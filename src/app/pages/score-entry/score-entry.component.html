@@ -31,7 +31,7 @@
                 <td>{{exams.registNum}}</td>
                 <td>{{exams.examTimePeriod1 | strLength: 10}}</td>
                 <td>
-                  <button type="submit" class="btn btn-sm btn-primary" (click)="onGetEntryList(exams.examId)"> 录入成绩
+                  <button type="submit" class="btn btn-sm btn-primary" (click)="onGetEntryList(exams.examId, skipConfirm)"> 录入成绩
                   </button>
                 </td>
               </tr>
@@ -69,3 +69,13 @@
     <!--/.row-->
   </div>
 </div>
+
+<ng-template #skipConfirm>
+  <div class="alert alert-warning mb-0">
+    <strong>注意</strong>！请问您是否放弃当前录入的信息？
+    <hr>
+    <button type="button" class="close" style="float: left" (click)="modalRef.hide()"><i
+      class="icon-close icons font-2xl"></i></button>
+    <button type="button" class="close" (click)="skipOther()"><i class="icon-check icons font-2xl"></i></button>
+  </div>
+</ng-template>

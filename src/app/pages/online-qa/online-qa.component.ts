@@ -60,24 +60,3 @@ export class OnlineQaComponent implements OnInit {
     this.answerStatus = false;
   }
 }
-
-
-// // 配置  要连接的服务器地址
-// this.stompService.configure({
-//   host: '/oerts/socket',
-//   debug: true,
-//   queue: {
-//     'init': false
-//   }
-// });
-// this.stompService.startConnect().then(() => {
-//   this.stompService.done('init');
-//   console.log('链接成功');
-//   // 发送消息
-//   this.stompService.send('/app/hello', {'data': 'data'});
-//   // 接收消息
-//   this.stompService.subscribe('/topic/notice',
-//     (data: any) => {
-//       console.log(data);
-//     });
-// });

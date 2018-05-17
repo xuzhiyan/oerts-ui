@@ -174,7 +174,7 @@
                 <td>{{exams.regTimeTo}}</td>
                 <td>{{exams.registNum}}/{{exams.maxNum}}</td>
                 <td>
-                  <button type="submit" class="btn btn-sm btn-primary" (click)="onDetails(exams)"
+                  <button type="submit" class="btn btn-sm btn-primary" (click)="onDetails(exams, messageInfo)"
                           [disabled]="!dangerMessage"> 详情
                   </button>
                 </td>
@@ -189,3 +189,10 @@
     <!--/.row-->
   </div>
 </div>
+
+<ng-template #messageInfo>
+  <div class="alert alert-warning mb-0">
+    <strong>注意</strong>，请先完善用户信息后再进行报名操作！
+    <button type="button" class="close" (click)="modalRef.hide()"><i class="icon-close icons font-2xl"></i></button>
+  </div>
+</ng-template>

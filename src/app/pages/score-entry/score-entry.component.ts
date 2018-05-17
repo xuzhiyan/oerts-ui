@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, TemplateRef} from '@angular/core';
 import {ExamInfo} from '../../model/ExamInfo';
 import {ExamManagementService} from '../../service/exam-management.service';
 import {ExamRegistrationService} from '../../service/exam-registration.service';
 import {CompleteRegistExamInfo} from '../../model/ExamineeRegistInfo';
+import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-score-entry',
@@ -15,9 +16,17 @@ export class ScoreEntryComponent implements OnInit {
   examEntryInfo: Array<CompleteRegistExamInfo>;
   showEntryInfo: boolean;
   isNoInfo: boolean;
+  skipInfo: string;
+  modalRef: BsModalRef;
+  config = {
+    backdrop: true,
+    ignoreBackdropClick: true,
+    keyboard: false
+  };
 
   constructor(private examService: ExamManagementService,
-              private examRService: ExamRegistrationService) {
+              private examRService: ExamRegistrationService,
+              private modalService: BsModalService) {
   }
 
   ngOnInit() {
@@ -28,20 +37,10 @@ export class ScoreEntryComponent implements OnInit {
     });
   }
 
-  onGetEntryList(examId: string) {
+  onGetEntryList(examId: string, skip: TemplateRef<any>) {
     if (!this.showEntryInfo) {
-      if (window.confirm('是否放弃当前录入的信息？')) {
-        this.examRService.getScoreEntryListById(examId).subscribe(data => {
-          if (data.json().data.length === 0) {
-            this.showEntryInfo = true;
-            this.isNoInfo = false;
-          } else {
-            this.examEntryInfo = data.json().data;
-            this.showEntryInfo = false;
-            this.isNoInfo = true;
-          }
-        });
-      }
+      this.skipInfo = examId;
+      this.modalRef = this.modalService.show(skip, this.config);
     } else {
       this.examRService.getScoreEntryListById(examId).subscribe(data => {
         if (data.json().data.length === 0) {
@@ -63,6 +62,20 @@ export class ScoreEntryComponent implements OnInit {
       this.examService.getExamByIsEntry(0).subscribe(data => {
         this.examInfo = data.json().data;
       });
+    });
+  }
+
+  skipOther() {
+    this.examRService.getScoreEntryListById(this.skipInfo).subscribe(data => {
+      this.modalRef.hide();
+      if (data.json().data.length === 0) {
+        this.showEntryInfo = true;
+        this.isNoInfo = false;
+      } else {
+        this.examEntryInfo = data.json().data;
+        this.showEntryInfo = false;
+        this.isNoInfo = true;
+      }
     });
   }
 

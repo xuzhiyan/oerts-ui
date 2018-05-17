@@ -28,7 +28,6 @@ export class TestDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
-    // console.log(sessionStorage.getItem('user_idcard') === 'root')
     this.identifyStatus = sessionStorage.getItem('user_idcard') === 'root';
     this.dangerMessage = true;
     this.numStatus = true;
@@ -43,7 +42,6 @@ export class TestDetailsComponent implements OnInit {
         }
       });
       this.examRService.countByIdCardAndExamID(this.examId, sessionStorage.getItem('user_idcard')).subscribe(data => {
-        // console.log(data.json().status);
         if (data.json().status === 'failed') {
           this.dangerMessage = false;
         }
@@ -52,13 +50,6 @@ export class TestDetailsComponent implements OnInit {
   }
 
   onExamRegistration(id: string, name: string) {
-    // this.examRService.examRegistByIdCardAndExamID(this.examId, sessionStorage.getItem('user_idcard')).subscribe(data => {
-    //   if (data.json().status === 'success') {
-    //     alert('报名成功');
-    //   } else {
-    //     alert('报名失败');
-    //   }
-    // });
     this.pathKeyService.examId = id;
     this.pathKeyService.examName = name;
     this.router.navigate(['/layout/test-improveinfo']);

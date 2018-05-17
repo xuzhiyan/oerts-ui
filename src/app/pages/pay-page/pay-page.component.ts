@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, TemplateRef} from '@angular/core';
 import {PathKeyService} from '../../service/path-key.service';
 import {ExamineeService} from '../../service/examinee.service';
 import {ExamRegistrationService} from '../../service/exam-registration.service';
 import {Router} from '@angular/router';
+import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-pay-page',
@@ -16,11 +17,18 @@ export class PayPageComponent implements OnInit {
   cost: number;
   balance: number;
   canPay: boolean;
+  modalRef: BsModalRef;
+  config = {
+    backdrop: true,
+    ignoreBackdropClick: true,
+    keyboard: false
+  };
 
   constructor(private pathKeyService: PathKeyService,
               private examineeService: ExamineeService,
               private examRService: ExamRegistrationService,
-              private router: Router) {
+              private router: Router,
+              private modalService: BsModalService) {
   }
 
   ngOnInit() {
@@ -33,7 +41,7 @@ export class PayPageComponent implements OnInit {
     });
   }
 
-  onPay() {
+  onPay(temp: TemplateRef<any>) {
     const body = {
       'cost': this.cost,
       'idCard': sessionStorage.getItem('user_idcard'),
@@ -41,10 +49,14 @@ export class PayPageComponent implements OnInit {
     };
     this.examRService.updatePayRegistration(body).subscribe(data => {
       if (data.json().status === 'success') {
-        alert('支付成功');
-        this.router.navigate(['/layout/test-complete']);
+        this.modalRef = this.modalService.show(temp, this.config);
       }
     });
+  }
+
+  afterPay() {
+    this.modalRef.hide();
+    this.router.navigate(['/layout/test-complete']);
   }
 
 }

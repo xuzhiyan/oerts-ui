@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, TemplateRef} from '@angular/core';
 import {ExamManagementService} from '../../service/exam-management.service';
 import {ExamInfo} from '../../model/ExamInfo';
 import {Router} from '@angular/router';
 import {PathKeyService} from '../../service/path-key.service';
+import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-test-registration',
@@ -14,10 +15,17 @@ export class TestRegistrationComponent implements OnInit {
   examInfo: Array<ExamInfo> = new Array();
   dangerMessage: boolean;
   isShowExamInfo: boolean;
+  modalRef: BsModalRef;
+  config = {
+    backdrop: true,
+    ignoreBackdropClick: true,
+    keyboard: false
+  };
 
   constructor(private examService: ExamManagementService,
               private router: Router,
-              private pathKeyService: PathKeyService) {
+              private pathKeyService: PathKeyService,
+              private modalService: BsModalService) {
   }
 
   ngOnInit() {
@@ -28,9 +36,9 @@ export class TestRegistrationComponent implements OnInit {
     }
   }
 
-  onDetails(item: any) {
+  onDetails(item: any, temp: TemplateRef<any>) {
     if (sessionStorage.getItem('user_idcard') === '') {
-      alert('请先完善用户信息后再报名！');
+      this.modalRef = this.modalService.show(temp, this.config);
     } else {
       this.pathKeyService.examId = item.examId;
       this.router.navigate(['/layout/test-details']);

@@ -308,7 +308,7 @@
             </div>
           </div>
           <div class="card-footer">
-            <button type="button" class="btn btn-sm btn-success" (click)="onExamAdd()"><i
+            <button type="button" class="btn btn-sm btn-success" (click)="onExamAdd(entrySuccess)"><i
               class="fa fa-dot-circle-o"></i> 提交
             </button>
             <button type="reset" class="btn btn-sm btn-danger" (click)="onReset()"><i class="fa fa-ban"></i> 重置</button>
@@ -320,3 +320,10 @@
     <!--/.row-->
   </div>
 </div>
+
+<ng-template #entrySuccess>
+  <div class="alert alert-success mb-0">
+    <strong>考试信息录入成功</strong>，考生现在可以获得本考试的信息了！
+    <button type="button" class="close" (click)="onEntrySuccess()"><i class="icon-check icons font-2xl"></i></button>
+  </div>
+</ng-template>

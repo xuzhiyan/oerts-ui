@@ -16,6 +16,11 @@ export class RegistComponent implements OnInit {
   validStatus: boolean;
   registModel: FormGroup;
   modalRef: BsModalRef;
+  config = {
+    backdrop: true,
+    ignoreBackdropClick: true,
+    keyboard: false
+  };
 
   constructor(private examineeService: ExamineeService,
               private router: Router,
@@ -45,12 +50,11 @@ export class RegistComponent implements OnInit {
       };
       this.examineeService.registByPassw(body).subscribe(data => {
         if (data.json().status === 'success') {
-          // alert('注册成功，快去登录把！');
-          this.modalRef = this.modalService.show(success);
-          this.router.navigate(['/login']);
+          // 注册成功提示
+          this.modalRef = this.modalService.show(success, this.config);
         } else {
-          // alert('注册失败，该手机号已经被注册！');
-          this.modalRef = this.modalService.show(failed);
+          // 注册失败提示
+          this.modalRef = this.modalService.show(failed, this.config);
         }
       })
     } else {
@@ -63,14 +67,8 @@ export class RegistComponent implements OnInit {
     this.registModel.reset();
   }
 
-  // existUserPhone(): any {
-  //   this.http.get('/oerts/countByUserPhone/' + this.registModel.value.userphone).subscribe(data => {
-  //     if (data.json().data !== '0') {
-  //       return {userphoneValid: {errorDesc: '手机号已经被注册'}};
-  //     } else {
-  //       return null;
-  //     }
-  //   });
-  // }
-
+  onSuccess() {
+    this.modalRef.hide();
+    this.router.navigate(['/login']);
+  }
 }

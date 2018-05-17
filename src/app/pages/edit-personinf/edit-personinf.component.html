@@ -120,7 +120,8 @@
             </div>
           </div>
           <div class="card-footer">
-            <button type="submit" class="btn btn-sm btn-success" (click)="onEdit()"><i class="fa fa-dot-circle-o"></i>
+            <button type="submit" class="btn btn-sm btn-success" (click)="onEdit(updateSuccess, updateFailed)"><i
+              class="fa fa-dot-circle-o"></i>
               提交
             </button>
             <button type="reset" class="btn btn-sm btn-danger" (click)="onReset()"><i class="fa fa-ban"></i> 重置</button>
@@ -130,3 +131,17 @@
     </div><!--/.row-->
   </div>
 </div>
+
+<ng-template #updateSuccess>
+  <div class="alert alert-success mb-0">
+    <strong>更新成功</strong>，个人信息已修改！
+    <button type="button" class="close" (click)="modalRef.hide()"><i class="icon-check icons font-2xl"></i></button>
+  </div>
+</ng-template>
+
+<ng-template #updateFailed>
+  <div class="alert alert-danger mb-0">
+    <strong>更新失败</strong>，身份证已有其他账户使用！
+    <button type="button" class="close" (click)="modalRef.hide()"><i class="icon-close icons font-2xl"></i></button>
+  </div>
+</ng-template>

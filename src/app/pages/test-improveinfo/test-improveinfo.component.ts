@@ -1,11 +1,12 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Component, OnInit, TemplateRef} from '@angular/core';
+import {Router} from '@angular/router';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {ExamineeService} from '../../service/examinee.service';
 import {ExamRegistrationService} from '../../service/exam-registration.service';
 import {PathKeyService} from '../../service/path-key.service';
 import {DomSanitizer} from '@angular/platform-browser';
 import {ImagesService} from '../../service/images.service';
+import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-test-improveinfo',
@@ -25,6 +26,12 @@ export class TestImproveinfoComponent implements OnInit {
   frontStatus: boolean;
   backStatus: boolean;
   imagesType: string;
+  modalRef: BsModalRef;
+  config = {
+    backdrop: true,
+    ignoreBackdropClick: true,
+    keyboard: false
+  };
 
   constructor(private fb: FormBuilder,
               private examineeService: ExamineeService,
@@ -32,7 +39,8 @@ export class TestImproveinfoComponent implements OnInit {
               private examRService: ExamRegistrationService,
               private pathKeyService: PathKeyService,
               private sanitizer: DomSanitizer,
-              private imagesService: ImagesService) {
+              private imagesService: ImagesService,
+              private modalService: BsModalService) {
     this.registExamModel = fb.group({
       username: [{value: '', disabled: true}],
       usersex: [{value: '', disabled: true}],
@@ -67,7 +75,7 @@ export class TestImproveinfoComponent implements OnInit {
     });
   }
 
-  onSubmitInfo() {
+  onSubmitInfo(temp: TemplateRef<any>) {
     if (this.idCardFrontPath === 'assets/img/front.png') {
       this.frontStatus = false;
       this.frontMessage = '身份证正面必须上传';
@@ -88,7 +96,7 @@ export class TestImproveinfoComponent implements OnInit {
         if (data.json().status === 'success') {
           this.router.navigate(['/layout/test-message']);
         } else {
-          alert('报名失败');
+          this.modalRef = this.modalService.show(temp, this.config);
         }
       });
     }

@@ -27,7 +27,6 @@ export class TestCompleteComponent implements OnInit {
   }
 
   onCancelRegist(item: string, message: string, status: string) {
-    // console.log(item);
     if (window.confirm(message)) {
       const body = {
         'examId': item,
@@ -53,9 +52,6 @@ export class TestCompleteComponent implements OnInit {
       };
       this.examRService.deleteByIdCardAndExamID(body).subscribe(data => {
         if (data.json().status === 'success') {
-          // this.examRService.completeResgistList(sessionStorage.getItem('user_idcard')).subscribe(value => {
-          //   this.completeREInfo = value.json().data;
-          // });
           this.router.navigate(['/layout/test-registration']);
         }
       });

@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, TemplateRef} from '@angular/core';
 import {ExamineeService} from '../../service/examinee.service';
 import {Observable} from 'rxjs/Observable';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {passwordValidator} from '../../shared/validators/validators';
+import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-edit-password',
@@ -19,9 +20,16 @@ export class EditPasswordComponent implements OnInit {
   countDownStatus: boolean;
   countDownMessage: string;
   identifyError: boolean;
+  modalRef: BsModalRef;
+  config = {
+    backdrop: true,
+    ignoreBackdropClick: true,
+    keyboard: false
+  };
 
   constructor(private examineeService: ExamineeService,
-              private fb: FormBuilder) {
+              private fb: FormBuilder,
+              private modalService: BsModalService) {
     this.changeModel = this.fb.group({
       identifycode: [''],
       loginPasswordsGroup: fb.group({
@@ -46,8 +54,6 @@ export class EditPasswordComponent implements OnInit {
     this.examineeService.updateByIdentifycode(body).subscribe(data => {
       if (data.json().status === 'success') {
         this.identifyCodeFromServer = data.json().data.code;
-      } else {
-        alert('获取验证码失败');
       }
     });
 
@@ -63,7 +69,7 @@ export class EditPasswordComponent implements OnInit {
     });
   }
 
-  onChangePassw() {
+  onChangePassw(temp: TemplateRef<any>) {
     if (this.changeModel.valid) {
       if (this.changeModel.value.identifycode === this.identifyCodeFromServer) {
         // 更新表中密码数据
@@ -74,7 +80,7 @@ export class EditPasswordComponent implements OnInit {
         this.examineeService.updatePasswByUserPhone(body).subscribe(data => {
           if (data.json().status === 'success') {
             this.onReset();
-            alert('更新密码成功，下次请用新密码登录');
+            this.modalRef = this.modalService.show(temp, this.config);
             this.identifyCodeFromServer = '验证码重置，防止再次利用！！！！';
           }
         });

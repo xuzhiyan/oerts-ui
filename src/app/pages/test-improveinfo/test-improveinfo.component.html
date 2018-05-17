@@ -96,7 +96,8 @@
                 <img [src]="idCardFrontPath" width="301px" height="186px">
               </div>
               <div class="col-md-3 d-flex align-items-center">
-                <input type="file" name="idcardphoto" formControlName="idcardphoto" (change)="onFileChange($event, 'front')">
+                <input type="file" name="idcardphoto" formControlName="idcardphoto"
+                       (change)="onFileChange($event, 'front')">
               </div>
               <div class="col-md-2 error-message"
                    [hidden]="frontStatus">
@@ -111,7 +112,8 @@
                 <img [src]="idCardBackPath" width="301px" height="186px">
               </div>
               <div class="col-md-3 d-flex align-items-center">
-                <input type="file" name="idcardphoto" formControlName="idcardphoto" (change)="onFileChange($event, 'back')">
+                <input type="file" name="idcardphoto" formControlName="idcardphoto"
+                       (change)="onFileChange($event, 'back')">
               </div>
               <div class="col-md-2 error-message"
                    [hidden]="backStatus">
@@ -122,7 +124,7 @@
             </div>
           </div>
           <div class="card-footer">
-            <button type="submit" class="btn btn-sm btn-success" (click)="onSubmitInfo()">
+            <button type="submit" class="btn btn-sm btn-success" (click)="onSubmitInfo(registExamFailed)">
               <i class="fa fa-dot-circle-o"></i> 提交信息
             </button>
             <button type="reset" class="btn btn-sm btn-danger" [routerLink]="['/layout/test-registration']"><i
@@ -134,3 +136,10 @@
     </div><!--/.row-->
   </div>
 </div>
+
+<ng-template #registExamFailed>
+  <div class="alert alert-danger mb-0">
+    <strong>报名失败</strong>，请联系系统管理员！
+    <button type="button" class="close" (click)="modalRef.hide()"><i class="icon-close icons font-2xl"></i></button>
+  </div>
+</ng-template>

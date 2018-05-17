@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, TemplateRef} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {BsDatepickerConfig, BsLocaleService, defineLocale, zhCnLocale} from 'ngx-bootstrap';
+import {BsDatepickerConfig, BsLocaleService, BsModalRef, BsModalService, defineLocale, zhCnLocale} from 'ngx-bootstrap';
 import {
   costValidator, examnameValidator, examplaceValidator, examtimedayValidator, examtimefm1Validator, examtimefm2Validator,
   examtimefm3Validator, examtypeValidator, hallnumValidator,
@@ -30,13 +30,20 @@ export class TestEntryComponent implements OnInit {
   cites: Array<ExamPlaceInfo> = new Array<ExamPlaceInfo>();
   districts: Array<ExamPlaceInfo> = new Array<ExamPlaceInfo>();
   places: Array<ExamPlaceInfo> = new Array<ExamPlaceInfo>();
+  modalRef: BsModalRef;
+  config = {
+    backdrop: true,
+    ignoreBackdropClick: true,
+    keyboard: false
+  };
 
   constructor(private fb: FormBuilder,
               private _localeService: BsLocaleService,
               private datePipe: DatePipe,
               private examManagementService: ExamManagementService,
               private router: Router,
-              private examPMService: ExamPlaceManagementService) {
+              private examPMService: ExamPlaceManagementService,
+              private modalService: BsModalService) {
     this.examModel = this.fb.group({
       examname: ['', examnameValidator],
       examtype: ['', examtypeValidator],
@@ -103,7 +110,7 @@ export class TestEntryComponent implements OnInit {
     }
   }
 
-  onExamAdd() {
+  onExamAdd(temp: TemplateRef<any>) {
     if (this.examModel.valid) {
       const value = this.examModel.value;
       const period1Time = this.datePipe.transform(value.examtimeday, 'yyyy-MM-dd') + ' '
@@ -149,8 +156,7 @@ export class TestEntryComponent implements OnInit {
       };
       this.examManagementService.addExam(body).subscribe(data => {
         if (data.json().status === 'success') {
-          alert('提交考试信息成功');
-          this.router.navigate(['/layout/test-registration']);
+          this.modalRef = this.modalService.show(temp, this.config);
         }
       });
     } else {
@@ -163,6 +169,11 @@ export class TestEntryComponent implements OnInit {
     this.period3 = false;
     this.period2 = false;
     this.examModel.reset();
+  }
+
+  onEntrySuccess() {
+    this.modalRef.hide();
+    this.router.navigate(['/layout/test-registration']);
   }
 
   changeTimeNumberToString(hour: number, min: number): string {

@@ -156,8 +156,6 @@ export class LoginComponent implements OnInit {
         if (data.json().status === 'success') {
           this.userPhoneFromServer = data.json().data.userPhone;
           this.identifyCodeFromServer = data.json().data.code;
-        } else {
-          alert('获取验证码失败');
         }
       });
 
