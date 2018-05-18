@@ -54,4 +54,12 @@ export class TestDetailsComponent implements OnInit {
     this.pathKeyService.examName = name;
     this.router.navigate(['/layout/test-improveinfo']);
   }
+
+  onBack() {
+    if (this.identifyStatus) {
+      this.router.navigate(['/layout/test-info']);
+    } else {
+      this.router.navigate(['/layout/test-registration']);
+    }
+  }
 }

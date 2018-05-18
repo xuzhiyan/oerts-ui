@@ -71,3 +71,11 @@ th, td {
 .text-purple {
   color: #800080;
 }
+
+.card {
+  border-radius: calc(0.25rem - 1px);
+}
+
+.alert {
+  border-radius: calc(0.25rem - 1px);
+}

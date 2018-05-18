@@ -1,45 +1,54 @@
 <!-- Breadcrumb -->
 <ol class="breadcrumb">
-  <li class="breadcrumb-item">
-    <span>考试地点管理</span>
-  </li>
+  <li class="breadcrumb-item">考试信息</li>
+  <li class="breadcrumb-item">考试地点管理</li>
 </ol>
 
 <div class="container-fluid">
   <div class="animated fadeIn">
-    <table class="table table-responsive-sm table-bordered thead-default">
-      <thead>
-      <tr>
-        <th>市</th>
-        <th>区/镇</th>
-        <th>具体位置</th>
-        <th>操作</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let place of placeInfo">
-        <td>{{place.city}}</td>
-        <td>{{place.district}}</td>
-        <td>{{place.place}}</td>
-        <td>
-          <button type="button" class="close" style="float: none" (click)="onDelete(place, deleteConfirm)"><i
-            class="icon-trash icons font-2xl"></i></button>
-        </td>
-      </tr>
-      <tr>
-        <td colspan="4">
-          <button type="button" class="close" style="float: none" (click)="onAdd(addExamInfo)"><i
-            class="icon-plus icons font-2xl"></i></button>
-        </td>
-      </tr>
-      </tbody>
-    </table>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <table class="table table-responsive-sm table-bordered thead-default">
+              <thead>
+              <tr>
+                <th>市</th>
+                <th>区/镇</th>
+                <th>具体位置</th>
+                <th>操作</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let place of placeInfo">
+                <td>{{place.city}}</td>
+                <td>{{place.district}}</td>
+                <td>{{place.place}}</td>
+                <td>
+                  <button type="button" class="close" style="float: none" (click)="onDelete(place, deleteConfirm)"><i
+                    class="icon-trash icons font-2xl"></i></button>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <button type="button" class="close" style="float: none" (click)="onAdd(addExamInfo)"><i
+                    class="icon-plus icons font-2xl"></i></button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!--/.col-->
+    </div>
+    <!--/.row-->
   </div>
 </div>
 
 <ng-template #deleteConfirm>
   <div class="alert alert-warning mb-0">
-    <strong>删除后不可恢复！</strong>请问您确定要删除此条记录吗？
+    <strong>删除后不可恢复</strong>，请问您确定要删除此条记录吗？
     <hr>
     <button type="button" class="close" style="float: left" (click)="modalRef.hide()"><i
       class="icon-close icons font-2xl"></i></button>
@@ -105,7 +114,7 @@
 
 <ng-template #addFailed>
   <div class="alert alert-danger mb-0">
-    <strong>添加失败！</strong> 已经有相同的考试地点了，请修改后再添加。
+    <strong>添加失败</strong>，已经有相同的考试地点了，请修改后再添加。
     <button type="button" class="close" (click)="modalRef2.hide()"><i class="icon-close icons font-2xl"></i></button>
   </div>
 </ng-template>

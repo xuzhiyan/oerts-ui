@@ -1,8 +1,8 @@
 <!-- Breadcrumb -->
 <ol class="breadcrumb">
-  <li class="breadcrumb-item">
-    <span>考试报名</span>
-  </li>
+  <li class="breadcrumb-item">考试信息</li>
+  <li class="breadcrumb-item">考试报名</li>
+  <li class="breadcrumb-item">考试详情</li>
 </ol>
 
 <div class="container-fluid">
@@ -22,9 +22,6 @@
           </button>
         </div>
         <div class="card">
-          <div class="card-header">
-            <i class="fa fa-align-justify"></i> 考试详情
-          </div>
           <div class="card-body">
             <div class="form-group row">
               <label class="col-md-2 form-control-label"><strong>考试编号:</strong></label>
@@ -100,7 +97,7 @@
                     [disabled]="!dangerMessage || identifyStatus || !numStatus">
               <i class="fa fa-dot-circle-o"></i> 报名
             </button>
-            <button type="reset" class="btn btn-sm btn-danger" [routerLink]="['/layout/test-registration']"><i
+            <button type="reset" class="btn btn-sm btn-danger" (click)="onBack()"><i
               class="fa fa-ban"></i> 返回
             </button>
           </div>

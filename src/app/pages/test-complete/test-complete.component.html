@@ -1,8 +1,7 @@
 <!-- Breadcrumb -->
 <ol class="breadcrumb">
-  <li class="breadcrumb-item">
-    <span>已报名考试</span>
-  </li>
+  <li class="breadcrumb-item">考试信息</li>
+  <li class="breadcrumb-item">已报名考试</li>
 </ol>
 
 <div class="container-fluid">
@@ -10,9 +9,6 @@
     <div class="row">
       <div class="col-lg-12">
         <div class="card">
-          <div class="card-header">
-            <i class="fa fa-align-justify"></i> 考试信息
-          </div>
           <div class="card-body">
             <table class="table table-responsive-sm table-bordered thead-default">
               <thead>
@@ -43,7 +39,8 @@
                   <span class="badge badge-secondary">报名已过期</span>
                 </td>
                 <td *ngIf="creinfos.status == '00'">
-                  <button type="button" class="btn btn-sm btn-primary" (click)="onCancelRegist(creinfos.examId, '你确定要取消报名吗？', '00')"> 取消报名
+                  <button type="button" class="btn btn-sm btn-primary"
+                          (click)="onCancelRegist(creinfos.examId, '00', cancelConfirm)"> 取消报名
                   </button>
                 </td>
                 <td *ngIf="creinfos.status == '10'">
@@ -51,13 +48,18 @@
                   </button>
                 </td>
                 <td *ngIf="creinfos.status == '11'">
-                  <button type="button" class="btn btn-sm btn-primary" (click)="onReReg(creinfos.examId)"> 重新报名</button>
+                  <button type="button" class="btn btn-sm btn-primary"
+                          (click)="onCancelRegist(creinfos.examId, '11', reConfirm)"> 重新报名
+                  </button>
                 </td>
                 <td *ngIf="creinfos.status == '20'">
-                  <button type="button" class="btn btn-sm btn-primary" (click)="onSuccessInfo(creinfos.examId)"> 报名详情</button>
+                  <button type="button" class="btn btn-sm btn-primary" (click)="onSuccessInfo(creinfos.examId)"> 报名详情
+                  </button>
                 </td>
                 <td *ngIf="creinfos.status == '21'">
-                  <button type="button" class="btn btn-sm btn-primary" (click)="onCancelRegist(creinfos.examId, '你确定要删除这条记录吗？', '21')"> 删除记录</button>
+                  <button type="button" class="btn btn-sm btn-primary"
+                          (click)="onCancelRegist(creinfos.examId, '21', deleteConfirm)"> 删除记录
+                  </button>
                 </td>
               </tr>
               </tbody>
@@ -70,3 +72,33 @@
     <!--/.row-->
   </div>
 </div>
+
+<ng-template #cancelConfirm>
+  <div class="alert alert-warning mb-0">
+    <strong>取消后必须重新报名等待审核，并且可能由于上限人数无法再次报名</strong>，您确定要取消报名吗？
+    <hr>
+    <button type="button" class="close" style="float: left" (click)="modalRef.hide()"><i
+      class="icon-close icons font-2xl"></i></button>
+    <button type="button" class="close" (click)="deleteInfo()"><i class="icon-check icons font-2xl"></i></button>
+  </div>
+</ng-template>
+
+<ng-template #deleteConfirm>
+  <div class="alert alert-warning mb-0">
+    <strong>这条记录将永久删除</strong>，您确定要删除这条记录吗？
+    <hr>
+    <button type="button" class="close" style="float: left" (click)="modalRef.hide()"><i
+      class="icon-close icons font-2xl"></i></button>
+    <button type="button" class="close" (click)="deleteInfo()"><i class="icon-check icons font-2xl"></i></button>
+  </div>
+</ng-template>
+
+<ng-template #reConfirm>
+  <div class="alert alert-warning mb-0">
+    <strong>重新报名将删除此条记录</strong>，您确定要重新报名吗？
+    <hr>
+    <button type="button" class="close" style="float: left" (click)="modalRef.hide()"><i
+      class="icon-close icons font-2xl"></i></button>
+    <button type="button" class="close" (click)="deleteInfo()"><i class="icon-check icons font-2xl"></i></button>
+  </div>
+</ng-template>

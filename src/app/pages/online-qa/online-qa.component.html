@@ -1,8 +1,7 @@
 <!-- Breadcrumb -->
 <ol class="breadcrumb">
-  <li class="breadcrumb-item">
-    <span>在线问答</span>
-  </li>
+  <li class="breadcrumb-item">帮助</li>
+  <li class="breadcrumb-item">在线问答</li>
 </ol>
 
 <div class="container-fluid">
@@ -10,11 +9,7 @@
     <div class="row">
       <div class="col-lg-12">
         <div class="card">
-          <div class="card-header">
-            <i class="fa fa-align-justify"></i> 问答信息
-          </div>
           <div class="card-body chat-window">
-
             <div class="form-group row mb-0 col-5">
               <div class="alert alert-info alert-dismissible fade show">
                 <h3>你可能遇到的问题</h3>
@@ -39,7 +34,6 @@
                 <span [innerHTML]="answerMessage"></span>
               </div>
             </div>
-
           </div>
           <div class="card-footer pb-0">
             <div class="form-group row" [formGroup]="questionModel">
