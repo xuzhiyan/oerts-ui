@@ -55,11 +55,11 @@ export class ScoreEntryComponent implements OnInit {
     }
   }
 
-  onEntryScore() {
+  onEntryScore(temp: TemplateRef<any>) {
     this.examRService.entryScore(this.examEntryInfo).subscribe(value => {
-      alert('更新成功');
-      this.showEntryInfo = true;
       this.examService.getExamByIsEntry(0).subscribe(data => {
+        this.modalRef = this.modalService.show(temp, this.config);
+        this.showEntryInfo = true;
         this.examInfo = data.json().data;
       });
     });

@@ -27,9 +27,10 @@
                 <td>{{exams.registNum}}</td>
                 <td>{{exams.examTimePeriod1 | strLength: 10}}</td>
                 <td>
-                  <button type="submit" class="btn btn-sm btn-primary"
+                  <button type="button" class="btn btn-sm btn-primary"
                           (click)="onGetEntryList(exams.examId, skipConfirm)"> 录入成绩
                   </button>
+                  <button type="button" class="btn btn-sm btn-primary"> 上传Excel成绩单</button>
                 </td>
               </tr>
               </tbody>
@@ -56,7 +57,7 @@
                 </tr>
                 </tbody>
               </table>
-              <button class="btn btn-sm btn-success" (click)="onEntryScore()">提交成绩</button>
+              <button class="btn btn-sm btn-success" (click)="onEntryScore(entrySuccess)">提交成绩</button>
             </div>
           </div>
         </div>
@@ -74,5 +75,13 @@
     <button type="button" class="close" style="float: left" (click)="modalRef.hide()"><i
       class="icon-close icons font-2xl"></i></button>
     <button type="button" class="close" (click)="skipOther()"><i class="icon-check icons font-2xl"></i></button>
+  </div>
+</ng-template>
+
+<ng-template #entrySuccess>
+  <div class="alert alert-success mb-0">
+    <strong>更新成功</strong>，成绩信息已录入系统。
+    <hr>
+    <button type="button" class="close" (click)="modalRef.hide()"><i class="icon-check icons font-2xl"></i></button>
   </div>
 </ng-template>
