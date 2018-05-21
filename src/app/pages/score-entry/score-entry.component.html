@@ -30,7 +30,9 @@
                   <button type="button" class="btn btn-sm btn-primary"
                           (click)="onGetEntryList(exams.examId, skipConfirm)"> 录入成绩
                   </button>
-                  <button type="button" class="btn btn-sm btn-primary"> 上传Excel成绩单</button>
+                  <button type="button" class="btn btn-sm btn-primary"
+                          (click)="onUploadExcel(uploadExcel, exams.examId)"> 上传Excel成绩单
+                  </button>
                 </td>
               </tr>
               </tbody>
@@ -83,5 +85,44 @@
     <strong>更新成功</strong>，成绩信息已录入系统。
     <hr>
     <button type="button" class="close" (click)="modalRef.hide()"><i class="icon-check icons font-2xl"></i></button>
+  </div>
+</ng-template>
+
+<ng-template #entryFailed>
+  <div class="alert alert-danger mb-0">
+    <strong>更新失败</strong>，请检查上传文件中的数据格式，或者前往考试列表获取该考试的考生信息表模板。
+    <hr>
+    <button type="button" class="close" (click)="modalRef.hide()"><i class="icon-close icons font-2xl"></i></button>
+  </div>
+</ng-template>
+
+<ng-template #uploadExcel>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">上传考生成绩Excel</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="onCloseUpload()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group row">
+      <label class="col-md-4 form-control-label"><span class="pull-right">选择上传文件:</span></label>
+      <div class="col-md-5">
+        <input type="file" (change)="onChangeFile($event)">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-md-4 form-control-label"></label>
+      <div class="col-md-5 error-message" [hidden]="showExcelMessage">
+        <label class="error-message-vertical">
+          上传文件不能为空
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-sm btn-primary" (click)="uploadToServer(entrySuccess, entryFailed)"> 确定
+    </button>
+    <button type="button" class="btn btn-sm btn-light" (click)="onCloseUpload()"> 取消
+    </button>
   </div>
 </ng-template>

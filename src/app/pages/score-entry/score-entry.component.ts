@@ -4,6 +4,7 @@ import {ExamManagementService} from '../../service/exam-management.service';
 import {ExamRegistrationService} from '../../service/exam-registration.service';
 import {CompleteRegistExamInfo} from '../../model/ExamineeRegistInfo';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
+import {ExcelService} from '../../service/excel.service';
 
 @Component({
   selector: 'app-score-entry',
@@ -18,6 +19,11 @@ export class ScoreEntryComponent implements OnInit {
   isNoInfo: boolean;
   skipInfo: string;
   modalRef: BsModalRef;
+  modalRef1: BsModalRef;
+  file: File;
+  isSelectFile: boolean;
+  examId: string;
+  showExcelMessage: boolean;
   config = {
     backdrop: true,
     ignoreBackdropClick: true,
@@ -26,10 +32,13 @@ export class ScoreEntryComponent implements OnInit {
 
   constructor(private examService: ExamManagementService,
               private examRService: ExamRegistrationService,
-              private modalService: BsModalService) {
+              private modalService: BsModalService,
+              private excelService: ExcelService) {
   }
 
   ngOnInit() {
+    this.showExcelMessage = true;
+    this.isSelectFile = false;
     this.showEntryInfo = true;
     this.isNoInfo = true;
     this.examService.getExamByIsEntry(0).subscribe(data => {
@@ -65,6 +74,11 @@ export class ScoreEntryComponent implements OnInit {
     });
   }
 
+  onUploadExcel(temp: TemplateRef<any>, examId: string) {
+    this.examId = examId;
+    this.modalRef1 = this.modalService.show(temp, this.config);
+  }
+
   skipOther() {
     this.examRService.getScoreEntryListById(this.skipInfo).subscribe(data => {
       this.modalRef.hide();
@@ -77,6 +91,43 @@ export class ScoreEntryComponent implements OnInit {
         this.isNoInfo = true;
       }
     });
+  }
+
+  onChangeFile(event) {
+    const fileList = event.target.files;
+    this.file = fileList[0];
+    this.isSelectFile = true;
+    this.showExcelMessage = true;
+  }
+
+  uploadToServer(success: TemplateRef<any>, failed: TemplateRef<any>) {
+    if (this.isSelectFile) {
+      // 文件上传
+      const formData = new FormData();
+      formData.append('excel', this.file);
+      formData.append('examId', this.examId);
+      this.excelService.uploadScoreExcel(formData).subscribe(data => {
+        if (data.json().data === 0) {
+          // 更新失败
+          this.modalRef = this.modalService.show(failed, this.config);
+          this.isSelectFile = false;
+        } else {
+          this.examService.getExamByIsEntry(0).subscribe(value => {
+            this.examInfo = value.json().data;
+            this.modalRef1.hide();
+            this.modalRef = this.modalService.show(success, this.config);
+            this.isSelectFile = false;
+          });
+        }
+      });
+    } else {
+      this.showExcelMessage = false;
+    }
+  }
+
+  onCloseUpload() {
+    this.modalRef1.hide();
+    this.showExcelMessage = true;
   }
 
 }

@@ -17,4 +17,8 @@ export class ExcelService {
     const url = '/oerts/excel/info/score/' + examId;
     return this.http.get(url);
   }
+
+  uploadScoreExcel(formData: FormData) {
+    return this.http.post('/oerts/excel/info/score/upload', formData);
+  }
 }
