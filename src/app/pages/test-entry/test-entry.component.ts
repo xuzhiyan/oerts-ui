@@ -173,7 +173,7 @@ export class TestEntryComponent implements OnInit {
 
   onEntrySuccess() {
     this.modalRef.hide();
-    this.router.navigate(['/layout/test-registration']);
+    this.router.navigate(['/layout/test-info']);
   }
 
   changeTimeNumberToString(hour: number, min: number): string {

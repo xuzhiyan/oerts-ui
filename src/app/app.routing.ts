@@ -26,6 +26,7 @@ import {TestSuccessinfoComponent} from './pages/test-successinfo/test-successinf
 import {PlaceEntryComponent} from './pages/place-entry/place-entry.component';
 import {TestInfoComponent} from './pages/test-info/test-info.component';
 import {PayRechargeComponent} from './pages/pay-recharge/pay-recharge.component';
+import {RootGuard} from './shared/guard/root.guard';
 
 export const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -40,20 +41,20 @@ export const routes: Routes = [
       {path: 'test-pay', component: TestPayComponent},
       {path: 'test-complete', component: TestCompleteComponent},
       {path: 'score-inquiry', component: ScoreInquiryComponent},
-      {path: 'score-details', component: ScoreDetailsComponent},
+      {path: 'score-details', component: ScoreDetailsComponent, canActivate: [RootGuard]},
       {path: 'edit-persioninf', component: EditPersoninfComponent},
       {path: 'edit-password', component: EditPasswordComponent},
       {path: 'online-qa', component: OnlineQaComponent},
       {path: 'test-message', component: TestMessageComponent},
       {path: 'test-details', component: TestDetailsComponent},
       {path: 'test-improveinfo', component: TestImproveinfoComponent},
-      {path: 'manage-userinfo', component: ManageUserinfoComponent},
-      {path: 'test-entry', component: TestEntryComponent},
-      {path: 'score-entry', component: ScoreEntryComponent},
+      {path: 'manage-userinfo', component: ManageUserinfoComponent, canActivate: [RootGuard]},
+      {path: 'test-entry', component: TestEntryComponent, canActivate: [RootGuard]},
+      {path: 'score-entry', component: ScoreEntryComponent, canActivate: [RootGuard]},
       {path: 'pay-page', component: PayPageComponent},
       {path: 'test-successinfo', component: TestSuccessinfoComponent},
-      {path: 'place-entry', component: PlaceEntryComponent},
-      {path: 'test-info', component: TestInfoComponent},
+      {path: 'place-entry', component: PlaceEntryComponent, canActivate: [RootGuard]},
+      {path: 'test-info', component: TestInfoComponent, canActivate: [RootGuard]},
       {path: 'pay-recharge', component: PayRechargeComponent}
     ], canActivate: [LoginGuard]
   },
@@ -63,7 +64,10 @@ export const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  providers: [LoginGuard]
+  providers: [
+    LoginGuard,
+    RootGuard
+  ]
 })
 export class AppRoutingModule {
 }
